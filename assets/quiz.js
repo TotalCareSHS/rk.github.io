@@ -145,6 +145,8 @@ window.scrollTo(0,0)
 
 function finishQuiz(){
 
+clearInterval(timerInterval)
+
 document.getElementById("quiz").innerHTML=""
 
 document.getElementById("score").innerHTML =
@@ -152,6 +154,9 @@ document.getElementById("score").innerHTML =
 "<p>Correct: "+correct+"</p>"+
 "<p>Wrong: "+wrong+"</p>"+
 "<p>Total Questions: "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
 
 }
 
