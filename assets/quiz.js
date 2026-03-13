@@ -1,7 +1,8 @@
 ```javascript
-let index=0;
-
-let score=0;
+let index = 0
+let correct = 0
+let wrong = 0
+let answered = []
 
 function showQuestion(){
 
