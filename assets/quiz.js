@@ -68,7 +68,7 @@ let opts = document.querySelectorAll(".option")
 
 opts.forEach(o => o.style.pointerEvents="none")
 
-if(i == q.answer){
+if(i === q.answer){
 
 opts[i].classList.add("correct")
 correct++
@@ -81,8 +81,9 @@ wrong++
 
 }
 
-document.getElementById("correct").innerText = correct
-document.getElementById("wrong").innerText = wrong
+// update counter display
+document.getElementById("correct").textContent = correct
+document.getElementById("wrong").textContent = wrong
 
 document.getElementById("explanation").innerHTML =
 "<p>"+q.explanation+"</p>"
