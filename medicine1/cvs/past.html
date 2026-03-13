@@ -1,24 +1,12 @@
 ```html
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>Medicine 1 – Cardiovascular System – Past Paper MCQs</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="../../assets/style.css">
-
-<style>
-.navigation{
-margin-top:20px;
-}
-
-.navigation button{
-padding:10px 18px;
-margin:5px;
-font-size:16px;
-cursor:pointer;
-}
-</style>
 
 </head>
 
@@ -27,7 +15,6 @@ cursor:pointer;
 <h2>Medicine 1 – Cardiovascular System – Past Paper MCQs</h2>
 
 <div id="progress"></div>
-
 <div id="quiz"></div>
 <div id="explanation"></div>
 
@@ -38,62 +25,213 @@ cursor:pointer;
 
 <div id="score"></div>
 
-<script src="../../assets/quiz.js"></script>
-
 <script>
 
 const questions=[
 
-{question:"1. Most common cause of myocardial infarction?",options:["Coronary thrombosis","Coronary embolism","Vasculitis","Spasm"],answer:0,explanation:"Most MIs occur due to rupture of an atherosclerotic plaque leading to coronary thrombosis."},
+{question:"1. The natural pacemaker of the heart is:",options:["AV node","SA node","Bundle of His","Purkinje fibers"],answer:1,explanation:"The SA node generates spontaneous impulses controlling heart rhythm."},
 
-{question:"2. Gold standard biomarker for myocardial infarction?",options:["CK-MB","Troponin I","Myoglobin","LDH"],answer:1,explanation:"Cardiac troponins are the most specific and sensitive markers for myocardial injury."},
+{question:"2. Normal adult resting heart rate:",options:["40–60 bpm","60–100 bpm","80–120 bpm","100–140 bpm"],answer:1,explanation:"Normal resting heart rate is between 60 and 100 beats per minute."},
 
-{question:"3. First drug to be given in suspected acute MI?",options:["Aspirin","Morphine","Heparin","Beta blocker"],answer:0,explanation:"Immediate aspirin reduces mortality by inhibiting platelet aggregation."},
+{question:"3. Cardiac output equals:",options:["HR × BP","Stroke volume × HR","HR × TPR","Stroke volume × BP"],answer:1,explanation:"Cardiac output is the volume of blood pumped per minute."},
 
-{question:"4. Most common risk factor for coronary artery disease?",options:["Smoking","Hypertension","Hyperlipidemia","Diabetes"],answer:2,explanation:"High LDL cholesterol promotes atherosclerosis and is a major risk factor."},
+{question:"4. Most common congenital heart disease:",options:["ASD","VSD","PDA","Tetralogy of Fallot"],answer:1,explanation:"Ventricular septal defect is the most common congenital heart defect."},
 
-{question:"5. Drug that reduces mortality after MI?",options:["ACE inhibitors","Nitrates","Digoxin","Furosemide"],answer:0,explanation:"ACE inhibitors improve survival by reducing cardiac remodeling."},
+{question:"5. S1 heart sound represents closure of:",options:["Aortic valve","Pulmonary valve","Mitral and tricuspid valves","Semilunar valves"],answer:2,explanation:"S1 occurs when AV valves close."},
 
-{question:"6. Most common cause of heart failure?",options:["Hypertension","Coronary artery disease","Valvular disease","Cardiomyopathy"],answer:1,explanation:"Ischemic heart disease is the most frequent cause of heart failure."},
+{question:"6. S2 sound represents closure of:",options:["AV valves","Semilunar valves","Mitral valve","Tricuspid valve"],answer:1,explanation:"S2 occurs due to closure of aortic and pulmonary valves."},
 
-{question:"7. Most common sustained arrhythmia?",options:["Atrial fibrillation","Atrial flutter","Ventricular tachycardia","PVC"],answer:0,explanation:"Atrial fibrillation is the most common arrhythmia in clinical practice."},
+{question:"7. Most common cause of mitral stenosis:",options:["Rheumatic fever","Degenerative disease","Infective endocarditis","Hypertension"],answer:0,explanation:"Rheumatic fever damages the mitral valve leading to stenosis."},
 
-{question:"8. Drug of choice for supraventricular tachycardia?",options:["Adenosine","Amiodarone","Lidocaine","Digoxin"],answer:0,explanation:"Adenosine transiently blocks AV node conduction and terminates SVT."},
+{question:"8. Cardiac tamponade results from:",options:["Myocardial hypertrophy","Pericardial fluid accumulation","Valve stenosis","Coronary obstruction"],answer:1,explanation:"Fluid accumulation in the pericardial sac compresses the heart."},
 
-{question:"9. Most common cause of infective endocarditis?",options:["Staphylococcus aureus","Streptococcus viridans","Enterococcus","Candida"],answer:0,explanation:"Staphylococcus aureus is now the leading cause of infective endocarditis."},
+{question:"9. Apex beat location:",options:["4th ICS midclavicular","5th ICS midclavicular","6th ICS midclavicular","5th ICS midaxillary"],answer:1,explanation:"Normally located in the 5th intercostal space midclavicular line."},
 
-{question:"10. Rheumatic fever most commonly affects which valve?",options:["Mitral","Aortic","Pulmonary","Tricuspid"],answer:0,explanation:"The mitral valve is most commonly involved in rheumatic heart disease."},
+{question:"10. Most common cause of heart failure:",options:["Coronary artery disease","Congenital disease","Rheumatic disease","Cardiomyopathy"],answer:0,explanation:"Coronary artery disease is the leading cause of heart failure."},
 
-{question:"11. Most common congenital heart defect?",options:["Ventricular septal defect","Atrial septal defect","Patent ductus arteriosus","Tetralogy of Fallot"],answer:0,explanation:"VSD accounts for about 25% of congenital heart diseases."},
+{question:"11. Normal blood pressure:",options:["120/80 mmHg","140/90 mmHg","160/100 mmHg","100/60 mmHg"],answer:0,explanation:"Normal BP is approximately 120/80 mmHg."},
 
-{question:"12. Most common cyanotic congenital heart disease?",options:["Tetralogy of Fallot","TGA","Tricuspid atresia","TAPVR"],answer:0,explanation:"Tetralogy of Fallot is the most common cyanotic congenital heart disease."},
+{question:"12. Most common risk factor for cardiovascular disease:",options:["Hypertension","Smoking","Diabetes","Obesity"],answer:0,explanation:"Hypertension is the most common cardiovascular risk factor."},
 
-{question:"13. Classic pulse finding in aortic stenosis?",options:["Pulsus parvus et tardus","Bounding pulse","Water hammer pulse","Pulsus alternans"],answer:0,explanation:"Slow rising low amplitude pulse occurs due to obstruction of outflow."},
+{question:"13. First-line drug for hypertension:",options:["ACE inhibitors","Digoxin","Warfarin","Atropine"],answer:0,explanation:"ACE inhibitors are commonly first-line drugs."},
 
-{question:"14. Most common cause of aortic stenosis in elderly?",options:["Calcific degeneration","Rheumatic fever","Endocarditis","Congenital bicuspid valve"],answer:0,explanation:"Degenerative calcification is the commonest cause in older adults."},
+{question:"14. Drug used in hypertensive emergency:",options:["Labetalol","Paracetamol","Aspirin","Insulin"],answer:0,explanation:"IV labetalol is commonly used."},
 
-{question:"15. Most common cause of mitral regurgitation?",options:["Mitral valve prolapse","Rheumatic disease","Endocarditis","Papillary rupture"],answer:0,explanation:"Mitral valve prolapse is the leading cause."},
+{question:"15. Target organ damage in hypertension:",options:["Kidney","Heart","Brain","All of the above"],answer:3,explanation:"Hypertension damages multiple organs."},
 
-{question:"16. Best investigation for valvular heart disease?",options:["Echocardiography","ECG","Chest X-ray","CT scan"],answer:0,explanation:"Echo directly visualizes valve structure and function."},
+{question:"16. Most common coronary artery involved in MI:",options:["LAD","RCA","LCX","Diagonal"],answer:0,explanation:"LAD is most commonly occluded."},
 
-{question:"17. Drug improving survival in heart failure?",options:["ACE inhibitors","Digoxin","Diuretics","Nitrates"],answer:0,explanation:"ACE inhibitors reduce mortality in heart failure patients."},
+{question:"17. Gold standard for coronary artery disease:",options:["ECG","Troponin","Coronary angiography","Echo"],answer:2,explanation:"Coronary angiography directly visualizes arteries."},
 
-{question:"18. Most common cardiomyopathy?",options:["Dilated","Hypertrophic","Restrictive","Arrhythmogenic"],answer:0,explanation:"Dilated cardiomyopathy is the most frequent cardiomyopathy."},
+{question:"18. Most sensitive marker of MI:",options:["CK-MB","Troponin I","LDH","AST"],answer:1,explanation:"Troponin I is highly specific and sensitive."},
 
-{question:"19. Cause of sudden death in young athletes?",options:["Hypertrophic cardiomyopathy","Dilated cardiomyopathy","Myocarditis","Aortic stenosis"],answer:0,explanation:"Hypertrophic cardiomyopathy commonly causes sudden death during exertion."},
+{question:"19. First drug given in suspected MI:",options:["Aspirin","Digoxin","Furosemide","Warfarin"],answer:0,explanation:"Aspirin reduces platelet aggregation."},
 
-{question:"20. Most common cause of pericarditis?",options:["Viral infection","Bacterial infection","Tuberculosis","Uremia"],answer:0,explanation:"Viral infections are the most frequent cause."}
+{question:"20. MONA therapy includes:",options:["Morphine","Oxygen","Nitrates","All"],answer:3,explanation:"MONA stands for Morphine, Oxygen, Nitrates, Aspirin."},
 
-];
+{question:"21. Most common arrhythmia:",options:["Atrial fibrillation","Ventricular tachycardia","SVT","Heart block"],answer:0,explanation:"AF is the most common arrhythmia."},
 
-for(let i=21;i<=100;i++){
-questions.push({
-question:i+". Advanced cardiovascular concept MCQ?",
-options:["Option A","Option B","Option C","Option D"],
-answer:0,
-explanation:"Detailed cardiovascular concept explanation related to diagnosis, physiology, pharmacology, or treatment."
-});
-}
+{question:"22. ECG finding in atrial fibrillation:",options:["Absent P waves","Tall T waves","ST elevation","Delta wave"],answer:0,explanation:"AF causes absent P waves."},
+
+{question:"23. Drug used for SVT:",options:["Adenosine","Digoxin","Warfarin","Aspirin"],answer:0,explanation:"Adenosine terminates SVT."},
+
+{question:"24. Treatment of ventricular fibrillation:",options:["Defibrillation","Atropine","Digoxin","Furosemide"],answer:0,explanation:"Immediate defibrillation is life-saving."},
+
+{question:"25. First degree heart block ECG:",options:["Prolonged PR interval","Dropped beat","Wide QRS","Delta wave"],answer:0,explanation:"PR interval >200 ms."},
+
+{question:"26. Most common cardiomyopathy:",options:["Dilated","Hypertrophic","Restrictive","Ischemic"],answer:0,explanation:"Dilated cardiomyopathy is most common."},
+
+{question:"27. Sudden death in young athletes:",options:["Hypertrophic cardiomyopathy","Dilated cardiomyopathy","MI","Heart block"],answer:0,explanation:"Hypertrophic cardiomyopathy causes sudden death."},
+
+{question:"28. Pulsus paradoxus seen in:",options:["Cardiac tamponade","MI","HF","HTN"],answer:0,explanation:"Seen in tamponade."},
+
+{question:"29. Beck's triad occurs in:",options:["Cardiac tamponade","MI","HF","Endocarditis"],answer:0,explanation:"Hypotension, JVP rise, muffled heart sounds."},
+
+{question:"30. Most common cause of pericarditis:",options:["Viral infection","TB","MI","Trauma"],answer:0,explanation:"Viral infection is most common."},
+
+{question:"31. Dressler syndrome occurs after:",options:["Myocardial infarction","Hypertension","Atrial fibrillation","Pulmonary embolism"],answer:0,explanation:"Dressler syndrome is autoimmune pericarditis occurring weeks after myocardial infarction."},
+
+{question:"32. Earliest biomarker to rise in myocardial infarction:",options:["Myoglobin","Troponin","CK-MB","LDH"],answer:0,explanation:"Myoglobin rises within 1–2 hours after myocardial infarction."},
+
+{question:"33. Troponin remains elevated for:",options:["24 hours","3 days","7–10 days","1 month"],answer:2,explanation:"Troponin remains elevated for about 7–10 days after myocardial infarction."},
+
+{question:"34. Most common cause of sudden cardiac death:",options:["Ventricular fibrillation","Atrial fibrillation","Heart block","Bradycardia"],answer:0,explanation:"Ventricular fibrillation is the most common cause of sudden cardiac death."},
+
+{question:"35. Drug used for thrombolysis in MI:",options:["Streptokinase","Heparin","Warfarin","Digoxin"],answer:0,explanation:"Streptokinase dissolves thrombus by converting plasminogen to plasmin."},
+
+{question:"36. Stable angina occurs due to:",options:["Fixed coronary artery stenosis","Coronary embolism","Valve disease","Pericarditis"],answer:0,explanation:"Stable angina is caused by fixed atherosclerotic narrowing of coronary arteries."},
+
+{question:"37. Prinzmetal angina is caused by:",options:["Coronary vasospasm","Atherosclerosis","Thrombosis","Valve stenosis"],answer:0,explanation:"Prinzmetal angina results from transient coronary artery spasm."},
+
+{question:"38. LDL cholesterol is known as:",options:["Good cholesterol","Bad cholesterol","Neutral cholesterol","Protective cholesterol"],answer:1,explanation:"LDL contributes to atherosclerotic plaque formation."},
+
+{question:"39. HDL function:",options:["Reverse cholesterol transport","Fat digestion","Protein synthesis","Lipid oxidation"],answer:0,explanation:"HDL removes cholesterol from tissues and transports it to the liver."},
+
+{question:"40. Most common complication of myocardial infarction:",options:["Arrhythmia","Stroke","Renal failure","Pulmonary embolism"],answer:0,explanation:"Arrhythmias are the most frequent complication after MI."},
+
+{question:"41. Most common symptom of heart failure:",options:["Dyspnea","Fever","Headache","Vomiting"],answer:0,explanation:"Dyspnea due to pulmonary congestion is the most common symptom."},
+
+{question:"42. Orthopnea is:",options:["Breathlessness when lying flat","Chest pain on exertion","Palpitations","Syncope"],answer:0,explanation:"Orthopnea occurs due to redistribution of fluid to lungs in supine position."},
+
+{question:"43. Best investigation to evaluate heart failure:",options:["Echocardiography","Chest X-ray","ECG","CT scan"],answer:0,explanation:"Echocardiography evaluates ventricular function and ejection fraction."},
+
+{question:"44. BNP level increases in:",options:["Heart failure","Hypertension","Anemia","Diabetes"],answer:0,explanation:"BNP is released from ventricles due to volume overload."},
+
+{question:"45. Drug improving survival in heart failure:",options:["ACE inhibitors","Digoxin","Nitrates","Atropine"],answer:0,explanation:"ACE inhibitors reduce mortality in heart failure."},
+
+{question:"46. Acute pulmonary edema treatment:",options:["Furosemide","Digoxin","Atropine","Warfarin"],answer:0,explanation:"Furosemide reduces pulmonary congestion by diuresis."},
+
+{question:"47. Most common cause of right sided heart failure:",options:["Left sided heart failure","Pulmonary embolism","Tricuspid stenosis","Congenital disease"],answer:0,explanation:"Left heart failure leads to pulmonary hypertension and right heart failure."},
+
+{question:"48. Peripheral edema in heart failure occurs due to:",options:["Increased venous pressure","Hypotension","Dehydration","Infection"],answer:0,explanation:"Elevated venous pressure causes fluid leakage into tissues."},
+
+{question:"49. Drug causing hyperkalemia in heart failure:",options:["Spironolactone","Furosemide","Hydrochlorothiazide","Digoxin"],answer:0,explanation:"Spironolactone is a potassium-sparing diuretic."},
+
+{question:"50. Digoxin is mainly used in:",options:["Heart failure with atrial fibrillation","Hypertension","Myocardial infarction","Pericarditis"],answer:0,explanation:"Digoxin improves symptoms and controls ventricular rate in AF with heart failure."},
+
+{question:"51. Opening snap is heard in:",options:["Mitral stenosis","Aortic stenosis","Mitral regurgitation","Aortic regurgitation"],answer:0,explanation:"Opening snap occurs in mitral stenosis due to sudden tensing of stenotic mitral valve."},
+
+{question:"52. Pansystolic murmur is heard in:",options:["Mitral regurgitation","Mitral stenosis","Aortic stenosis","Pulmonary stenosis"],answer:0,explanation:"Mitral regurgitation produces a pansystolic murmur best heard at the apex."},
+
+{question:"53. Ejection systolic murmur is characteristic of:",options:["Aortic stenosis","Mitral stenosis","Tricuspid regurgitation","Mitral regurgitation"],answer:0,explanation:"Aortic stenosis produces an ejection systolic murmur radiating to the carotids."},
+
+{question:"54. Water hammer pulse is seen in:",options:["Aortic regurgitation","Mitral stenosis","Aortic stenosis","Tricuspid regurgitation"],answer:0,explanation:"Aortic regurgitation causes a collapsing (water hammer) pulse."},
+
+{question:"55. Most commonly affected valve in rheumatic heart disease:",options:["Mitral valve","Aortic valve","Tricuspid valve","Pulmonary valve"],answer:0,explanation:"Mitral valve is most frequently involved in rheumatic heart disease."},
+
+{question:"56. Carey Coombs murmur occurs in:",options:["Acute rheumatic fever","Myocardial infarction","Endocarditis","Pericarditis"],answer:0,explanation:"Carey Coombs murmur is a mid-diastolic murmur heard in acute rheumatic fever."},
+
+{question:"57. Most common organism causing infective endocarditis:",options:["Staphylococcus aureus","E. coli","Salmonella","Mycobacterium"],answer:0,explanation:"Staphylococcus aureus is the most common cause of infective endocarditis."},
+
+{question:"58. Duke criteria are used to diagnose:",options:["Infective endocarditis","Myocardial infarction","Heart failure","Hypertension"],answer:0,explanation:"Duke criteria combine clinical, microbiological, and echocardiographic findings."},
+
+{question:"59. Janeway lesions are seen in:",options:["Infective endocarditis","Rheumatic fever","Myocardial infarction","Pericarditis"],answer:0,explanation:"Janeway lesions are painless erythematous lesions on palms and soles."},
+
+{question:"60. Osler nodes are:",options:["Painful nodules in infective endocarditis","Painless skin lesions","Edema of fingers","Skin rash"],answer:0,explanation:"Osler nodes are painful nodules usually on fingers or toes."},
+
+{question:"61. Most common cause of rheumatic fever:",options:["Group A Streptococcus","Staphylococcus aureus","E. coli","Pseudomonas"],answer:0,explanation:"Rheumatic fever follows untreated infection with Group A beta-hemolytic streptococcus."},
+
+{question:"62. Jones criteria are used to diagnose:",options:["Rheumatic fever","Myocardial infarction","Endocarditis","Heart failure"],answer:0,explanation:"Jones criteria include major and minor clinical features."},
+
+{question:"63. Major Jones criterion includes:",options:["Carditis","Fever","Leukocytosis","Elevated ESR"],answer:0,explanation:"Carditis, polyarthritis, chorea, erythema marginatum, and subcutaneous nodules are major criteria."},
+
+{question:"64. Subcutaneous nodules are seen in:",options:["Rheumatic fever","Myocardial infarction","Hypertension","Pericarditis"],answer:0,explanation:"They are firm painless nodules seen in rheumatic fever."},
+
+{question:"65. Erythema marginatum occurs in:",options:["Rheumatic fever","Endocarditis","Myocardial infarction","Cardiomyopathy"],answer:0,explanation:"It is a non-pruritic rash associated with rheumatic fever."},
+
+{question:"66. Most common complication of rheumatic fever:",options:["Mitral stenosis","Aortic stenosis","Tricuspid stenosis","Pulmonary stenosis"],answer:0,explanation:"Chronic rheumatic heart disease most often leads to mitral stenosis."},
+
+{question:"67. Best investigation for valvular heart disease:",options:["Echocardiography","ECG","Chest X-ray","CT scan"],answer:0,explanation:"Echocardiography visualizes valve structure and function."},
+
+{question:"68. Vegetations in infective endocarditis are best detected by:",options:["Echocardiography","Chest X-ray","ECG","Blood count"],answer:0,explanation:"Echocardiography can detect vegetations attached to valves."},
+
+{question:"69. Most common valve affected in IV drug users with endocarditis:",options:["Tricuspid valve","Mitral valve","Aortic valve","Pulmonary valve"],answer:0,explanation:"IV drug users commonly develop tricuspid valve endocarditis."},
+
+{question:"70. Clubbing may be seen in:",options:["Infective endocarditis","Hypertension","Angina","Arrhythmia"],answer:0,explanation:"Chronic infective endocarditis may produce clubbing."},
+
+{question:"71. Aortic stenosis murmur radiates to:",options:["Carotid arteries","Axilla","Back","Abdomen"],answer:0,explanation:"The murmur of aortic stenosis typically radiates to the carotids."},
+
+{question:"72. Mid-diastolic murmur at apex indicates:",options:["Mitral stenosis","Mitral regurgitation","Aortic stenosis","Aortic regurgitation"],answer:0,explanation:"Mitral stenosis produces a mid-diastolic rumbling murmur."},
+
+{question:"73. Wide pulse pressure occurs in:",options:["Aortic regurgitation","Mitral stenosis","Aortic stenosis","Tricuspid stenosis"],answer:0,explanation:"Aortic regurgitation causes increased systolic and decreased diastolic pressure."},
+
+{question:"74. Austin Flint murmur is associated with:",options:["Aortic regurgitation","Mitral stenosis","Tricuspid regurgitation","Pulmonary stenosis"],answer:0,explanation:"Austin Flint murmur occurs due to regurgitant jet striking the mitral valve."},
+
+{question:"75. Infective endocarditis is confirmed by:",options:["Positive blood culture","ECG","Chest X-ray","Urine test"],answer:0,explanation:"Blood culture is essential for confirming infective endocarditis."},
+
+{question:"76. Most common arrhythmia in clinical practice:",options:["Atrial fibrillation","Ventricular tachycardia","Supraventricular tachycardia","Heart block"],answer:0,explanation:"Atrial fibrillation is the most common sustained arrhythmia."},
+
+{question:"77. ECG feature of atrial fibrillation:",options:["Absent P waves","ST elevation","Delta wave","Tall T waves"],answer:0,explanation:"AF shows absent P waves with irregularly irregular rhythm."},
+
+{question:"78. Drug used for rate control in atrial fibrillation:",options:["Beta blockers","Antibiotics","Insulin","Thrombolytics"],answer:0,explanation:"Beta blockers slow AV nodal conduction and control ventricular rate."},
+
+{question:"79. ECG finding in Wolff-Parkinson-White syndrome:",options:["Delta wave","ST depression","Q wave","Tall P wave"],answer:0,explanation:"WPW syndrome shows a characteristic delta wave due to accessory pathway."},
+
+{question:"80. Treatment of ventricular fibrillation:",options:["Immediate defibrillation","Digoxin","Warfarin","Atropine"],answer:0,explanation:"Ventricular fibrillation requires immediate electrical defibrillation."},
+
+{question:"81. First degree heart block shows:",options:["Prolonged PR interval","Dropped beats","Wide QRS","Delta waves"],answer:0,explanation:"PR interval longer than 200 ms is characteristic."},
+
+{question:"82. Complete heart block treatment:",options:["Pacemaker","Aspirin","Digoxin","Furosemide"],answer:0,explanation:"Permanent pacemaker is required for complete heart block."},
+
+{question:"83. Drug that may cause torsades de pointes:",options:["Quinidine","Aspirin","Digoxin","Heparin"],answer:0,explanation:"Quinidine prolongs QT interval leading to torsades de pointes."},
+
+{question:"84. Drug used for symptomatic bradycardia:",options:["Atropine","Digoxin","Verapamil","Beta blockers"],answer:0,explanation:"Atropine increases heart rate by blocking vagal tone."},
+
+{question:"85. Acute treatment for supraventricular tachycardia:",options:["Adenosine","Warfarin","Insulin","Paracetamol"],answer:0,explanation:"Adenosine temporarily blocks AV node conduction."},
+
+{question:"86. Most common type of cardiomyopathy:",options:["Dilated cardiomyopathy","Hypertrophic cardiomyopathy","Restrictive cardiomyopathy","Ischemic cardiomyopathy"],answer:0,explanation:"Dilated cardiomyopathy is the most common form."},
+
+{question:"87. Sudden death in young athletes is usually due to:",options:["Hypertrophic cardiomyopathy","Dilated cardiomyopathy","Myocardial infarction","Heart block"],answer:0,explanation:"Hypertrophic cardiomyopathy is the leading cause."},
+
+{question:"88. Pulsus paradoxus occurs in:",options:["Cardiac tamponade","Hypertension","Myocardial infarction","Arrhythmia"],answer:0,explanation:"It is an exaggerated fall in systolic BP during inspiration."},
+
+{question:"89. Pulsus alternans indicates:",options:["Left ventricular failure","Hypertension","Pericarditis","Arrhythmia"],answer:0,explanation:"Alternating strong and weak pulses suggest severe LV dysfunction."},
+
+{question:"90. Beck's triad consists of:",options:["Hypotension, raised JVP, muffled heart sounds","Hypertension, bradycardia, edema","Tachycardia, fever, rash","Chest pain, cough, dyspnea"],answer:0,explanation:"Beck's triad is seen in cardiac tamponade."},
+
+{question:"91. Most common cause of acute pericarditis:",options:["Viral infection","Tuberculosis","Myocardial infarction","Trauma"],answer:0,explanation:"Viral infection is the most common cause."},
+
+{question:"92. Pericardial friction rub is heard in:",options:["Pericarditis","Heart failure","Myocardial infarction","Hypertension"],answer:0,explanation:"Inflamed pericardial layers rubbing cause this sound."},
+
+{question:"93. Electrical alternans on ECG suggests:",options:["Cardiac tamponade","Atrial fibrillation","Heart block","Myocardial infarction"],answer:0,explanation:"Electrical alternans occurs due to swinging heart in large pericardial effusion."},
+
+{question:"94. Most common embolic stroke source:",options:["Atrial fibrillation","Hypertension","Diabetes","Smoking"],answer:0,explanation:"AF causes thrombus formation in the atria."},
+
+{question:"95. Anticoagulant commonly used in atrial fibrillation:",options:["Warfarin","Aspirin","Digoxin","Furosemide"],answer:0,explanation:"Warfarin prevents thromboembolism in AF."},
+
+{question:"96. Rheumatic fever commonly follows infection with:",options:["Streptococcus pyogenes","Staphylococcus aureus","E. coli","Mycobacterium tuberculosis"],answer:0,explanation:"Group A beta-hemolytic streptococcus causes rheumatic fever."},
+
+{question:"97. Drug used for secondary prevention of rheumatic fever:",options:["Penicillin","Aspirin","Heparin","Warfarin"],answer:0,explanation:"Long-acting penicillin prevents recurrence."},
+
+{question:"98. Most common cause of sudden collapse in MI:",options:["Ventricular fibrillation","Bradycardia","Atrial fibrillation","Heart block"],answer:0,explanation:"Ventricular fibrillation causes sudden cardiac arrest."},
+
+{question:"99. Best imaging modality for valve disease:",options:["Echocardiography","CT scan","MRI","Chest X-ray"],answer:0,explanation:"Echo visualizes valve anatomy and function."},
+
+{question:"100. Most common cardiovascular risk factor worldwide:",options:["Hypertension","Smoking","Diabetes","Obesity"],answer:0,explanation:"Hypertension is the leading risk factor for cardiovascular disease."}
+
+]
+
+// continue adding remaining questions up to 100 similarly
 
 let index=0
 let score=0
@@ -103,8 +241,7 @@ function showQuestion(){
 
 let q=questions[index]
 
-document.getElementById("progress").innerHTML=
-"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+document.getElementById("progress").innerHTML="<b>Question "+(index+1)+" / "+questions.length+"</b>"
 
 let html="<div class='question'>"+q.question+"</div>"
 
@@ -124,16 +261,21 @@ if(answered[index]) return
 answered[index]=true
 
 let q=questions[index]
+
 let opts=document.querySelectorAll(".option")
 
 opts.forEach(o=>o.style.pointerEvents="none")
 
 if(i==q.answer){
+
 opts[i].classList.add("correct")
 score++
+
 }else{
+
 opts[i].classList.add("wrong")
 opts[q.answer].classList.add("correct")
+
 }
 
 document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
@@ -142,11 +284,15 @@ document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
 
 function nextQuestion(){
 
-if(index < questions.length-1){
+if(index<questions.length-1){
+
 index++
 showQuestion()
+
 }else{
+
 finishQuiz()
+
 }
 
 }
@@ -154,8 +300,10 @@ finishQuiz()
 function prevQuestion(){
 
 if(index>0){
+
 index--
 showQuestion()
+
 }
 
 }
@@ -163,9 +311,7 @@ showQuestion()
 function finishQuiz(){
 
 document.getElementById("quiz").innerHTML=""
-document.getElementById("explanation").innerHTML=""
-document.getElementById("score").innerHTML=
-"<h3>Score: "+score+" / "+questions.length+"</h3>"
+document.getElementById("score").innerHTML="<h3>Your Score: "+score+" / "+questions.length+"</h3>"
 
 }
 
@@ -176,4 +322,3 @@ showQuestion()
 </body>
 </html>
 ```
-
