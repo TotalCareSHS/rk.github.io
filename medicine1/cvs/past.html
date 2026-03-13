@@ -317,8 +317,18 @@ showQuestion()
 
 function finishQuiz(){
 
+clearInterval(timerInterval)
+
 document.getElementById("quiz").innerHTML=""
-document.getElementById("score").innerHTML="<h3>Your Score: "+score+" / "+questions.length+"</h3>"
+
+document.getElementById("score").innerHTML =
+"<h3>Quiz Finished</h3>"+
+"<p>Correct: "+correct+"</p>"+
+"<p>Wrong: "+wrong+"</p>"+
+"<p>Total Questions: "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
 
 }
 
