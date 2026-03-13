@@ -112,6 +112,21 @@ showQuestion()
 
 }
 
+questions = wrongQuestions
+index = 0
+
+correct = 0
+wrong = 0
+
+userAnswers = new Array(questions.length).fill(null)
+
+document.getElementById("score").innerHTML=""
+document.getElementById("review").innerHTML=""
+
+showQuestion()
+
+}
+
 function answer(i){
 
 if(userAnswers[index] !== null) return
