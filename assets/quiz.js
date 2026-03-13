@@ -54,6 +54,34 @@ document.getElementById("explanation").innerHTML=""
 
 }
 
+function reviewWrong(){
+
+let wrongQuestions = questions.filter((q,i)=>{
+return userAnswers[i] !== null && userAnswers[i] !== q.answer
+})
+
+if(wrongQuestions.length === 0){
+
+alert("No wrong answers to review!")
+return
+
+}
+
+questions = wrongQuestions
+index = 0
+
+correct = 0
+wrong = 0
+
+userAnswers = new Array(questions.length).fill(null)
+
+document.getElementById("score").innerHTML=""
+document.getElementById("review").innerHTML=""
+
+showQuestion()
+
+}
+
 function answer(i){
 
 if(userAnswers[index] !== null) return
