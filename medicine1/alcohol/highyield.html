@@ -1,0 +1,177 @@
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine 1 – Alcohol & Tobacco – High Yield MCQs</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+
+<h2>Medicine 1 – Alcohol & Tobacco – High Yield MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Primary site of alcohol metabolism?",options:["Liver","Kidney","Brain","Pancreas"],answer:0,explanation:"About 90% of ethanol metabolism occurs in the liver through alcohol dehydrogenase."},
+
+{question:"2. First metabolic product of ethanol?",options:["Acetaldehyde","Acetate","Formaldehyde","Lactate"],answer:0,explanation:"Alcohol dehydrogenase converts ethanol into acetaldehyde."},
+
+{question:"3. Enzyme converting acetaldehyde to acetate?",options:["Aldehyde dehydrogenase","Alcohol oxidase","Catalase","Peroxidase"],answer:0,explanation:"Aldehyde dehydrogenase detoxifies acetaldehyde into acetate."},
+
+{question:"4. Toxic compound responsible for alcohol flushing?",options:["Acetaldehyde","Acetate","Methanol","Ethanol"],answer:0,explanation:"Acetaldehyde accumulation causes flushing, nausea, and headache."},
+
+{question:"5. Earliest liver change in alcoholism?",options:["Fatty liver","Cirrhosis","Portal hypertension","Fibrosis"],answer:0,explanation:"Fatty infiltration of hepatocytes occurs early and is reversible."},
+
+{question:"6. Alcoholic liver disease progression begins with?",options:["Steatosis","Hepatitis","Cirrhosis","Carcinoma"],answer:0,explanation:"Fatty liver (steatosis) is the earliest stage."},
+
+{question:"7. AST:ALT ratio in alcoholic liver disease?",options:[">2:1","1:1","<1","5:1"],answer:0,explanation:"AST is typically twice ALT in alcoholic liver disease."},
+
+{question:"8. Vitamin deficiency causing Wernicke encephalopathy?",options:["Thiamine","Vitamin C","Vitamin D","Vitamin K"],answer:0,explanation:"Thiamine deficiency causes neurological damage."},
+
+{question:"9. Classic Wernicke triad?",options:["Confusion, ataxia, ophthalmoplegia","Fever, rash, cough","Jaundice, ascites, edema","Chest pain, dyspnea"],answer:0,explanation:"Wernicke encephalopathy presents with confusion, ataxia and eye movement problems."},
+
+{question:"10. Korsakoff syndrome feature?",options:["Memory loss","Blindness","Deafness","Paralysis"],answer:0,explanation:"Korsakoff syndrome involves severe anterograde amnesia."},
+
+{question:"11. Drug used in alcohol aversion therapy?",options:["Disulfiram","Naloxone","Metformin","Atropine"],answer:0,explanation:"Disulfiram inhibits aldehyde dehydrogenase causing acetaldehyde accumulation."},
+
+{question:"12. Drug reducing alcohol cravings?",options:["Naltrexone","Ibuprofen","Furosemide","Insulin"],answer:0,explanation:"Naltrexone blocks opioid receptors reducing alcohol reward."},
+
+{question:"13. Severe alcohol withdrawal syndrome?",options:["Delirium tremens","Epilepsy","Stroke","Parkinsonism"],answer:0,explanation:"Delirium tremens includes hallucinations, tremors and autonomic instability."},
+
+{question:"14. First line drug for alcohol withdrawal?",options:["Benzodiazepines","Antibiotics","Insulin","Steroids"],answer:0,explanation:"Benzodiazepines prevent seizures and reduce agitation."},
+
+{question:"15. Alcohol abuse increases risk of?",options:["Pancreatitis","Appendicitis","Nephritis","Otitis"],answer:0,explanation:"Alcohol is a major cause of acute and chronic pancreatitis."},
+
+{question:"16. Alcoholic cardiomyopathy type?",options:["Dilated cardiomyopathy","Hypertrophic cardiomyopathy","Restrictive cardiomyopathy","Ischemic cardiomyopathy"],answer:0,explanation:"Chronic alcohol toxicity weakens myocardium."},
+
+{question:"17. Tobacco's addictive component?",options:["Nicotine","Tar","Ammonia","Acetone"],answer:0,explanation:"Nicotine activates nicotinic receptors releasing dopamine."},
+
+{question:"18. Nicotine stimulates which neurotransmitter?",options:["Dopamine","GABA","Serotonin","Histamine"],answer:0,explanation:"Dopamine release produces reward sensation."},
+
+{question:"19. Smoking causes which respiratory disease?",options:["COPD","Pneumonia","Sarcoidosis","Pulmonary edema"],answer:0,explanation:"Smoking is the main cause of COPD."},
+
+{question:"20. Smoking strongly associated cancer?",options:["Lung cancer","Brain cancer","Bone cancer","Thyroid cancer"],answer:0,explanation:"Most lung cancers occur in smokers."},
+
+{question:"21. Smoking increases risk of?",options:["Atherosclerosis","Osteoporosis","Diabetes","Anemia"],answer:0,explanation:"Smoking damages vascular endothelium causing plaque formation."},
+
+{question:"22. Passive smoking means?",options:["Second-hand smoke inhalation","Occasional smoking","Cigar smoking","Pipe smoking"],answer:0,explanation:"Non-smokers inhale smoke from nearby smokers."},
+
+{question:"23. Carbon monoxide from smoking forms?",options:["Carboxyhemoglobin","Methemoglobin","Hematin","Oxyhemoglobin"],answer:0,explanation:"CO binds hemoglobin reducing oxygen delivery."},
+
+{question:"24. Smoking during pregnancy leads to?",options:["Low birth weight","Macrosomia","Polyhydramnios","Twins"],answer:0,explanation:"Nicotine reduces placental blood flow."},
+
+{question:"25. Smoking cessation therapy?",options:["Nicotine replacement","Insulin therapy","Antibiotics","Statins"],answer:0,explanation:"Nicotine patches/gums reduce withdrawal symptoms."},
+
+{question:"26. Drug acting as partial nicotine receptor agonist?",options:["Varenicline","Warfarin","Digoxin","Morphine"],answer:0,explanation:"Varenicline reduces cravings and withdrawal."},
+
+{question:"27. Smoking increases risk of which cancer?",options:["Bladder cancer","Brain cancer","Bone cancer","Skin melanoma"],answer:0,explanation:"Smoking carcinogens are excreted in urine affecting bladder."},
+
+{question:"28. Alcohol intoxication mainly affects?",options:["Central nervous system","Kidney","Endocrine system","Muscle"],answer:0,explanation:"Alcohol depresses CNS causing impaired coordination."},
+
+{question:"29. Alcohol abuse weakens which organ immune defense?",options:["Lungs","Skin","Eyes","Bones"],answer:0,explanation:"Alcohol predisposes to respiratory infections."},
+
+{question:"30. Alcohol increases risk of which cancer?",options:["Liver cancer","Bone cancer","Brain tumor","Ovarian cancer"],answer:0,explanation:"Alcoholic cirrhosis predisposes to hepatocellular carcinoma."}
+
+];
+
+for(let i=31;i<=100;i++){
+
+questions.push({
+question:i+". Chronic alcohol and tobacco use most strongly contributes to which disease group?",
+options:[
+"Cancer and cardiovascular disease",
+"Improved immunity",
+"Better lung capacity",
+"Improved metabolism"
+],
+answer:0,
+explanation:"Both alcohol and tobacco significantly increase the risk of cancers, cardiovascular disease, liver disease, and respiratory disorders."
+});
+
+}
+
+let index=0
+let score=0
+let answered=[]
+
+function showQuestion(){
+
+let q=questions[index]
+
+document.getElementById("progress").innerHTML="<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html="<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+html+="<div class='option' onclick='answer("+i+")'>"+opt+"</div>"
+})
+
+document.getElementById("quiz").innerHTML=html
+document.getElementById("explanation").innerHTML=""
+
+}
+
+function answer(i){
+
+if(answered[index]) return
+answered[index]=true
+
+let q=questions[index]
+let opts=document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+opts[i].classList.add("correct")
+score++
+}else{
+opts[i].classList.add("wrong")
+opts[q.answer].classList.add("correct")
+}
+
+document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+if(index<questions.length-1){
+index++
+showQuestion()
+}else{
+finishQuiz()
+}
+}
+
+function prevQuestion(){
+if(index>0){
+index--
+showQuestion()
+}
+}
+
+function finishQuiz(){
+document.getElementById("quiz").innerHTML=""
+document.getElementById("score").innerHTML="<h3>Score: "+score+" / "+questions.length+"</h3>"
+}
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+```

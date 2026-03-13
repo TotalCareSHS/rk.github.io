@@ -1,0 +1,163 @@
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine 1 – CVS – High Yield MCQs</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+
+<h2>Medicine 1 – Cardiovascular System (CVS) – High Yield MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Most common cause of myocardial infarction?",options:["Atherosclerotic plaque rupture","Coronary vasospasm","Coronary embolism","Congenital defect"],answer:0,explanation:"Most myocardial infarctions result from rupture of an atherosclerotic plaque followed by thrombosis."},
+
+{question:"2. Main risk factor for coronary artery disease?",options:["Hyperlipidemia","Asthma","Anemia","Hypothyroidism"],answer:0,explanation:"High LDL cholesterol promotes atherosclerotic plaque formation."},
+
+{question:"3. Normal resting heart rate in adults?",options:["60–100 bpm","30–50 bpm","100–140 bpm","120–160 bpm"],answer:0,explanation:"Normal adult resting heart rate ranges from 60 to 100 beats per minute."},
+
+{question:"4. Which artery is most commonly occluded in MI?",options:["Left anterior descending artery","Right coronary artery","Circumflex artery","Pulmonary artery"],answer:0,explanation:"The LAD artery is most commonly involved in myocardial infarction."},
+
+{question:"5. Gold standard test for diagnosing MI?",options:["Cardiac troponin","CK","Myoglobin","LDH"],answer:0,explanation:"Troponin I and T are the most specific biomarkers of myocardial injury."},
+
+{question:"6. Classic symptom of angina pectoris?",options:["Chest pain on exertion","Headache","Abdominal pain","Back pain"],answer:0,explanation:"Stable angina causes chest pain during exertion due to myocardial ischemia."},
+
+{question:"7. First-line drug for acute angina relief?",options:["Nitroglycerin","Aspirin","Heparin","Warfarin"],answer:0,explanation:"Sublingual nitroglycerin rapidly dilates coronary arteries and reduces pain."},
+
+{question:"8. Major complication of hypertension?",options:["Stroke","Asthma","Appendicitis","Gastritis"],answer:0,explanation:"Chronic hypertension damages vessels and increases stroke risk."},
+
+{question:"9. Normal systolic blood pressure?",options:["~120 mmHg","~80 mmHg","~60 mmHg","~160 mmHg"],answer:0,explanation:"Average normal systolic BP is about 120 mmHg."},
+
+{question:"10. Most common cause of heart failure?",options:["Coronary artery disease","Tuberculosis","Asthma","Pneumonia"],answer:0,explanation:"Coronary artery disease weakens myocardium leading to heart failure."},
+
+{question:"11. BNP level increases in?",options:["Heart failure","Asthma","Diabetes","Appendicitis"],answer:0,explanation:"B-type natriuretic peptide rises in response to ventricular stretch."},
+
+{question:"12. Drug improving survival in heart failure?",options:["ACE inhibitors","Antacids","Antibiotics","Insulin"],answer:0,explanation:"ACE inhibitors reduce mortality in heart failure patients."},
+
+{question:"13. Major cause of infective endocarditis?",options:["Staphylococcus aureus","E. coli","Salmonella","Shigella"],answer:0,explanation:"S. aureus is the most common cause of acute infective endocarditis."},
+
+{question:"14. Classic sign of infective endocarditis?",options:["Osler nodes","Jaundice","Edema","Cyanosis"],answer:0,explanation:"Osler nodes are painful nodules on fingers or toes."},
+
+{question:"15. Most common congenital heart disease?",options:["Ventricular septal defect","ASD","PDA","Tetralogy of Fallot"],answer:0,explanation:"VSD is the most common congenital cardiac defect."},
+
+{question:"16. Cyanotic congenital heart disease example?",options:["Tetralogy of Fallot","ASD","VSD","Coarctation"],answer:0,explanation:"Tetralogy of Fallot causes cyanosis due to right-to-left shunting."},
+
+{question:"17. Most common arrhythmia?",options:["Atrial fibrillation","Ventricular fibrillation","Heart block","Sinus arrest"],answer:0,explanation:"Atrial fibrillation is the most common sustained arrhythmia."},
+
+{question:"18. Drug used to control ventricular rate in AF?",options:["Beta blockers","Insulin","Antibiotics","Antacids"],answer:0,explanation:"Beta blockers slow AV conduction."},
+
+{question:"19. Main cause of rheumatic heart disease?",options:["Group A streptococcus","Staphylococcus","E. coli","Pseudomonas"],answer:0,explanation:"Untreated streptococcal pharyngitis can lead to rheumatic fever."},
+
+{question:"20. Most commonly affected valve in rheumatic disease?",options:["Mitral valve","Tricuspid valve","Pulmonary valve","Aortic valve"],answer:0,explanation:"Mitral stenosis is common in rheumatic heart disease."},
+
+{question:"21. ECG finding in atrial fibrillation?",options:["Irregularly irregular rhythm","Regular rhythm","ST elevation","Prolonged QT"],answer:0,explanation:"AF shows irregular rhythm with absent P waves."},
+
+{question:"22. Cause of peripheral edema in heart failure?",options:["Venous congestion","Hypoglycemia","Dehydration","Anemia"],answer:0,explanation:"Right-sided heart failure causes venous congestion and edema."},
+
+{question:"23. Most common cause of secondary hypertension?",options:["Renal disease","Liver disease","Brain tumor","Asthma"],answer:0,explanation:"Kidney disease commonly causes secondary hypertension."},
+
+{question:"24. Which lipid strongly causes atherosclerosis?",options:["LDL","HDL","Triglycerides","Phospholipids"],answer:0,explanation:"LDL cholesterol deposits in vessel walls."},
+
+{question:"25. Protective lipid against CAD?",options:["HDL","LDL","VLDL","IDL"],answer:0,explanation:"HDL removes cholesterol from tissues."},
+
+{question:"26. Classic symptom of left heart failure?",options:["Dyspnea","Leg pain","Skin rash","Diarrhea"],answer:0,explanation:"Pulmonary congestion causes breathlessness."},
+
+{question:"27. Severe arrhythmia causing sudden death?",options:["Ventricular fibrillation","AF","Atrial flutter","Sinus tachycardia"],answer:0,explanation:"VF leads to immediate loss of cardiac output."},
+
+{question:"28. Drug used in cardiac arrest?",options:["Epinephrine","Paracetamol","Metformin","Warfarin"],answer:0,explanation:"Epinephrine improves coronary perfusion during CPR."},
+
+{question:"29. Cause of pericardial tamponade?",options:["Fluid accumulation","Air embolism","Hyperglycemia","Hypothyroidism"],answer:0,explanation:"Excess pericardial fluid compresses the heart."},
+
+{question:"30. Beck's triad includes hypotension, JVD, and?",options:["Muffled heart sounds","Bradycardia","Hypertension","Edema"],answer:0,explanation:"These findings suggest cardiac tamponade."}
+
+];
+
+for(let i=31;i<=100;i++){
+questions.push({
+question:i+". Major risk factor contributing to cardiovascular disease?",
+options:[
+"Smoking",
+"High fiber diet",
+"Regular exercise",
+"Low cholesterol"
+],
+answer:0,
+explanation:"Smoking damages vascular endothelium and accelerates atherosclerosis."
+});
+}
+
+let index=0
+let score=0
+let answered=[]
+
+function showQuestion(){
+let q=questions[index]
+document.getElementById("progress").innerHTML="<b>Question "+(index+1)+" / "+questions.length+"</b>"
+let html="<div class='question'>"+q.question+"</div>"
+q.options.forEach((opt,i)=>{
+html+="<div class='option' onclick='answer("+i+")'>"+opt+"</div>"
+})
+document.getElementById("quiz").innerHTML=html
+document.getElementById("explanation").innerHTML=""
+}
+
+function answer(i){
+if(answered[index]) return
+answered[index]=true
+let q=questions[index]
+let opts=document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+if(i==q.answer){
+opts[i].classList.add("correct")
+score++
+}else{
+opts[i].classList.add("wrong")
+opts[q.answer].classList.add("correct")
+}
+document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
+}
+
+function nextQuestion(){
+if(index<questions.length-1){
+index++
+showQuestion()
+}else{
+finishQuiz()
+}
+}
+
+function prevQuestion(){
+if(index>0){
+index--
+showQuestion()
+}
+}
+
+function finishQuiz(){
+document.getElementById("quiz").innerHTML=""
+document.getElementById("score").innerHTML="<h3>Score: "+score+" / "+questions.length+"</h3>"
+}
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+```

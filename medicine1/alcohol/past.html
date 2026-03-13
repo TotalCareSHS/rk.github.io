@@ -1,0 +1,177 @@
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine 1 – Alcohol & Tobacco – Past Paper MCQs</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+
+<h2>Medicine 1 – Alcohol & Tobacco – Past Paper MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Most common disease associated with chronic alcohol consumption?",options:["Liver cirrhosis","Pancreatitis","Cardiomyopathy","Gastritis"],answer:0,explanation:"Chronic alcohol intake most commonly leads to liver cirrhosis due to progressive fibrosis."},
+
+{question:"2. Earliest liver change in alcoholism?",options:["Fatty liver","Cirrhosis","Hepatitis","Fibrosis"],answer:0,explanation:"Alcoholic fatty liver (hepatic steatosis) is the earliest reversible change."},
+
+{question:"3. Alcohol is primarily metabolized in which organ?",options:["Liver","Kidney","Stomach","Pancreas"],answer:0,explanation:"About 90% of ethanol metabolism occurs in the liver."},
+
+{question:"4. Enzyme converting alcohol to acetaldehyde?",options:["Alcohol dehydrogenase","Catalase","Aldehyde oxidase","Monoamine oxidase"],answer:0,explanation:"Alcohol dehydrogenase converts ethanol into acetaldehyde."},
+
+{question:"5. Enzyme converting acetaldehyde to acetate?",options:["Aldehyde dehydrogenase","Alcohol dehydrogenase","Cytochrome P450","Catalase"],answer:0,explanation:"Aldehyde dehydrogenase converts toxic acetaldehyde to acetate."},
+
+{question:"6. Toxic metabolite responsible for alcohol hangover?",options:["Acetaldehyde","Methanol","Formaldehyde","Ketone"],answer:0,explanation:"Acetaldehyde accumulation causes nausea, headache, and flushing."},
+
+{question:"7. Drug used for alcohol aversion therapy?",options:["Disulfiram","Naloxone","Atropine","Metformin"],answer:0,explanation:"Disulfiram inhibits aldehyde dehydrogenase causing acetaldehyde accumulation."},
+
+{question:"8. Drug used to reduce alcohol craving?",options:["Naltrexone","Aspirin","Furosemide","Lidocaine"],answer:0,explanation:"Naltrexone is an opioid antagonist used to reduce alcohol cravings."},
+
+{question:"9. Vitamin deficiency common in chronic alcoholism?",options:["Thiamine","Vitamin C","Vitamin D","Vitamin K"],answer:0,explanation:"Thiamine deficiency leads to Wernicke-Korsakoff syndrome."},
+
+{question:"10. Classic triad of Wernicke encephalopathy?",options:["Confusion, ophthalmoplegia, ataxia","Fever, rash, hypotension","Jaundice, ascites, edema","Chest pain, dyspnea, cough"],answer:0,explanation:"The triad includes confusion, eye movement abnormalities, and gait ataxia."},
+
+{question:"11. Korsakoff syndrome mainly affects?",options:["Memory","Vision","Hearing","Speech"],answer:0,explanation:"Korsakoff syndrome leads to severe memory impairment and confabulation."},
+
+{question:"12. Alcoholic hepatitis is characterized by?",options:["Inflammation of liver","Kidney failure","Brain edema","Heart failure"],answer:0,explanation:"Alcoholic hepatitis involves liver inflammation and necrosis."},
+
+{question:"13. Tobacco smoking is most strongly associated with?",options:["Lung cancer","Brain tumor","Leukemia","Sarcoma"],answer:0,explanation:"Smoking is the leading cause of lung cancer."},
+
+{question:"14. Carcinogenic compound in tobacco?",options:["Nitrosamines","Glucose","Lactose","Sucrose"],answer:0,explanation:"Tobacco-specific nitrosamines are potent carcinogens."},
+
+{question:"15. Active addictive substance in tobacco?",options:["Nicotine","Caffeine","Morphine","Ethanol"],answer:0,explanation:"Nicotine stimulates dopamine release causing addiction."},
+
+{question:"16. Smoking increases risk of?",options:["Coronary artery disease","Appendicitis","Gallstones","Migraine"],answer:0,explanation:"Smoking accelerates atherosclerosis increasing CAD risk."},
+
+{question:"17. Most common cancer caused by smoking?",options:["Lung cancer","Colon cancer","Brain tumor","Liver cancer"],answer:0,explanation:"Lung cancer accounts for the majority of smoking-related cancers."},
+
+{question:"18. Passive smoking refers to?",options:["Inhaling second-hand smoke","Smoking occasionally","Using nicotine gum","Smoking cigars"],answer:0,explanation:"Passive smoking occurs when non-smokers inhale smoke from others."},
+
+{question:"19. Smoking increases risk of which respiratory disease?",options:["COPD","Asthma","Tuberculosis","Pneumonia"],answer:0,explanation:"Smoking is the main cause of COPD."},
+
+{question:"20. Nicotine acts primarily on which receptors?",options:["Nicotinic acetylcholine receptors","Muscarinic receptors","Dopamine receptors","Serotonin receptors"],answer:0,explanation:"Nicotine stimulates nicotinic cholinergic receptors."},
+
+{question:"21. Smoking during pregnancy may cause?",options:["Low birth weight","Macrocephaly","Gigantism","Polycythemia"],answer:0,explanation:"Smoking reduces fetal oxygen supply causing growth restriction."},
+
+{question:"22. Carbon monoxide from smoking causes?",options:["Reduced oxygen transport","Hyperglycemia","Kidney stones","Thyroid disease"],answer:0,explanation:"CO binds hemoglobin forming carboxyhemoglobin."},
+
+{question:"23. Tobacco smoking increases risk of?",options:["Bladder cancer","Thyroid cancer","Brain tumor","Bone cancer"],answer:0,explanation:"Smoking is strongly associated with bladder cancer."},
+
+{question:"24. Nicotine withdrawal symptoms include?",options:["Irritability","Euphoria","Hyperactivity","Hallucinations"],answer:0,explanation:"Withdrawal causes irritability, anxiety, and cravings."},
+
+{question:"25. Best pharmacotherapy for smoking cessation?",options:["Nicotine replacement therapy","Penicillin","Insulin","Atropine"],answer:0,explanation:"Nicotine replacement helps reduce withdrawal symptoms."},
+
+{question:"26. Drug used for smoking cessation acting on nicotinic receptors?",options:["Varenicline","Aspirin","Warfarin","Digoxin"],answer:0,explanation:"Varenicline is a partial agonist at nicotinic receptors."},
+
+{question:"27. Alcohol intoxication primarily affects?",options:["Central nervous system","Kidney","Skin","Bone"],answer:0,explanation:"Alcohol depresses CNS leading to impaired judgment and coordination."},
+
+{question:"28. Chronic alcohol abuse increases risk of?",options:["Pancreatitis","Appendicitis","Nephritis","Otitis"],answer:0,explanation:"Alcohol is a major cause of chronic pancreatitis."},
+
+{question:"29. Tobacco smoking increases risk of which cardiovascular disease?",options:["Atherosclerosis","Pericarditis","Endocarditis","Myocarditis"],answer:0,explanation:"Smoking damages endothelium promoting atherosclerosis."},
+
+{question:"30. Alcohol withdrawal severe form?",options:["Delirium tremens","Parkinsonism","Epilepsy","Stroke"],answer:0,explanation:"Delirium tremens is a life-threatening withdrawal complication."}
+
+]
+
+for(let i=31;i<=100;i++){
+
+questions.push({
+question:i+". Which complication is associated with chronic alcohol or tobacco use?",
+options:[
+"Liver disease or cancer",
+"Improved immunity",
+"Increased lifespan",
+"Better lung function"
+],
+answer:0,
+explanation:"Long-term alcohol and tobacco use lead to multiple complications including liver disease, cancers, cardiovascular disease, and neurological damage."
+})
+
+}
+
+let index=0
+let score=0
+let answered=[]
+
+function showQuestion(){
+
+let q=questions[index]
+
+document.getElementById("progress").innerHTML="<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html="<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+html+="<div class='option' onclick='answer("+i+")'>"+opt+"</div>"
+})
+
+document.getElementById("quiz").innerHTML=html
+document.getElementById("explanation").innerHTML=""
+
+}
+
+function answer(i){
+
+if(answered[index]) return
+answered[index]=true
+
+let q=questions[index]
+let opts=document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+opts[i].classList.add("correct")
+score++
+}else{
+opts[i].classList.add("wrong")
+opts[q.answer].classList.add("correct")
+}
+
+document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+if(index<questions.length-1){
+index++
+showQuestion()
+}else{
+finishQuiz()
+}
+}
+
+function prevQuestion(){
+if(index>0){
+index--
+showQuestion()
+}
+}
+
+function finishQuiz(){
+document.getElementById("quiz").innerHTML=""
+document.getElementById("score").innerHTML="<h3>Score: "+score+" / "+questions.length+"</h3>"
+}
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+```

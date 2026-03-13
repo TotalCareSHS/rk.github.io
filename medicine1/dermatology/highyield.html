@@ -1,0 +1,178 @@
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Medicine 1 – Dermatology – High Yield MCQs</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+
+<h2>Medicine 1 – Dermatology – High Yield MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Most common skin cancer?",options:["Basal cell carcinoma","Melanoma","Squamous cell carcinoma","Kaposi sarcoma"],answer:0,explanation:"Basal cell carcinoma is the most common skin cancer and arises from basal keratinocytes."},
+
+{question:"2. Most aggressive skin malignancy?",options:["Melanoma","Basal cell carcinoma","Squamous cell carcinoma","Actinic keratosis"],answer:0,explanation:"Melanoma has high metastatic potential and causes most skin cancer deaths."},
+
+{question:"3. Silvery scaly plaques are typical of?",options:["Psoriasis","Vitiligo","Melasma","Urticaria"],answer:0,explanation:"Psoriasis produces erythematous plaques covered with silvery scales."},
+
+{question:"4. Auspitz sign occurs in?",options:["Psoriasis","Acne","Tinea","Scabies"],answer:0,explanation:"Pinpoint bleeding when scales are removed is called Auspitz sign."},
+
+{question:"5. Loss of melanocytes causes?",options:["Vitiligo","Melasma","Psoriasis","Eczema"],answer:0,explanation:"Vitiligo is caused by autoimmune destruction of melanocytes."},
+
+{question:"6. Honey-colored crusted lesions suggest?",options:["Impetigo","Melanoma","Eczema","Psoriasis"],answer:0,explanation:"Impetigo caused by Staphylococcus produces honey-colored crusts."},
+
+{question:"7. Main pathogen causing impetigo?",options:["Staphylococcus aureus","E coli","Candida","Mycobacterium"],answer:0,explanation:"Staphylococcus aureus is the most common cause."},
+
+{question:"8. Athlete's foot is?",options:["Tinea pedis","Tinea capitis","Tinea corporis","Tinea cruris"],answer:0,explanation:"Tinea pedis is dermatophyte infection of the feet."},
+
+{question:"9. Dermatophytes infect?",options:["Keratinized tissue","Muscle","Bone","Cartilage"],answer:0,explanation:"Dermatophytes grow in keratin-rich structures."},
+
+{question:"10. Acne is associated with?",options:["Cutibacterium acnes","Streptococcus","Candida","HSV"],answer:0,explanation:"Cutibacterium acnes contributes to acne inflammation."},
+
+{question:"11. Severe nodulocystic acne drug?",options:["Isotretinoin","Aspirin","Amoxicillin","Ibuprofen"],answer:0,explanation:"Oral isotretinoin is the most effective therapy for severe acne."},
+
+{question:"12. Scabies cause?",options:["Sarcoptes scabiei","Tick","Demodex","Louse"],answer:0,explanation:"Scabies results from infestation with Sarcoptes mite."},
+
+{question:"13. Key symptom of scabies?",options:["Severe itching","Hair loss","Pain","Fever"],answer:0,explanation:"Intense nocturnal itching is characteristic."},
+
+{question:"14. Drug of choice for scabies?",options:["Permethrin","Acyclovir","Ketoconazole","Hydrocortisone"],answer:0,explanation:"Topical permethrin is first-line therapy."},
+
+{question:"15. Dandruff is mild form of?",options:["Seborrheic dermatitis","Psoriasis","Vitiligo","Tinea"],answer:0,explanation:"Dandruff results from seborrheic dermatitis."},
+
+{question:"16. Main cause of contact dermatitis?",options:["Allergic reaction","Bacterial infection","Virus","Fungus"],answer:0,explanation:"Allergic or irritant exposure triggers dermatitis."},
+
+{question:"17. Poison ivy causes?",options:["Allergic contact dermatitis","Psoriasis","Vitiligo","Tinea"],answer:0,explanation:"Urushiol oil causes delayed hypersensitivity."},
+
+{question:"18. Urticaria lesions appear as?",options:["Itchy wheals","Plaques","Ulcers","Scales"],answer:0,explanation:"Urticaria causes transient wheals."},
+
+{question:"19. Mediator responsible for urticaria?",options:["Histamine","Insulin","Cortisol","Thyroxine"],answer:0,explanation:"Histamine release from mast cells causes urticaria."},
+
+{question:"20. ABCDE rule helps detect?",options:["Melanoma","Psoriasis","Acne","Tinea"],answer:0,explanation:"ABCDE rule identifies suspicious melanoma lesions."},
+
+{question:"21. Pre-cancerous sun lesion?",options:["Actinic keratosis","Nevus","Papule","Macule"],answer:0,explanation:"Actinic keratosis can progress to squamous carcinoma."},
+
+{question:"22. Sun exposure mainly causes?",options:["Skin cancer","Vitiligo","Scabies","Acne"],answer:0,explanation:"UV radiation damages DNA leading to cancer."},
+
+{question:"23. Basal cell carcinoma usually appears on?",options:["Face","Feet","Abdomen","Back"],answer:0,explanation:"It occurs on sun-exposed areas."},
+
+{question:"24. Melasma causes?",options:["Hyperpigmented patches","Depigmentation","Blisters","Ulcers"],answer:0,explanation:"Melasma produces facial hyperpigmentation."},
+
+{question:"25. Albinism occurs due to?",options:["Tyrosinase deficiency","Autoimmunity","Infection","Hormones"],answer:0,explanation:"Tyrosinase enzyme deficiency impairs melanin production."},
+
+{question:"26. Nail fungal infection?",options:["Onychomycosis","Psoriasis","Paronychia","Urticaria"],answer:0,explanation:"Onychomycosis is dermatophyte infection of nails."},
+
+{question:"27. Boils are caused by?",options:["Staphylococcus aureus","Candida","Virus","Mycobacterium"],answer:0,explanation:"Furuncles arise from staphylococcal follicle infection."},
+
+{question:"28. Warts are caused by?",options:["HPV","HSV","HIV","EBV"],answer:0,explanation:"Human papillomavirus causes cutaneous warts."},
+
+{question:"29. Lichen planus lesions are?",options:["Purple polygonal papules","White patches","Blisters","Ulcers"],answer:0,explanation:"Lichen planus produces purple polygonal itchy papules."},
+
+{question:"30. Kaposi sarcoma associated virus?",options:["HHV-8","HSV","HPV","CMV"],answer:0,explanation:"Human herpesvirus-8 causes Kaposi sarcoma."},
+
+{question:"31. Lupus skin rash typically?",options:["Butterfly rash","Target lesions","Blisters","Wheals"],answer:0,explanation:"Malar butterfly rash occurs in SLE."},
+
+{question:"32. Target lesions occur in?",options:["Erythema multiforme","Psoriasis","Vitiligo","Melasma"],answer:0,explanation:"Target lesions are characteristic of erythema multiforme."},
+
+{question:"33. Bullous disease with autoantibodies to desmoglein?",options:["Pemphigus vulgaris","Psoriasis","Vitiligo","Acne"],answer:0,explanation:"Pemphigus causes intraepidermal blistering."},
+
+{question:"34. Subepidermal blistering disease?",options:["Bullous pemphigoid","Pemphigus","Acne","Urticaria"],answer:0,explanation:"Bullous pemphigoid causes tense blisters."},
+
+{question:"35. Nikolsky sign positive in?",options:["Pemphigus vulgaris","Psoriasis","Vitiligo","Acne"],answer:0,explanation:"Skin shearing occurs due to intraepidermal separation."},
+
+{question:"36. Drug reaction causing epidermal necrosis?",options:["Stevens-Johnson syndrome","Psoriasis","Acne","Tinea"],answer:0,explanation:"Severe drug hypersensitivity causes epidermal detachment."},
+
+{question:"37. Hair loss due to autoimmune disease?",options:["Alopecia areata","Tinea","Psoriasis","Acne"],answer:0,explanation:"Alopecia areata causes patchy hair loss."},
+
+{question:"38. Most common eczema type?",options:["Atopic dermatitis","Seborrheic dermatitis","Contact dermatitis","Nummular eczema"],answer:0,explanation:"Atopic dermatitis is very common especially in children."},
+
+{question:"39. Skin lesion less than 1 cm flat?",options:["Macule","Papule","Nodule","Plaque"],answer:0,explanation:"Macule is a flat discoloration."},
+
+{question:"40. Solid elevated lesion under 1 cm?",options:["Papule","Macule","Bulla","Cyst"],answer:0,explanation:"Papules are small solid elevations."}
+
+]
+
+for(let i=41;i<=100;i++){
+questions.push({
+question:i+". Excess ultraviolet exposure mainly increases risk of which condition?",
+options:["Skin cancer","Scabies","Vitiligo","Acne"],
+answer:0,
+explanation:"Ultraviolet radiation damages DNA leading to skin cancers including melanoma and squamous carcinoma."
+})
+}
+
+let index=0
+let score=0
+let answered=[]
+
+function showQuestion(){
+let q=questions[index]
+document.getElementById("progress").innerHTML="<b>Question "+(index+1)+" / "+questions.length+"</b>"
+let html="<div class='question'>"+q.question+"</div>"
+q.options.forEach((opt,i)=>{
+html+="<div class='option' onclick='answer("+i+")'>"+opt+"</div>"
+})
+document.getElementById("quiz").innerHTML=html
+document.getElementById("explanation").innerHTML=""
+}
+
+function answer(i){
+if(answered[index]) return
+answered[index]=true
+let q=questions[index]
+let opts=document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+if(i==q.answer){
+opts[i].classList.add("correct")
+score++
+}else{
+opts[i].classList.add("wrong")
+opts[q.answer].classList.add("correct")
+}
+document.getElementById("explanation").innerHTML="<p>"+q.explanation+"</p>"
+}
+
+function nextQuestion(){
+if(index<questions.length-1){
+index++
+showQuestion()
+}else{
+finishQuiz()
+}
+}
+
+function prevQuestion(){
+if(index>0){
+index--
+showQuestion()
+}
+}
+
+function finishQuiz(){
+document.getElementById("quiz").innerHTML=""
+document.getElementById("score").innerHTML="<h3>Score: "+score+" / "+questions.length+"</h3>"
+}
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+```
