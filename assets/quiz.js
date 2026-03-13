@@ -9,6 +9,9 @@ function initQuiz(){
     showQuestion()
 }
 
+let timeLeft = 1800   // 30 minutes
+let timerInterval
+
 function showQuestion(){
 
 let q = questions[index]
@@ -22,6 +25,33 @@ q.options.forEach((opt,i)=>{
 html += "<div class='option' onclick='answer("+i+")'>" + opt + "</div>"
 })
 
+    function startTimer(){
+
+timerInterval = setInterval(function(){
+
+timeLeft--
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft % 60
+
+if(seconds < 10){
+seconds = "0"+seconds
+}
+
+document.getElementById("timer").innerText =
+"Time Left: "+minutes+":"+seconds
+
+if(timeLeft <= 0){
+
+clearInterval(timerInterval)
+finishQuiz()
+
+}
+
+},1000)
+
+}
+    
 document.getElementById("quiz").innerHTML = html
 
 let saved = userAnswers[index]
@@ -161,4 +191,9 @@ document.getElementById("review").innerHTML =
 }
 
 // start quiz after page loads
-window.onload = initQuiz
+window.onload = function(){
+
+initQuiz()
+startTimer()
+
+}
