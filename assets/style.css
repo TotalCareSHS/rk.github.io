@@ -139,6 +139,16 @@ font-size:20px;
 margin-bottom:15px;
 }
 
+#timer{
+text-align:center;
+font-size:18px;
+font-weight:bold;
+background:#fff3cd;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+}
+  
 .option{
 background:white;
 border:1px solid #ddd;
