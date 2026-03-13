@@ -1,45 +1,44 @@
-// Quiz Engine for Total Care MCQ System
-
 let index = 0
 let correct = 0
 let wrong = 0
-let userAnswers = new Array(questions.length).fill(null)
+let userAnswers = []
 
-// store user answers
-let userAnswers = new Array(questions.length).fill(null)
+// initialize memory
+function initQuiz(){
+    userAnswers = new Array(questions.length).fill(null)
+    showQuestion()
+}
 
 function showQuestion(){
 
 let q = questions[index]
 
 document.getElementById("progress").innerHTML =
-"<b>Question " + (index+1) + " / " + questions.length + "</b>"
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
 
 let html = "<div class='question'>" + q.question + "</div>"
 
 q.options.forEach((opt,i)=>{
-
 html += "<div class='option' onclick='answer("+i+")'>" + opt + "</div>"
-
 })
 
 document.getElementById("quiz").innerHTML = html
 
-let savedAnswer = userAnswers[index]
+let saved = userAnswers[index]
 
-if(savedAnswer !== null){
+if(saved !== null){
 
 let opts = document.querySelectorAll(".option")
 
-opts.forEach(o => o.style.pointerEvents="none")
+opts.forEach(o=>o.style.pointerEvents="none")
 
-if(savedAnswer == q.answer){
+if(saved == q.answer){
 
-opts[savedAnswer].classList.add("correct")
+opts[saved].classList.add("correct")
 
 }else{
 
-opts[savedAnswer].classList.add("wrong")
+opts[saved].classList.add("wrong")
 opts[q.answer].classList.add("correct")
 
 }
@@ -55,7 +54,6 @@ document.getElementById("explanation").innerHTML=""
 
 }
 
-// answer selection
 function answer(i){
 
 if(userAnswers[index] !== null) return
@@ -66,7 +64,7 @@ userAnswers[index] = i
 
 let opts = document.querySelectorAll(".option")
 
-opts.forEach(o => o.style.pointerEvents="none")
+opts.forEach(o=>o.style.pointerEvents="none")
 
 if(i === q.answer){
 
@@ -81,7 +79,6 @@ wrong++
 
 }
 
-// update counter display
 document.getElementById("correct").textContent = correct
 document.getElementById("wrong").textContent = wrong
 
@@ -90,10 +87,9 @@ document.getElementById("explanation").innerHTML =
 
 }
 
-// next question
 function nextQuestion(){
 
-if(index < questions.length - 1){
+if(index < questions.length-1){
 
 index++
 showQuestion()
@@ -107,7 +103,6 @@ finishQuiz()
 
 }
 
-// previous question
 function prevQuestion(){
 
 if(index > 0){
@@ -120,18 +115,17 @@ window.scrollTo(0,0)
 
 }
 
-// finish quiz
 function finishQuiz(){
 
 document.getElementById("quiz").innerHTML=""
 
 document.getElementById("score").innerHTML =
-"<h3>Quiz Finished</h3>" +
-"<p>Correct: "+correct+"</p>" +
-"<p>Wrong: "+wrong+"</p>" +
+"<h3>Quiz Finished</h3>"+
+"<p>Correct: "+correct+"</p>"+
+"<p>Wrong: "+wrong+"</p>"+
 "<p>Total Questions: "+questions.length+"</p>"
 
 }
 
-// start quiz
-showQuestion()
+// start quiz after page loads
+window.onload = initQuiz
