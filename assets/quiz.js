@@ -1,74 +1,74 @@
+// Quiz Engine for Total Care MCQ System
+
 let index = 0
 let correct = 0
 let wrong = 0
-let userAnswers = []
 
-// initialize memory
-function initQuiz(){
-    userAnswers = new Array(questions.length).fill(null)
-    showQuestion()
+
+// SHUFFLE OPTIONS FUNCTION
+function shuffleOptions(){
+
+questions.forEach(q=>{
+
+let correctText = q.options[q.answer]
+
+for(let i=q.options.length-1;i>0;i--){
+
+let j = Math.floor(Math.random()*(i+1))
+
+let temp = q.options[i]
+q.options[i] = q.options[j]
+q.options[j] = temp
+
 }
 
-let timeLeft = 1800   // 30 minutes
-let timerInterval
+q.answer = q.options.indexOf(correctText)
+
+})
+
+}
+
+
+// run shuffle before quiz starts
+shuffleOptions()
+
+
+// store user answers
+let userAnswers = new Array(questions.length).fill(null)
+
 
 function showQuestion(){
 
 let q = questions[index]
 
 document.getElementById("progress").innerHTML =
-"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+"<b>Question " + (index+1) + " / " + questions.length + "</b>"
 
 let html = "<div class='question'>" + q.question + "</div>"
 
 q.options.forEach((opt,i)=>{
+
 html += "<div class='option' onclick='answer("+i+")'>" + opt + "</div>"
+
 })
 
-    function startTimer(){
-
-timerInterval = setInterval(function(){
-
-timeLeft--
-
-let minutes = Math.floor(timeLeft/60)
-let seconds = timeLeft % 60
-
-if(seconds < 10){
-seconds = "0"+seconds
-}
-
-document.getElementById("timer").innerText =
-"Time Left: "+minutes+":"+seconds
-
-if(timeLeft <= 0){
-
-clearInterval(timerInterval)
-finishQuiz()
-
-}
-
-},1000)
-
-}
-    
 document.getElementById("quiz").innerHTML = html
 
-let saved = userAnswers[index]
+let savedAnswer = userAnswers[index]
 
-if(saved !== null){
+if(savedAnswer !== null){
 
 let opts = document.querySelectorAll(".option")
 
-opts.forEach(o=>o.style.pointerEvents="none")
+opts.forEach(o => o.style.pointerEvents="none")
 
-if(saved == q.answer){
+if(savedAnswer == q.answer){
 
-opts[saved].classList.add("correct")
+opts[savedAnswer].classList.add("correct")
 
 }else{
 
-opts[saved].classList.add("wrong")
+opts[savedAnswer].classList.add("wrong")
 opts[q.answer].classList.add("correct")
 
 }
@@ -84,49 +84,8 @@ document.getElementById("explanation").innerHTML=""
 
 }
 
-function reviewWrong(){
 
-let wrongQuestions = questions.filter((q,i)=>{
-return userAnswers[i] !== null && userAnswers[i] !== q.answer
-})
-
-if(wrongQuestions.length === 0){
-
-alert("No wrong answers to review!")
-return
-
-}
-
-questions = wrongQuestions
-index = 0
-
-correct = 0
-wrong = 0
-
-userAnswers = new Array(questions.length).fill(null)
-
-document.getElementById("score").innerHTML=""
-document.getElementById("review").innerHTML=""
-
-showQuestion()
-
-}
-
-questions = wrongQuestions
-index = 0
-
-correct = 0
-wrong = 0
-
-userAnswers = new Array(questions.length).fill(null)
-
-document.getElementById("score").innerHTML=""
-document.getElementById("review").innerHTML=""
-
-showQuestion()
-
-}
-
+// answer selection
 function answer(i){
 
 if(userAnswers[index] !== null) return
@@ -137,9 +96,9 @@ userAnswers[index] = i
 
 let opts = document.querySelectorAll(".option")
 
-opts.forEach(o=>o.style.pointerEvents="none")
+opts.forEach(o => o.style.pointerEvents="none")
 
-if(i === q.answer){
+if(i == q.answer){
 
 opts[i].classList.add("correct")
 correct++
@@ -152,17 +111,19 @@ wrong++
 
 }
 
-document.getElementById("correct").textContent = correct
-document.getElementById("wrong").textContent = wrong
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
 
 document.getElementById("explanation").innerHTML =
 "<p>"+q.explanation+"</p>"
 
 }
 
+
+// next question
 function nextQuestion(){
 
-if(index < questions.length-1){
+if(index < questions.length - 1){
 
 index++
 showQuestion()
@@ -176,6 +137,8 @@ finishQuiz()
 
 }
 
+
+// previous question
 function prevQuestion(){
 
 if(index > 0){
@@ -188,27 +151,23 @@ window.scrollTo(0,0)
 
 }
 
-function finishQuiz(){
 
-clearInterval(timerInterval)
+// finish quiz
+function finishQuiz(){
 
 document.getElementById("quiz").innerHTML=""
 
 document.getElementById("score").innerHTML =
-"<h3>Quiz Finished</h3>"+
-"<p>Correct: "+correct+"</p>"+
-"<p>Wrong: "+wrong+"</p>"+
+"<h3>Quiz Finished</h3>" +
+"<p>Correct: "+correct+"</p>" +
+"<p>Wrong: "+wrong+"</p>" +
 "<p>Total Questions: "+questions.length+"</p>"
 
-document.getElementById("review").innerHTML =
-"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
-
 }
 
-// start quiz after page loads
-window.onload = function(){
 
-initQuiz()
-startTimer()
+// shuffle options before starting quiz
+shuffleOptions()
 
-}
+// start quiz
+showQuestion()
