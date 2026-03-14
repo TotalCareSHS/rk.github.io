@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Medicine 1 – Cardiovascular System – Past Paper MCQs</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Cardiovascular System – Past Paper MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. The most common cause of secondary spontaneous pneumothorax is:",options:["Pulmonary fibrosis","COPD","Tuberculosis","Asthma"],answer:1,explanation:"COPD with ruptured emphysematous bullae is the most common cause of secondary spontaneous pneumothorax."},
+
+{question:"2. Which investigation is most sensitive for detecting early pulmonary embolism?",options:["Chest X-ray","CT pulmonary angiography","Spirometry","ECG"],answer:1,explanation:"CT pulmonary angiography is the most sensitive and commonly used diagnostic test for pulmonary embolism."},
+
+{question:"3. Which lung cancer is most commonly seen in non-smokers?",options:["Adenocarcinoma","Squamous cell carcinoma","Small cell carcinoma","Large cell carcinoma"],answer:0,explanation:"Adenocarcinoma is the most common lung cancer in non-smokers and females."},
+
+{question:"4. Which condition causes hyperresonant percussion note on chest examination?",options:["Pleural effusion","Pneumothorax","Pneumonia","Pulmonary fibrosis"],answer:1,explanation:"Air in the pleural cavity during pneumothorax produces hyperresonance on percussion."},
+
+{question:"5. Which organism is the most common cause of hospital-acquired pneumonia?",options:["Streptococcus pneumoniae","Pseudomonas aeruginosa","Mycoplasma pneumoniae","Chlamydia pneumoniae"],answer:1,explanation:"Pseudomonas aeruginosa is a frequent pathogen in hospital-acquired pneumonia."},
+
+{question:"6. The Mantoux test is used to detect:",options:["Active tuberculosis","Past TB infection","Tuberculin hypersensitivity","TB exposure"],answer:3,explanation:"Mantoux test detects delayed hypersensitivity to tuberculin indicating prior exposure to TB."},
+
+{question:"7. Which respiratory disease causes digital clubbing most commonly?",options:["Asthma","Lung cancer","Bronchitis","Emphysema"],answer:1,explanation:"Clubbing is commonly associated with lung cancer due to chronic hypoxia and vascular changes."},
+
+{question:"8. Which symptom is most characteristic of bronchial asthma?",options:["Productive cough","Wheezing","Hemoptysis","Chest trauma"],answer:1,explanation:"Wheezing due to bronchospasm is the hallmark symptom of bronchial asthma."},
+
+{question:"9. Which lobe of lung is most commonly affected in tuberculosis?",options:["Upper lobe","Middle lobe","Lower lobe","Lingula"],answer:0,explanation:"Pulmonary tuberculosis typically affects the upper lobes due to higher oxygen tension."},
+
+{question:"10. Which respiratory condition leads to decreased lung compliance?",options:["Asthma","COPD","Pulmonary fibrosis","Bronchiectasis"],answer:2,explanation:"Fibrosis stiffens lung tissue leading to decreased lung compliance."},
+
+{question:"11. Which investigation measures arterial oxygen and carbon dioxide levels?",options:["Pulse oximetry","Arterial blood gas","Spirometry","Chest CT"],answer:1,explanation:"Arterial blood gas analysis measures PaO2, PaCO2, and pH."},
+
+{question:"12. Which condition produces mediastinal shift toward the affected side?",options:["Tension pneumothorax","Pleural effusion","Atelectasis","Emphysema"],answer:2,explanation:"Atelectasis causes lung collapse which pulls mediastinum toward the affected side."},
+
+{question:"13. Which disease is associated with 'pink puffer' patients?",options:["Chronic bronchitis","Emphysema","Asthma","Bronchiectasis"],answer:1,explanation:"Emphysema patients are often called pink puffers due to hyperventilation and minimal cyanosis."},
+
+{question:"14. Which condition produces productive cough with foul-smelling sputum?",options:["Asthma","Bronchiectasis","Pulmonary fibrosis","Pleural effusion"],answer:1,explanation:"Bronchiectasis causes copious foul-smelling purulent sputum due to chronic infection."},
+
+{question:"15. Which investigation is most useful for staging lung cancer?",options:["Chest X-ray","CT scan","Spirometry","Sputum smear"],answer:1,explanation:"CT scan provides detailed imaging for staging lung cancer."},
+
+{question:"16. Which organism causes atypical pneumonia with walking pneumonia symptoms?",options:["Mycoplasma pneumoniae","Klebsiella pneumoniae","Staphylococcus aureus","Pseudomonas aeruginosa"],answer:0,explanation:"Mycoplasma pneumoniae causes mild atypical pneumonia called walking pneumonia."},
+
+{question:"17. Which condition produces stony dullness on percussion?",options:["Pleural effusion","Asthma","Bronchitis","Emphysema"],answer:0,explanation:"Pleural effusion produces stony dull percussion note due to fluid accumulation."},
+
+{question:"18. Which respiratory muscle is most important during inspiration?",options:["Intercostal muscles","Diaphragm","Abdominal muscles","Scalene muscles"],answer:1,explanation:"The diaphragm is the primary muscle responsible for inspiration."},
+
+{question:"19. Which occupational lung disease occurs in silica exposure?",options:["Asbestosis","Silicosis","Byssinosis","Bagassosis"],answer:1,explanation:"Silicosis occurs due to inhalation of crystalline silica particles."},
+
+{question:"20. Which disease shows non-caseating granulomas?",options:["Tuberculosis","Sarcoidosis","Histoplasmosis","Aspergillosis"],answer:1,explanation:"Sarcoidosis produces non-caseating granulomas."},
+
+{question:"21. Which complication may occur in severe pneumonia?",options:["Pleural effusion","Asthma","COPD","Pulmonary fibrosis"],answer:0,explanation:"Pleural effusion is a common complication of bacterial pneumonia."},
+
+{question:"22. Which respiratory disorder shows reduced FEV1/FVC ratio?",options:["Restrictive lung disease","Obstructive lung disease","Pleural disease","Pulmonary embolism"],answer:1,explanation:"Obstructive lung diseases such as COPD and asthma reduce the FEV1/FVC ratio."},
+
+{question:"23. Which lung cancer is commonly located centrally in bronchi?",options:["Adenocarcinoma","Squamous cell carcinoma","Large cell carcinoma","Carcinoid tumor"],answer:1,explanation:"Squamous cell carcinoma often arises centrally in the bronchi."},
+
+{question:"24. Which sign indicates severe asthma exacerbation?",options:["Wheezing","Silent chest","Crackles","Pleural rub"],answer:1,explanation:"Silent chest indicates severe airway obstruction and minimal airflow."},
+
+{question:"25. Which organism is most commonly responsible for lung abscess?",options:["Anaerobic bacteria","Mycoplasma pneumoniae","Chlamydia pneumoniae","Legionella"],answer:0,explanation:"Anaerobic bacteria from aspiration commonly cause lung abscess."},
+
+{question:"26. Which imaging sign suggests pulmonary edema?",options:["Kerley B lines","Honeycombing","Cavitation","Pleural plaques"],answer:0,explanation:"Kerley B lines indicate interstitial pulmonary edema."},
+
+{question:"27. Which respiratory condition leads to barrel-shaped chest?",options:["Asthma","COPD","Pneumonia","Tuberculosis"],answer:1,explanation:"Hyperinflation in COPD produces barrel-shaped chest."},
+
+{question:"28. Which condition causes sudden chest pain and dyspnea in young tall individuals?",options:["Asthma","Primary spontaneous pneumothorax","Pulmonary fibrosis","Bronchitis"],answer:1,explanation:"Primary spontaneous pneumothorax commonly occurs in tall thin young males."},
+
+{question:"29. Which investigation is best to confirm bronchiectasis?",options:["Chest X-ray","High-resolution CT scan","Spirometry","Bronchoscopy"],answer:1,explanation:"HRCT scan is the gold standard for diagnosing bronchiectasis."},
+
+{question:"30. Which lung structure produces surfactant?",options:["Type I pneumocytes","Type II pneumocytes","Macrophages","Ciliated cells"],answer:1,explanation:"Type II pneumocytes produce pulmonary surfactant that reduces alveolar surface tension."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
