@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Respiratory System – Top 50 Final-1 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A 65-year-old smoker presents with hemoptysis and weight loss. Chest X-ray shows a hilar mass. Which paraneoplastic syndrome is most associated with this tumor?",options:["Hypercalcemia","SIADH","Cushing syndrome","Polycythemia"],answer:0,explanation:"Squamous cell carcinoma of lung commonly produces PTHrP leading to hypercalcemia."},
+
+{question:"2. A patient with COPD develops worsening dyspnea and cyanosis. ABG shows elevated CO2. This condition is called:",options:["Respiratory alkalosis","Type I respiratory failure","Type II respiratory failure","Metabolic acidosis"],answer:2,explanation:"Type II respiratory failure involves hypercapnia (PaCO2 >45 mmHg)."},
+
+{question:"3. A patient with asthma experiences severe breathlessness but minimal wheeze on auscultation. This finding suggests:",options:["Improvement of asthma","Mild bronchospasm","Severe airway obstruction","Pleural effusion"],answer:2,explanation:"Silent chest indicates critical airflow obstruction in severe asthma."},
+
+{question:"4. A patient presents with sudden dyspnea after long flight. ECG shows S1Q3T3 pattern. The likely diagnosis is:",options:["Asthma attack","Pulmonary embolism","Pneumonia","Pneumothorax"],answer:1,explanation:"S1Q3T3 pattern is classically associated with pulmonary embolism."},
+
+{question:"5. Which spirometry pattern is typical of restrictive lung disease?",options:["Reduced FEV1/FVC ratio","Normal FEV1/FVC ratio","Increased FEV1","Normal lung volumes"],answer:1,explanation:"Restrictive diseases reduce lung volumes but maintain normal FEV1/FVC ratio."},
+
+{question:"6. A patient with bronchiectasis often produces sputum that is:",options:["Watery","Frothy","Purulent and copious","Blood tinged"],answer:2,explanation:"Bronchiectasis causes large volumes of purulent sputum."},
+
+{question:"7. A cavitary lesion in upper lung with night sweats and fever suggests:",options:["Sarcoidosis","Tuberculosis","Pulmonary edema","Asthma"],answer:1,explanation:"Pulmonary TB commonly produces cavitary lesions in upper lobes."},
+
+{question:"8. Which condition causes increased diffusion capacity (DLCO)?",options:["Emphysema","Pulmonary fibrosis","Pulmonary hemorrhage","COPD"],answer:2,explanation:"Pulmonary hemorrhage increases DLCO due to hemoglobin binding CO."},
+
+{question:"9. A patient with silicosis has increased risk of developing:",options:["Asthma","Tuberculosis","Bronchitis","Sarcoidosis"],answer:1,explanation:"Silica exposure predisposes to tuberculosis infection."},
+
+{question:"10. A smoker develops clubbing and hypertrophic osteoarthropathy. The likely diagnosis is:",options:["Asthma","Lung cancer","Bronchitis","Emphysema"],answer:1,explanation:"Hypertrophic osteoarthropathy commonly occurs with lung malignancy."},
+
+{question:"11. Which lung cancer is most likely to produce ectopic ACTH?",options:["Adenocarcinoma","Squamous carcinoma","Small cell carcinoma","Large cell carcinoma"],answer:2,explanation:"Small cell carcinoma produces ACTH causing Cushing syndrome."},
+
+{question:"12. Which condition causes decreased DLCO?",options:["Pulmonary fibrosis","Pulmonary hemorrhage","Asthma","Obesity"],answer:0,explanation:"Fibrosis thickens alveolar membrane reducing gas diffusion."},
+
+{question:"13. A tall thin young male presents with sudden chest pain and dyspnea. Diagnosis?",options:["Primary spontaneous pneumothorax","Pleural effusion","Pulmonary embolism","Asthma"],answer:0,explanation:"Primary spontaneous pneumothorax commonly occurs in tall thin males."},
+
+{question:"14. Which organism causes pneumonia in alcoholics with currant jelly sputum?",options:["Staphylococcus aureus","Klebsiella pneumoniae","Legionella","Mycoplasma"],answer:1,explanation:"Klebsiella pneumonia causes thick blood-stained sputum."},
+
+{question:"15. The most sensitive test for diagnosing pulmonary embolism is:",options:["Chest X-ray","CT pulmonary angiography","ECG","Spirometry"],answer:1,explanation:"CT pulmonary angiography is the preferred diagnostic test."},
+
+{question:"16. Which disease shows 'egg shell calcification' in lymph nodes?",options:["Silicosis","Asbestosis","Sarcoidosis","Tuberculosis"],answer:0,explanation:"Silicosis causes characteristic egg shell calcification."},
+
+{question:"17. A patient with chronic cough produces sputum that separates into three layers when standing. Diagnosis?",options:["Bronchiectasis","Asthma","Tuberculosis","COPD"],answer:0,explanation:"Bronchiectasis sputum separates into frothy, mucous and purulent layers."},
+
+{question:"18. Which condition produces decreased breath sounds and hyperresonance?",options:["Pleural effusion","Pneumonia","Pneumothorax","Pulmonary edema"],answer:2,explanation:"Air accumulation in pneumothorax causes hyperresonance."},
+
+{question:"19. Which disease causes non-caseating granulomas in lungs?",options:["Sarcoidosis","Tuberculosis","Histoplasmosis","Aspergillosis"],answer:0,explanation:"Sarcoidosis produces non-caseating granulomas."},
+
+{question:"20. A patient with lung cancer develops facial swelling and dilated neck veins. Cause?",options:["Superior vena cava obstruction","Pulmonary embolism","Pleural effusion","COPD"],answer:0,explanation:"SVC syndrome occurs due to tumor compression."},
+
+{question:"21. Which drug is used for long-term control of asthma?",options:["Salbutamol","Inhaled corticosteroids","Adrenaline","Oxygen"],answer:1,explanation:"ICS are first-line maintenance therapy."},
+
+{question:"22. Which disease produces 'tram track' appearance on CT scan?",options:["Bronchiectasis","Asthma","Fibrosis","Tuberculosis"],answer:0,explanation:"Bronchiectasis shows tram-track bronchial dilation."},
+
+{question:"23. A patient presents with pleuritic chest pain and friction rub. Diagnosis?",options:["Pleural effusion","Pleuritis","Pneumothorax","Asthma"],answer:1,explanation:"Inflammation of pleura causes pleuritic pain and friction rub."},
+
+{question:"24. Which organism is associated with pneumonia from contaminated air conditioning systems?",options:["Legionella pneumophila","Mycoplasma","Streptococcus","Klebsiella"],answer:0,explanation:"Legionella spreads via water aerosol systems."},
+
+{question:"25. Which test best differentiates obstructive vs restrictive lung disease?",options:["Chest X-ray","Spirometry","ABG","CT scan"],answer:1,explanation:"Spirometry measures airflow limitation."},
+
+{question:"26. Which disease causes progressive massive fibrosis?",options:["Coal worker pneumoconiosis","Asthma","COPD","Tuberculosis"],answer:0,explanation:"Coal dust exposure can cause progressive fibrosis."},
+
+{question:"27. A patient with lung abscess most likely developed it due to:",options:["Aspiration","Allergy","Autoimmune disease","Pulmonary embolism"],answer:0,explanation:"Aspiration of oral anaerobes commonly causes lung abscess."},
+
+{question:"28. Which respiratory disease is characterized by eosinophilia?",options:["Asthma","COPD","Bronchiectasis","Tuberculosis"],answer:0,explanation:"Asthma involves eosinophilic airway inflammation."},
+
+{question:"29. Which lung cancer type is most peripheral?",options:["Adenocarcinoma","Small cell carcinoma","Squamous carcinoma","Large cell carcinoma"],answer:0,explanation:"Adenocarcinoma typically occurs in peripheral lung tissue."},
+
+{question:"30. Which sign indicates severe asthma attack?",options:["Wheezing","Silent chest","Productive cough","Clubbing"],answer:1,explanation:"Silent chest indicates minimal airflow and severe obstruction."},
+
+{question:"31. Which condition causes mediastinal shift toward affected lung?",options:["Atelectasis","Pleural effusion","Tension pneumothorax","COPD"],answer:0,explanation:"Lung collapse pulls mediastinum toward the lesion."},
+
+{question:"32. Which occupational exposure causes mesothelioma?",options:["Asbestos","Silica","Coal dust","Cotton dust"],answer:0,explanation:"Asbestos exposure strongly predisposes to mesothelioma."},
+
+{question:"33. Which disease causes restrictive ventilatory defect?",options:["Pulmonary fibrosis","Asthma","COPD","Bronchitis"],answer:0,explanation:"Fibrosis restricts lung expansion."},
+
+{question:"34. Which organism causes pneumonia in immunocompromised patients?",options:["Pneumocystis jirovecii","Mycoplasma","Legionella","Streptococcus"],answer:0,explanation:"Pneumocystis pneumonia occurs in immunocompromised patients."},
+
+{question:"35. Which condition produces 'ground glass opacity' on CT scan?",options:["Interstitial lung disease","Asthma","Bronchitis","COPD"],answer:0,explanation:"ILD often shows ground-glass opacities."},
+
+{question:"36. A patient with COPD retains CO2 due to:",options:["Reduced alveolar ventilation","Increased oxygen diffusion","Hyperventilation","Increased surfactant"],answer:0,explanation:"Hypoventilation leads to CO2 retention."},
+
+{question:"37. Which disease causes pulmonary hypertension secondary to lung pathology?",options:["COPD","Asthma","Bronchitis","Pneumonia"],answer:0,explanation:"Chronic hypoxia from COPD causes pulmonary hypertension."},
+
+{question:"38. Which condition produces orthopnea?",options:["Pulmonary edema","Asthma","Bronchitis","Tuberculosis"],answer:0,explanation:"Fluid in lungs worsens when lying flat."},
+
+{question:"39. Which disease shows 'tree-in-bud' pattern on CT?",options:["Endobronchial TB","Asthma","COPD","Fibrosis"],answer:0,explanation:"Tree-in-bud indicates endobronchial infection such as TB."},
+
+{question:"40. Which structure produces surfactant?",options:["Type II pneumocytes","Type I pneumocytes","Macrophages","Goblet cells"],answer:0,explanation:"Type II pneumocytes secrete surfactant."},
+
+{question:"41. Which complication may occur in severe pneumonia?",options:["Empyema","Asthma","COPD","Fibrosis"],answer:0,explanation:"Empyema occurs when infection spreads into pleural cavity."},
+
+{question:"42. Which lung cancer has the worst prognosis?",options:["Small cell carcinoma","Adenocarcinoma","Squamous carcinoma","Carcinoid"],answer:0,explanation:"Small cell carcinoma metastasizes rapidly."},
+
+{question:"43. Which sign is typical of pleural effusion?",options:["Stony dullness","Hyperresonance","Crackles","Wheezing"],answer:0,explanation:"Fluid dampens percussion producing stony dullness."},
+
+{question:"44. Which disease causes decreased chest expansion?",options:["Pulmonary fibrosis","Asthma","Bronchitis","COPD"],answer:0,explanation:"Fibrotic lungs expand poorly."},
+
+{question:"45. Which respiratory disease causes chronic productive cough for >3 months per year?",options:["Chronic bronchitis","Asthma","Tuberculosis","Fibrosis"],answer:0,explanation:"Definition of chronic bronchitis."},
+
+{question:"46. Which condition causes severe hypoxemia without hypercapnia initially?",options:["Pulmonary embolism","COPD","Asthma","Bronchitis"],answer:0,explanation:"PE primarily causes ventilation-perfusion mismatch."},
+
+{question:"47. Which lung disease is characterized by granuloma formation due to immune reaction?",options:["Sarcoidosis","Asthma","COPD","Bronchitis"],answer:0,explanation:"Sarcoidosis involves immune-mediated granulomas."},
+
+{question:"48. Which sign suggests lung consolidation?",options:["Bronchial breath sounds","Hyperresonance","Silent chest","Absent breath sounds"],answer:0,explanation:"Consolidation transmits bronchial breath sounds."},
+
+{question:"49. Which complication may occur in untreated pneumothorax?",options:["Tension pneumothorax","Bronchitis","Asthma","Fibrosis"],answer:0,explanation:"Air accumulation can lead to life-threatening tension pneumothorax."},
+
+{question:"50. Which imaging modality best detects interstitial lung disease?",options:["High resolution CT","Chest X-ray","Ultrasound","Spirometry"],answer:0,explanation:"HRCT provides detailed visualization of interstitial lung disease."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
