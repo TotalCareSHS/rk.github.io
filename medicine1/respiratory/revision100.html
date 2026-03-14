@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Respiratory System – Top 50 Final-3 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Which investigation is most sensitive for diagnosing pulmonary embolism?",options:["Chest X-ray","CT pulmonary angiography","Spirometry","ECG"],answer:1,explanation:"CT pulmonary angiography is the most sensitive imaging test for pulmonary embolism."},
+
+{question:"2. Most common cause of community acquired pneumonia?",options:["Mycoplasma pneumoniae","Streptococcus pneumoniae","Klebsiella pneumoniae","Legionella pneumophila"],answer:1,explanation:"Streptococcus pneumoniae is the leading cause of community acquired pneumonia."},
+
+{question:"3. Which condition causes hyperresonance on percussion?",options:["Pleural effusion","Pneumothorax","Pulmonary fibrosis","Lung consolidation"],answer:1,explanation:"Pneumothorax introduces air into pleural cavity producing hyperresonance."},
+
+{question:"4. Most common lung cancer in non smokers?",options:["Squamous carcinoma","Adenocarcinoma","Small cell carcinoma","Large cell carcinoma"],answer:1,explanation:"Adenocarcinoma is the most common lung cancer in non smokers."},
+
+{question:"5. Which disease shows reversible airway obstruction?",options:["COPD","Asthma","Bronchiectasis","Pulmonary fibrosis"],answer:1,explanation:"Asthma is characterized by reversible airway obstruction."},
+
+{question:"6. Which occupational exposure causes silicosis?",options:["Asbestos","Silica dust","Coal dust","Cotton dust"],answer:1,explanation:"Silica dust inhalation leads to silicosis."},
+
+{question:"7. Blue bloater appearance occurs in?",options:["Emphysema","Chronic bronchitis","Bronchiectasis","Asthma"],answer:1,explanation:"Chronic bronchitis patients are called blue bloaters due to hypoxia and obesity."},
+
+{question:"8. Which cells produce pulmonary surfactant?",options:["Type I pneumocytes","Type II pneumocytes","Macrophages","Goblet cells"],answer:1,explanation:"Type II pneumocytes produce surfactant to reduce alveolar collapse."},
+
+{question:"9. Which test measures airflow obstruction?",options:["Chest CT","Spirometry","Bronchoscopy","Pulse oximetry"],answer:1,explanation:"Spirometry evaluates airway obstruction using FEV1 and FVC."},
+
+{question:"10. Stony dull percussion occurs in?",options:["Pneumothorax","Pleural effusion","Asthma","Emphysema"],answer:1,explanation:"Pleural fluid produces stony dull percussion."},
+
+{question:"11. Most common cause of lung abscess?",options:["Staphylococcus","Aspiration of anaerobes","Mycoplasma","Legionella"],answer:1,explanation:"Aspiration of oral anaerobes is the most common cause."},
+
+{question:"12. Most common site of pulmonary tuberculosis?",options:["Lower lobe","Upper lobe","Middle lobe","Lingula"],answer:1,explanation:"TB prefers upper lobes due to higher oxygen tension."},
+
+{question:"13. Gold standard test for bronchiectasis?",options:["Chest X-ray","High resolution CT","Spirometry","Bronchoscopy"],answer:1,explanation:"HRCT clearly shows dilated bronchi."},
+
+{question:"14. Which lung cancer secretes ACTH?",options:["Adenocarcinoma","Small cell carcinoma","Squamous carcinoma","Large cell carcinoma"],answer:1,explanation:"Small cell carcinoma produces ectopic ACTH."},
+
+{question:"15. Pink puffer appearance occurs in?",options:["Chronic bronchitis","Emphysema","Asthma","Tuberculosis"],answer:1,explanation:"Emphysema patients maintain oxygenation by hyperventilation."},
+
+{question:"16. Characteristic sputum of bronchiectasis?",options:["Watery sputum","Copious purulent sputum","Dry cough","Frothy sputum"],answer:1,explanation:"Bronchiectasis produces large amounts of purulent sputum."},
+
+{question:"17. Sign of lung consolidation?",options:["Reduced breath sounds","Bronchial breath sounds","Hyperresonance","Silent chest"],answer:1,explanation:"Consolidation transmits bronchial breath sounds."},
+
+{question:"18. Primary muscle of inspiration?",options:["Intercostals","Diaphragm","Abdominal muscles","Scalene"],answer:1,explanation:"Diaphragm is the main inspiratory muscle."},
+
+{question:"19. Sudden dyspnea after long travel suggests?",options:["Asthma","Pulmonary embolism","Bronchitis","Tuberculosis"],answer:1,explanation:"Long travel predisposes to DVT causing pulmonary embolism."},
+
+{question:"20. Most common cause of secondary spontaneous pneumothorax?",options:["Asthma","COPD","Pneumonia","Tuberculosis"],answer:1,explanation:"Bullae rupture in COPD causes pneumothorax."},
+
+{question:"21. Disease causing decreased lung compliance?",options:["COPD","Asthma","Pulmonary fibrosis","Bronchitis"],answer:2,explanation:"Fibrosis stiffens lungs reducing compliance."},
+
+{question:"22. Honeycomb lung seen in?",options:["Asthma","COPD","Idiopathic pulmonary fibrosis","Bronchitis"],answer:2,explanation:"IPF produces honeycomb pattern."},
+
+{question:"23. Most common ventilator associated pneumonia organism?",options:["Streptococcus","Mycoplasma","Pseudomonas aeruginosa","Chlamydia"],answer:2,explanation:"Pseudomonas commonly causes hospital acquired pneumonia."},
+
+{question:"24. Non-caseating granulomas occur in?",options:["Tuberculosis","Histoplasmosis","Sarcoidosis","Aspergillosis"],answer:2,explanation:"Sarcoidosis causes non caseating granulomas."},
+
+{question:"25. Walking pneumonia organism?",options:["Streptococcus","Klebsiella","Mycoplasma pneumoniae","Legionella"],answer:2,explanation:"Mycoplasma causes mild atypical pneumonia."},
+
+{question:"26. Pleural inflammation sign?",options:["Wheezing","Crackles","Pleural friction rub","Hyperresonance"],answer:2,explanation:"Inflamed pleura produces friction rub."},
+
+{question:"27. Mediastinal shift toward lesion occurs in?",options:["Pneumothorax","Effusion","Atelectasis","Asthma"],answer:2,explanation:"Collapsed lung pulls mediastinum."},
+
+{question:"28. Most common cause of massive hemoptysis?",options:["Asthma","COPD","Bronchiectasis","Fibrosis"],answer:2,explanation:"Bronchiectasis damages bronchial arteries."},
+
+{question:"29. Restrictive lung disease feature?",options:["Low FEV1/FVC","Normal TLC","Reduced lung volumes","High FEV1"],answer:2,explanation:"Restrictive diseases reduce lung volumes."},
+
+{question:"30. Clubbing commonly occurs in?",options:["Asthma","Bronchiectasis","COPD","Acute bronchitis"],answer:1,explanation:"Clubbing occurs in bronchiectasis due to chronic hypoxia."},
+
+{question:"31. Which investigation is best for diagnosing pulmonary tuberculosis?",options:["Chest ultrasound","Sputum smear microscopy","ECG","Spirometry"],answer:1,explanation:"Sputum smear microscopy for acid fast bacilli is the primary diagnostic test for pulmonary tuberculosis."},
+
+{question:"32. Which condition causes barrel shaped chest?",options:["Asthma","Pulmonary embolism","Emphysema","Pleural effusion"],answer:2,explanation:"Hyperinflation of lungs in emphysema produces a barrel shaped chest."},
+
+{question:"33. Which respiratory disease shows productive cough for at least 3 months for 2 consecutive years?",options:["Asthma","Chronic bronchitis","Bronchiectasis","Tuberculosis"],answer:1,explanation:"Chronic bronchitis is defined by productive cough lasting at least 3 months per year for 2 years."},
+
+{question:"34. Which structure prevents alveolar collapse?",options:["Hemoglobin","Pulmonary surfactant","Pleural fluid","Cilia"],answer:1,explanation:"Surfactant reduces surface tension preventing alveolar collapse."},
+
+{question:"35. Which organism commonly causes hospital acquired pneumonia?",options:["Mycoplasma","Streptococcus","Pseudomonas","Chlamydia"],answer:2,explanation:"Pseudomonas aeruginosa commonly causes nosocomial pneumonia."},
+
+{question:"36. Which condition produces tracheal deviation away from the affected side?",options:["Atelectasis","Pleural effusion","Pulmonary fibrosis","Bronchiectasis"],answer:1,explanation:"Large pleural effusion pushes mediastinum away from affected side."},
+
+{question:"37. Which disease is associated with finger clubbing?",options:["Asthma","Bronchiectasis","Acute bronchitis","Allergic rhinitis"],answer:1,explanation:"Chronic hypoxia in bronchiectasis leads to finger clubbing."},
+
+{question:"38. Which lung cancer is most strongly associated with smoking?",options:["Adenocarcinoma","Small cell carcinoma","Squamous cell carcinoma","Large cell carcinoma"],answer:2,explanation:"Squamous cell carcinoma is strongly associated with smoking."},
+
+{question:"39. Which test measures oxygen saturation?",options:["ABG","Pulse oximetry","Chest X-ray","Spirometry"],answer:1,explanation:"Pulse oximetry noninvasively measures oxygen saturation."},
+
+{question:"40. Which condition causes sudden pleuritic chest pain and dyspnea?",options:["Bronchitis","Pulmonary embolism","Asthma","Pneumonia"],answer:1,explanation:"Pulmonary embolism presents with sudden dyspnea and pleuritic chest pain."},
+
+{question:"41. Which condition shows decreased breath sounds?",options:["Pleural effusion","Asthma","Bronchitis","Pneumonia"],answer:0,explanation:"Pleural effusion dampens transmission of breath sounds."},
+
+{question:"42. Which disease produces thick tenacious sputum?",options:["Asthma","COPD","Cystic fibrosis","Tuberculosis"],answer:2,explanation:"Cystic fibrosis produces thick mucus secretions."},
+
+{question:"43. Which investigation confirms asthma reversibility?",options:["Chest X-ray","Bronchodilator spirometry test","CT scan","ABG"],answer:1,explanation:"Spirometry before and after bronchodilator confirms reversible airway obstruction."},
+
+{question:"44. Which disease causes inspiratory stridor?",options:["Bronchitis","Upper airway obstruction","Asthma","COPD"],answer:1,explanation:"Stridor indicates upper airway obstruction."},
+
+{question:"45. Which condition produces pink frothy sputum?",options:["Asthma","Pulmonary edema","Bronchiectasis","Tuberculosis"],answer:1,explanation:"Pulmonary edema causes pink frothy sputum due to fluid leakage."},
+
+{question:"46. Which disease causes caseating granulomas?",options:["Sarcoidosis","Tuberculosis","Histoplasmosis","Silicosis"],answer:1,explanation:"Tuberculosis forms caseating granulomas."},
+
+{question:"47. Which lung disease results from asbestos exposure?",options:["Silicosis","Asbestosis","Coal workers pneumoconiosis","Byssinosis"],answer:1,explanation:"Asbestos fibers cause interstitial fibrosis called asbestosis."},
+
+{question:"48. Which condition produces wheezing?",options:["Pleural effusion","Asthma","Pulmonary fibrosis","Pneumothorax"],answer:1,explanation:"Airway narrowing in asthma produces wheezing."},
+
+{question:"49. Which disease causes mediastinal widening on X-ray?",options:["Asthma","Tuberculosis lymphadenopathy","Bronchitis","COPD"],answer:1,explanation:"Enlarged lymph nodes in tuberculosis can widen mediastinum."},
+
+{question:"50. Which structure carries oxygen in blood?",options:["Albumin","Hemoglobin","Platelets","Fibrinogen"],answer:1,explanation:"Hemoglobin binds and transports oxygen in blood."},
+
+{question:"51. Which disease causes restrictive lung pattern?",options:["Asthma","Pulmonary fibrosis","COPD","Bronchitis"],answer:1,explanation:"Fibrosis restricts lung expansion causing restrictive pattern."},
+
+{question:"52. Which organism causes atypical pneumonia?",options:["Streptococcus","Mycoplasma","Staphylococcus","Pseudomonas"],answer:1,explanation:"Mycoplasma pneumoniae causes atypical pneumonia."},
+
+{question:"53. Which test measures arterial oxygen and carbon dioxide?",options:["Pulse oximetry","ABG analysis","Spirometry","Chest CT"],answer:1,explanation:"Arterial blood gas measures PaO2 and PaCO2."},
+
+{question:"54. Which disease causes chronic productive cough?",options:["Asthma","Chronic bronchitis","Pulmonary embolism","Pneumothorax"],answer:1,explanation:"Chronic bronchitis produces persistent productive cough."},
+
+{question:"55. Which disease produces honeycomb appearance in lungs?",options:["COPD","Pulmonary fibrosis","Asthma","Bronchitis"],answer:1,explanation:"Fibrosis causes cystic honeycomb lung."},
+
+{question:"56. Which condition causes dull percussion note?",options:["Pneumothorax","Pleural effusion","Asthma","Emphysema"],answer:1,explanation:"Fluid in pleural space produces dull percussion."},
+
+{question:"57. Which lung cancer spreads early via blood?",options:["Adenocarcinoma","Small cell carcinoma","Squamous carcinoma","Large cell carcinoma"],answer:3,explanation:"Large cell carcinoma spreads rapidly via bloodstream."},
+
+{question:"58. Which disease causes destruction of alveolar walls?",options:["Asthma","Emphysema","Bronchitis","Tuberculosis"],answer:1,explanation:"Emphysema destroys alveolar walls leading to air trapping."},
+
+{question:"59. Which disease produces cavitary lung lesions?",options:["Tuberculosis","Asthma","Bronchitis","COPD"],answer:0,explanation:"Pulmonary tuberculosis frequently forms cavities."},
+
+{question:"60. Which sign indicates pleural irritation?",options:["Pleural rub","Wheezing","Crackles","Rhonchi"],answer:0,explanation:"Pleural rub occurs when inflamed pleura rub together."},
+
+{question:"61. Which disease causes severe hypoxia with normal CO2 initially?",options:["Pulmonary embolism","Asthma","COPD","Bronchitis"],answer:0,explanation:"Pulmonary embolism causes ventilation-perfusion mismatch leading to hypoxia."},
+
+{question:"62. Which respiratory structure warms inhaled air?",options:["Bronchi","Nasal cavity","Alveoli","Pleura"],answer:1,explanation:"Nasal cavity warms and humidifies inhaled air."},
+
+{question:"63. Which condition causes decreased FEV1/FVC ratio?",options:["Restrictive lung disease","Obstructive lung disease","Pleural effusion","Fibrosis"],answer:1,explanation:"Obstructive diseases reduce FEV1 more than FVC."},
+
+{question:"64. Which disease causes chronic airway inflammation?",options:["Asthma","Pulmonary fibrosis","Tuberculosis","Pleural effusion"],answer:0,explanation:"Asthma involves chronic airway inflammation."},
+
+{question:"65. Which organism causes Legionnaires disease?",options:["Legionella pneumophila","Streptococcus pneumoniae","Mycoplasma","Chlamydia"],answer:0,explanation:"Legionella pneumophila causes Legionnaires disease."},
+
+{question:"66. Which lung disease is associated with miners?",options:["Coal workers pneumoconiosis","Asthma","Bronchitis","COPD"],answer:0,explanation:"Coal dust inhalation causes pneumoconiosis."},
+
+{question:"67. Which investigation visualizes airways directly?",options:["Bronchoscopy","Chest X-ray","Spirometry","ABG"],answer:0,explanation:"Bronchoscopy allows direct visualization of bronchi."},
+
+{question:"68. Which disease causes excessive mucus secretion?",options:["Chronic bronchitis","Asthma","Pulmonary fibrosis","Tuberculosis"],answer:0,explanation:"Chronic bronchitis causes hypertrophy of mucus glands."},
+
+{question:"69. Which condition causes sudden lung collapse?",options:["Pneumothorax","Asthma","Bronchitis","Fibrosis"],answer:0,explanation:"Air entering pleural cavity collapses lung."},
+
+{question:"70. Which structure separates thoracic and abdominal cavity?",options:["Diaphragm","Pleura","Bronchi","Pericardium"],answer:0,explanation:"The diaphragm forms the boundary between thoracic and abdominal cavities."},
+
+{question:"71. Which condition causes air in the pleural cavity?",options:["Pleural effusion","Pneumothorax","Pulmonary fibrosis","Bronchiectasis"],answer:1,explanation:"Pneumothorax is defined as air accumulation in the pleural space."},
+
+{question:"72. Which organism commonly causes tuberculosis?",options:["Mycobacterium leprae","Mycobacterium tuberculosis","Streptococcus pneumoniae","Klebsiella pneumoniae"],answer:1,explanation:"Mycobacterium tuberculosis is the causative organism of tuberculosis."},
+
+{question:"73. Which lung sound is heard in pulmonary edema?",options:["Wheezing","Crackles","Pleural rub","Stridor"],answer:1,explanation:"Fluid in alveoli during pulmonary edema produces crackles."},
+
+{question:"74. Which disease produces destruction of alveolar walls?",options:["Bronchitis","Emphysema","Asthma","Tuberculosis"],answer:1,explanation:"Emphysema destroys alveolar septa leading to enlarged air spaces."},
+
+{question:"75. Which investigation confirms lung cancer diagnosis?",options:["Chest X-ray","Sputum cytology","Lung biopsy","Spirometry"],answer:2,explanation:"Histopathological examination through biopsy confirms lung cancer."},
+
+{question:"76. Which disease causes productive cough with foul smelling sputum?",options:["Asthma","Bronchiectasis","COPD","Pleural effusion"],answer:1,explanation:"Bronchiectasis produces copious foul smelling sputum due to infection."},
+
+{question:"77. Which condition causes decreased oxygen saturation?",options:["Pulmonary embolism","Bronchitis","Allergic rhinitis","Sinusitis"],answer:0,explanation:"Pulmonary embolism reduces lung perfusion causing hypoxemia."},
+
+{question:"78. Which disease is associated with coal dust exposure?",options:["Coal workers pneumoconiosis","Silicosis","Asbestosis","Sarcoidosis"],answer:0,explanation:"Coal dust inhalation causes coal workers pneumoconiosis."},
+
+{question:"79. Which disease shows reversible airway obstruction?",options:["Asthma","COPD","Pulmonary fibrosis","Bronchiectasis"],answer:0,explanation:"Asthma is characterized by reversible airway obstruction."},
+
+{question:"80. Which structure lines the lungs externally?",options:["Pleura","Pericardium","Peritoneum","Endocardium"],answer:0,explanation:"The pleura is a double membrane covering the lungs."},
+
+{question:"81. Which lung disease causes barrel chest?",options:["Pulmonary fibrosis","Emphysema","Bronchitis","Tuberculosis"],answer:1,explanation:"Hyperinflation in emphysema causes barrel shaped chest."},
+
+{question:"82. Which organism causes atypical pneumonia?",options:["Streptococcus","Mycoplasma pneumoniae","Staphylococcus","Pseudomonas"],answer:1,explanation:"Mycoplasma pneumoniae causes atypical pneumonia."},
+
+{question:"83. Which sign indicates lung consolidation?",options:["Hyperresonance","Bronchial breath sounds","Silent chest","Reduced fremitus"],answer:1,explanation:"Consolidated lung transmits bronchial breath sounds."},
+
+{question:"84. Which test measures lung volumes?",options:["Spirometry","ECG","Chest ultrasound","Bronchoscopy"],answer:0,explanation:"Spirometry measures lung capacity and airflow."},
+
+{question:"85. Which condition causes mediastinal shift toward affected side?",options:["Pleural effusion","Atelectasis","Pneumothorax","Asthma"],answer:1,explanation:"Lung collapse pulls mediastinum toward the affected side."},
+
+{question:"86. Which lung cancer is strongly linked with smoking?",options:["Adenocarcinoma","Squamous cell carcinoma","Large cell carcinoma","Carcinoid tumor"],answer:1,explanation:"Squamous cell carcinoma is strongly associated with smoking."},
+
+{question:"87. Which disease causes thick mucus plugging?",options:["Asthma","Bronchiectasis","Cystic fibrosis","Tuberculosis"],answer:2,explanation:"Cystic fibrosis causes thick mucus due to CFTR mutation."},
+
+{question:"88. Which investigation detects pleural fluid?",options:["Chest X-ray","CT scan","Ultrasound","Spirometry"],answer:2,explanation:"Ultrasound is very sensitive for detecting pleural effusion."},
+
+{question:"89. Which disease causes non-caseating granulomas?",options:["Tuberculosis","Sarcoidosis","Histoplasmosis","Aspergillosis"],answer:1,explanation:"Sarcoidosis is characterized by non-caseating granulomas."},
+
+{question:"90. Which lung disease causes progressive dyspnea and dry cough?",options:["Asthma","Pulmonary fibrosis","Bronchitis","COPD"],answer:1,explanation:"Pulmonary fibrosis causes progressive breathlessness."},
+
+{question:"91. Which condition causes pleuritic chest pain?",options:["Pulmonary embolism","Asthma","Bronchitis","COPD"],answer:0,explanation:"Pulmonary embolism commonly causes pleuritic chest pain."},
+
+{question:"92. Which disease causes airway inflammation and wheezing?",options:["Asthma","Tuberculosis","Bronchiectasis","Pleural effusion"],answer:0,explanation:"Asthma produces airway inflammation and wheezing."},
+
+{question:"93. Which organism commonly causes hospital acquired pneumonia?",options:["Pseudomonas aeruginosa","Mycoplasma pneumoniae","Chlamydia pneumoniae","Streptococcus pyogenes"],answer:0,explanation:"Pseudomonas is a major cause of hospital acquired pneumonia."},
+
+{question:"94. Which investigation measures oxygen and carbon dioxide in blood?",options:["ABG analysis","Spirometry","Chest X-ray","Bronchoscopy"],answer:0,explanation:"Arterial blood gas measures PaO2 and PaCO2."},
+
+{question:"95. Which disease produces copious purulent sputum?",options:["Bronchiectasis","Asthma","COPD","Tuberculosis"],answer:0,explanation:"Bronchiectasis produces large amounts of purulent sputum."},
+
+{question:"96. Which structure divides the thoracic and abdominal cavities?",options:["Diaphragm","Pleura","Bronchus","Pericardium"],answer:0,explanation:"The diaphragm separates thoracic and abdominal cavities."},
+
+{question:"97. Which disease causes chronic airflow limitation?",options:["Asthma","COPD","Pulmonary fibrosis","Pleural effusion"],answer:1,explanation:"COPD causes persistent airflow limitation."},
+
+{question:"98. Which investigation visualizes bronchi directly?",options:["Chest X-ray","Bronchoscopy","Spirometry","ABG"],answer:1,explanation:"Bronchoscopy allows direct visualization of airways."},
+
+{question:"99. Which disease causes lung cavitation?",options:["Bronchitis","Tuberculosis","Asthma","COPD"],answer:1,explanation:"Tuberculosis often causes cavitary lesions in lungs."},
+
+{question:"100. Which condition causes sudden lung collapse due to air leakage?",options:["Asthma","Pneumothorax","Bronchitis","Fibrosis"],answer:1,explanation:"Pneumothorax occurs when air enters pleural space causing lung collapse."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
