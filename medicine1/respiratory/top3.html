@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Respiratory System – Top 50 Final-3 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient presents with progressive dyspnea and dry cough. HRCT shows reticular shadows and honeycombing. Diagnosis?",options:["Pulmonary fibrosis","Bronchiectasis","COPD","Asthma"],answer:0,explanation:"Idiopathic pulmonary fibrosis causes progressive dyspnea with honeycomb pattern on HRCT."},
+
+{question:"2. Which lung cancer is most commonly associated with Pancoast tumor?",options:["Small cell carcinoma","Adenocarcinoma","Squamous cell carcinoma","Large cell carcinoma"],answer:2,explanation:"Pancoast tumors typically arise from squamous cell carcinoma in the lung apex."},
+
+{question:"3. A patient with pulmonary embolism usually develops which ABG abnormality initially?",options:["Respiratory alkalosis","Respiratory acidosis","Metabolic acidosis","Metabolic alkalosis"],answer:0,explanation:"Hyperventilation due to hypoxia causes respiratory alkalosis in early PE."},
+
+{question:"4. Which disease is associated with 'blue bloater' phenotype?",options:["Emphysema","Chronic bronchitis","Asthma","Bronchiectasis"],answer:1,explanation:"Chronic bronchitis patients often appear cyanotic and overweight (blue bloater)."},
+
+{question:"5. Which respiratory condition shows increased hematocrit due to chronic hypoxia?",options:["Asthma","COPD","Bronchitis","Pulmonary fibrosis"],answer:1,explanation:"Chronic hypoxia in COPD stimulates erythropoietin leading to secondary polycythemia."},
+
+{question:"6. A patient develops severe dyspnea and bilateral infiltrates after sepsis. Diagnosis?",options:["ARDS","Pulmonary embolism","Pleural effusion","Asthma"],answer:0,explanation:"Acute respiratory distress syndrome occurs after severe systemic inflammation like sepsis."},
+
+{question:"7. Which organism causes pneumonia with 'bulging fissure sign'?",options:["Klebsiella pneumoniae","Mycoplasma pneumoniae","Legionella pneumophila","Streptococcus pneumoniae"],answer:0,explanation:"Klebsiella pneumonia produces lobar consolidation with bulging fissures."},
+
+{question:"8. Which condition produces decreased tactile fremitus?",options:["Pleural effusion","Lung consolidation","Pneumonia","Tuberculosis"],answer:0,explanation:"Fluid in pleural space dampens vibration transmission."},
+
+{question:"9. A patient with tuberculosis most commonly spreads infection via:",options:["Droplet nuclei","Blood transfusion","Skin contact","Food contamination"],answer:0,explanation:"TB spreads through airborne droplet nuclei."},
+
+{question:"10. Which lung disease is characterized by destruction of alveolar septa?",options:["Bronchitis","Asthma","Emphysema","Fibrosis"],answer:2,explanation:"Emphysema causes permanent destruction of alveolar walls."},
+
+{question:"11. Which respiratory condition causes sudden pleuritic chest pain and hyperresonance?",options:["Pleural effusion","Pneumothorax","Pulmonary edema","Bronchitis"],answer:1,explanation:"Air in pleural space produces hyperresonant percussion."},
+
+{question:"12. Which disease causes progressive breathlessness and inspiratory crackles?",options:["Asthma","Pulmonary fibrosis","Bronchitis","COPD"],answer:1,explanation:"Fibrotic lungs produce fine end-inspiratory crackles."},
+
+{question:"13. Which investigation confirms the diagnosis of sarcoidosis?",options:["Lung biopsy","Chest X-ray","Spirometry","Sputum culture"],answer:0,explanation:"Non-caseating granulomas on biopsy confirm sarcoidosis."},
+
+{question:"14. A patient with lung cancer develops hypercalcemia due to secretion of:",options:["Parathyroid hormone","PTH-related peptide","Calcitonin","Vitamin D"],answer:1,explanation:"Squamous cell carcinoma secretes PTHrP causing hypercalcemia."},
+
+{question:"15. Which condition causes mediastinal shift away from affected side?",options:["Tension pneumothorax","Atelectasis","Pulmonary fibrosis","Bronchitis"],answer:0,explanation:"Air pressure pushes mediastinum to opposite side."},
+
+{question:"16. Which organism commonly causes aspiration pneumonia?",options:["Anaerobic bacteria","Mycoplasma pneumoniae","Legionella pneumophila","Streptococcus pneumoniae"],answer:0,explanation:"Anaerobes from oral flora cause aspiration pneumonia."},
+
+{question:"17. Which lung disease causes irreversible bronchial dilation?",options:["Asthma","Bronchiectasis","COPD","Fibrosis"],answer:1,explanation:"Bronchiectasis causes permanent bronchial dilation."},
+
+{question:"18. Which investigation measures carbon monoxide diffusion capacity?",options:["DLCO test","Spirometry","Bronchoscopy","Pulse oximetry"],answer:0,explanation:"DLCO assesses gas diffusion across alveolar membrane."},
+
+{question:"19. Which occupational lung disease occurs due to asbestos exposure?",options:["Silicosis","Asbestosis","Coal workers pneumoconiosis","Byssinosis"],answer:1,explanation:"Inhalation of asbestos fibers causes asbestosis."},
+
+{question:"20. Which lung cancer commonly produces SIADH?",options:["Small cell carcinoma","Adenocarcinoma","Squamous carcinoma","Large cell carcinoma"],answer:0,explanation:"Small cell carcinoma secretes ADH causing SIADH."},
+
+{question:"21. Which respiratory disease causes airway hyperresponsiveness?",options:["Asthma","Fibrosis","Bronchitis","Tuberculosis"],answer:0,explanation:"Asthma involves hyperresponsive airways."},
+
+{question:"22. Which condition causes productive cough lasting more than 3 months per year?",options:["Chronic bronchitis","Asthma","Tuberculosis","Bronchiectasis"],answer:0,explanation:"Definition of chronic bronchitis."},
+
+{question:"23. Which lung disease shows 'ground glass opacity' on CT?",options:["Interstitial lung disease","Bronchitis","COPD","Asthma"],answer:0,explanation:"Interstitial lung disease often shows ground-glass opacities."},
+
+{question:"24. Which sign indicates lung consolidation?",options:["Bronchial breath sounds","Hyperresonance","Reduced fremitus","Silent chest"],answer:0,explanation:"Consolidation transmits bronchial breath sounds."},
+
+{question:"25. Which structure divides the lungs into lobes?",options:["Fissures","Bronchi","Alveoli","Pleura"],answer:0,explanation:"Lobes are separated by fissures."},
+
+{question:"26. Which disease is associated with egg-shell calcification of lymph nodes?",options:["Silicosis","Asbestosis","Sarcoidosis","Tuberculosis"],answer:0,explanation:"Silicosis causes characteristic egg-shell calcification."},
+
+{question:"27. Which condition causes decreased lung compliance?",options:["Pulmonary fibrosis","Asthma","COPD","Bronchitis"],answer:0,explanation:"Fibrotic lungs become stiff and noncompliant."},
+
+{question:"28. Which lung cancer originates in peripheral lung tissue?",options:["Adenocarcinoma","Small cell carcinoma","Squamous carcinoma","Carcinoid"],answer:0,explanation:"Adenocarcinoma commonly arises peripherally."},
+
+{question:"29. Which condition causes pulmonary hypertension secondary to chronic hypoxia?",options:["COPD","Asthma","Bronchitis","Pneumonia"],answer:0,explanation:"Chronic hypoxia leads to pulmonary vasoconstriction."},
+
+{question:"30. Which test detects ventilation-perfusion mismatch?",options:["V/Q scan","Chest X-ray","Spirometry","ABG"],answer:0,explanation:"V/Q scan identifies mismatch between ventilation and perfusion."},
+
+{question:"31. Which organism causes tuberculosis?",options:["Mycobacterium tuberculosis","Mycoplasma pneumoniae","Legionella pneumophila","Klebsiella pneumoniae"],answer:0,explanation:"TB is caused by Mycobacterium tuberculosis."},
+
+{question:"32. Which lung disease produces barrel-shaped chest?",options:["Emphysema","Fibrosis","Asthma","Bronchitis"],answer:0,explanation:"Hyperinflation in emphysema causes barrel chest."},
+
+{question:"33. Which complication occurs in severe pneumonia?",options:["Empyema","Asthma","COPD","Bronchitis"],answer:0,explanation:"Pleural infection may lead to empyema."},
+
+{question:"34. Which investigation best diagnoses bronchiectasis?",options:["High resolution CT","Chest X-ray","Spirometry","ABG"],answer:0,explanation:"HRCT is gold standard for bronchiectasis."},
+
+{question:"35. Which condition causes sudden onset dyspnea after immobilization?",options:["Pulmonary embolism","Asthma","COPD","Bronchitis"],answer:0,explanation:"Venous thromboembolism can cause pulmonary embolism."},
+
+{question:"36. Which respiratory muscle contracts during inspiration?",options:["Diaphragm","Abdominal muscles","Internal intercostals","Rectus abdominis"],answer:0,explanation:"The diaphragm is the primary inspiratory muscle."},
+
+{question:"37. Which lung disease shows patchy bronchial inflammation?",options:["Bronchopneumonia","Asthma","COPD","Fibrosis"],answer:0,explanation:"Bronchopneumonia produces patchy inflammation."},
+
+{question:"38. Which organism causes walking pneumonia?",options:["Mycoplasma pneumoniae","Streptococcus pneumoniae","Klebsiella pneumoniae","Legionella pneumophila"],answer:0,explanation:"Mycoplasma pneumonia causes mild atypical pneumonia."},
+
+{question:"39. Which respiratory disease is associated with eosinophilia?",options:["Asthma","COPD","Bronchitis","Tuberculosis"],answer:0,explanation:"Asthma involves eosinophilic airway inflammation."},
+
+{question:"40. Which condition produces hemoptysis due to bronchial artery rupture?",options:["Bronchiectasis","Asthma","COPD","Bronchitis"],answer:0,explanation:"Bronchiectasis can cause massive hemoptysis."},
+
+{question:"41. Which lung disease produces restrictive spirometry pattern?",options:["Pulmonary fibrosis","COPD","Asthma","Bronchitis"],answer:0,explanation:"Fibrosis restricts lung expansion."},
+
+{question:"42. Which investigation measures oxygen partial pressure?",options:["Arterial blood gas","Spirometry","Bronchoscopy","Pulse oximetry"],answer:0,explanation:"ABG measures PaO2 and PaCO2."},
+
+{question:"43. Which respiratory condition causes orthopnea?",options:["Pulmonary edema","Asthma","COPD","Bronchitis"],answer:0,explanation:"Fluid accumulation worsens breathing when lying down."},
+
+{question:"44. Which lung disease produces chronic productive cough?",options:["Chronic bronchitis","Asthma","Fibrosis","Tuberculosis"],answer:0,explanation:"Chronic bronchitis produces persistent productive cough."},
+
+{question:"45. Which sign indicates pleural effusion?",options:["Stony dull percussion","Hyperresonance","Bronchial breathing","Crackles"],answer:0,explanation:"Pleural fluid causes stony dullness."},
+
+{question:"46. Which lung cancer has worst prognosis?",options:["Small cell carcinoma","Adenocarcinoma","Squamous carcinoma","Carcinoid"],answer:0,explanation:"Small cell lung cancer spreads rapidly."},
+
+{question:"47. Which disease produces cavitary lesions in lungs?",options:["Tuberculosis","Asthma","Bronchitis","COPD"],answer:0,explanation:"Pulmonary TB often causes cavitation."},
+
+{question:"48. Which investigation stages lung cancer?",options:["CT scan","Spirometry","Chest X-ray","Pulse oximetry"],answer:0,explanation:"CT scan helps stage lung cancer."},
+
+{question:"49. Which respiratory disease causes chronic airway inflammation with mucus hypersecretion?",options:["Asthma","Fibrosis","Sarcoidosis","Tuberculosis"],answer:0,explanation:"Asthma causes airway inflammation."},
+
+{question:"50. Which lung disease causes decreased diffusion capacity?",options:["Pulmonary fibrosis","Asthma","Bronchitis","COPD"],answer:0,explanation:"Fibrotic lungs impair gas diffusion."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
