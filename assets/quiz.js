@@ -1,4 +1,6 @@
+// -------------------------
 // Total Care MCQ Quiz Engine
+// -------------------------
 
 let index = 0;
 let correct = 0;
@@ -21,16 +23,23 @@ let questions = [
   // Add more questions here
 ];
 
-// Shuffle options for each question
+// -------------------------
+// Shuffle questions function
+function shuffleQuestions() {
+  for (let i = questions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [questions[i], questions[j]] = [questions[j], questions[i]];
+  }
+}
+
+// Shuffle options function
 function shuffleOptions() {
   questions.forEach(q => {
     const correctText = q.options[q.answer];
-    // Fisher-Yates shuffle
     for (let i = q.options.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
     }
-    // Update correct answer index after shuffle
     q.answer = q.options.indexOf(correctText);
   });
 }
@@ -38,6 +47,7 @@ function shuffleOptions() {
 // Store user answers
 let userAnswers = new Array(questions.length).fill(null);
 
+// -------------------------
 // Show current question
 function showQuestion() {
   let q = questions[index];
@@ -53,7 +63,7 @@ function showQuestion() {
 
   document.getElementById("quiz").innerHTML = html;
 
-  // Show previously selected answer
+  // Show previously selected answer if returning to this question
   let savedAnswer = userAnswers[index];
   if (savedAnswer !== null) {
     const opts = document.querySelectorAll(".option");
@@ -73,6 +83,7 @@ function showQuestion() {
   }
 }
 
+// -------------------------
 // Handle answer selection
 function answer(i) {
   if (userAnswers[index] !== null) return;
@@ -98,6 +109,7 @@ function answer(i) {
     "<p>" + q.explanation + "</p>";
 }
 
+// -------------------------
 // Next question
 function nextQuestion() {
   if (index < questions.length - 1) {
@@ -131,6 +143,8 @@ function finishQuiz() {
     "<p>Total Questions: " + questions.length + "</p>";
 }
 
+// -------------------------
 // Initialize quiz
-shuffleOptions();
-showQuestion();
+shuffleQuestions();  // Shuffle the order of questions
+shuffleOptions();    // Shuffle options within each question
+showQuestion();      // Show the first question
