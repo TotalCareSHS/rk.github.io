@@ -16,7 +16,7 @@ Wrong: <span id="wrong">0</span>
 
 <body>
 
-<h2>Medicine 1 – Respiratory System – Expected MCQs</h2>
+<h2>Medicine 1 – Respiratory – Expected MCQs</h2>
 
 <div id="progress"></div>
 <div id="quiz"></div>
@@ -34,65 +34,155 @@ Wrong: <span id="wrong">0</span>
 
 const questions=[
 
-{question:"1. The most common cause of secondary spontaneous pneumothorax is:",options:["Pulmonary fibrosis","COPD","Tuberculosis","Asthma"],answer:1,explanation:"COPD with ruptured emphysematous bullae is the most common cause of secondary spontaneous pneumothorax."},
+{question:"1. The most common cause of secondary spontaneous pneumothorax is:",
+options:["Pulmonary fibrosis","Asthma","COPD","Tuberculosis"],
+answer:2,
+explanation:"COPD with ruptured emphysematous bullae is the most common cause of secondary spontaneous pneumothorax."},
 
-{question:"2. Which investigation is most sensitive for detecting early pulmonary embolism?",options:["Chest X-ray","CT pulmonary angiography","Spirometry","ECG"],answer:1,explanation:"CT pulmonary angiography is the most sensitive and commonly used diagnostic test for pulmonary embolism."},
+{question:"2. Which investigation is most sensitive for detecting early pulmonary embolism?",
+options:["ECG","CT pulmonary angiography","Spirometry","Chest X-ray"],
+answer:1,
+explanation:"CT pulmonary angiography is the most sensitive and commonly used diagnostic test for pulmonary embolism."},
 
-{question:"3. Which lung cancer is most commonly seen in non-smokers?",options:["Adenocarcinoma","Squamous cell carcinoma","Small cell carcinoma","Large cell carcinoma"],answer:0,explanation:"Adenocarcinoma is the most common lung cancer in non-smokers and females."},
+{question:"3. Which lung cancer is most commonly seen in non-smokers?",
+options:["Large cell carcinoma","Squamous cell carcinoma","Small cell carcinoma","Adenocarcinoma"],
+answer:3,
+explanation:"Adenocarcinoma is the most common lung cancer in non-smokers and females."},
 
-{question:"4. Which condition causes hyperresonant percussion note on chest examination?",options:["Pleural effusion","Pneumothorax","Pneumonia","Pulmonary fibrosis"],answer:1,explanation:"Air in the pleural cavity during pneumothorax produces hyperresonance on percussion."},
+{question:"4. Which condition causes hyperresonant percussion note on chest examination?",
+options:["Pneumothorax","Pulmonary fibrosis","Pneumonia","Pleural effusion"],
+answer:0,
+explanation:"Air in the pleural cavity during pneumothorax produces hyperresonance on percussion."},
 
-{question:"5. Which organism is the most common cause of hospital-acquired pneumonia?",options:["Streptococcus pneumoniae","Pseudomonas aeruginosa","Mycoplasma pneumoniae","Chlamydia pneumoniae"],answer:1,explanation:"Pseudomonas aeruginosa is a frequent pathogen in hospital-acquired pneumonia."},
+{question:"5. Which organism is the most common cause of hospital-acquired pneumonia?",
+options:["Chlamydia pneumoniae","Mycoplasma pneumoniae","Pseudomonas aeruginosa","Streptococcus pneumoniae"],
+answer:2,
+explanation:"Pseudomonas aeruginosa is a frequent pathogen in hospital-acquired pneumonia."},
 
-{question:"6. The Mantoux test is used to detect:",options:["Active tuberculosis","Past TB infection","Tuberculin hypersensitivity","TB exposure"],answer:3,explanation:"Mantoux test detects delayed hypersensitivity to tuberculin indicating prior exposure to TB."},
+{question:"6. The Mantoux test is used to detect:",
+options:["Tuberculin hypersensitivity","TB exposure","Active tuberculosis","Past TB infection"],
+answer:1,
+explanation:"Mantoux test detects delayed hypersensitivity to tuberculin indicating prior exposure to TB."},
 
-{question:"7. Which respiratory disease causes digital clubbing most commonly?",options:["Asthma","Lung cancer","Bronchitis","Emphysema"],answer:1,explanation:"Clubbing is commonly associated with lung cancer due to chronic hypoxia and vascular changes."},
+{question:"7. Which respiratory disease causes digital clubbing most commonly?",
+options:["Lung cancer","Emphysema","Asthma","Bronchitis"],
+answer:0,
+explanation:"Clubbing is commonly associated with lung cancer due to chronic hypoxia."},
 
-{question:"8. Which symptom is most characteristic of bronchial asthma?",options:["Productive cough","Wheezing","Hemoptysis","Chest trauma"],answer:1,explanation:"Wheezing due to bronchospasm is the hallmark symptom of bronchial asthma."},
+{question:"8. Which symptom is most characteristic of bronchial asthma?",
+options:["Chest trauma","Productive cough","Hemoptysis","Wheezing"],
+answer:3,
+explanation:"Wheezing due to bronchospasm is the hallmark symptom of bronchial asthma."},
 
-{question:"9. Which lobe of lung is most commonly affected in tuberculosis?",options:["Upper lobe","Middle lobe","Lower lobe","Lingula"],answer:0,explanation:"Pulmonary tuberculosis typically affects the upper lobes due to higher oxygen tension."},
+{question:"9. Which lobe of lung is most commonly affected in tuberculosis?",
+options:["Middle lobe","Lingula","Upper lobe","Lower lobe"],
+answer:2,
+explanation:"Pulmonary tuberculosis typically affects upper lobes due to higher oxygen tension."},
 
-{question:"10. Which respiratory condition leads to decreased lung compliance?",options:["Asthma","COPD","Pulmonary fibrosis","Bronchiectasis"],answer:2,explanation:"Fibrosis stiffens lung tissue leading to decreased lung compliance."},
+{question:"10. Which respiratory condition leads to decreased lung compliance?",
+options:["Asthma","Pulmonary fibrosis","COPD","Bronchiectasis"],
+answer:1,
+explanation:"Fibrosis stiffens lung tissue causing reduced compliance."},
 
-{question:"11. Which investigation measures arterial oxygen and carbon dioxide levels?",options:["Pulse oximetry","Arterial blood gas","Spirometry","Chest CT"],answer:1,explanation:"Arterial blood gas analysis measures PaO2, PaCO2, and pH."},
+{question:"11. Which investigation measures arterial oxygen and carbon dioxide levels?",
+options:["Spirometry","Pulse oximetry","Chest CT","Arterial blood gas"],
+answer:3,
+explanation:"ABG measures PaO2 and PaCO2."},
 
-{question:"12. Which condition produces mediastinal shift toward the affected side?",options:["Tension pneumothorax","Pleural effusion","Atelectasis","Emphysema"],answer:2,explanation:"Atelectasis causes lung collapse which pulls mediastinum toward the affected side."},
+{question:"12. Which condition produces mediastinal shift toward the affected side?",
+options:["Atelectasis","Pleural effusion","Emphysema","Tension pneumothorax"],
+answer:0,
+explanation:"Atelectasis pulls mediastinum toward the collapsed lung."},
 
-{question:"13. Which disease is associated with 'pink puffer' patients?",options:["Chronic bronchitis","Emphysema","Asthma","Bronchiectasis"],answer:1,explanation:"Emphysema patients are often called pink puffers due to hyperventilation and minimal cyanosis."},
+{question:"13. Which disease is associated with 'pink puffer' patients?",
+options:["Chronic bronchitis","Asthma","Emphysema","Bronchiectasis"],
+answer:2,
+explanation:"Emphysema patients are called pink puffers due to hyperventilation."},
 
-{question:"14. Which condition produces productive cough with foul-smelling sputum?",options:["Asthma","Bronchiectasis","Pulmonary fibrosis","Pleural effusion"],answer:1,explanation:"Bronchiectasis causes copious foul-smelling purulent sputum due to chronic infection."},
+{question:"14. Which condition produces productive cough with foul-smelling sputum?",
+options:["Asthma","Pleural effusion","Bronchiectasis","Pulmonary fibrosis"],
+answer:2,
+explanation:"Bronchiectasis produces copious foul-smelling sputum."},
 
-{question:"15. Which investigation is most useful for staging lung cancer?",options:["Chest X-ray","CT scan","Spirometry","Sputum smear"],answer:1,explanation:"CT scan provides detailed imaging for staging lung cancer."},
+{question:"15. Which investigation is most useful for staging lung cancer?",
+options:["Spirometry","CT scan","Chest X-ray","Sputum smear"],
+answer:1,
+explanation:"CT scan helps stage lung cancer."},
 
-{question:"16. Which organism causes atypical pneumonia with walking pneumonia symptoms?",options:["Mycoplasma pneumoniae","Klebsiella pneumoniae","Staphylococcus aureus","Pseudomonas aeruginosa"],answer:0,explanation:"Mycoplasma pneumoniae causes mild atypical pneumonia called walking pneumonia."},
+{question:"16. Which organism causes atypical pneumonia with walking pneumonia symptoms?",
+options:["Mycoplasma pneumoniae","Pseudomonas aeruginosa","Klebsiella pneumoniae","Staphylococcus aureus"],
+answer:0,
+explanation:"Mycoplasma pneumoniae causes walking pneumonia."},
 
-{question:"17. Which condition produces stony dullness on percussion?",options:["Pleural effusion","Asthma","Bronchitis","Emphysema"],answer:0,explanation:"Pleural effusion produces stony dull percussion note due to fluid accumulation."},
+{question:"17. Which condition produces stony dullness on percussion?",
+options:["Pleural effusion","Asthma","Bronchitis","Emphysema"],
+answer:0,
+explanation:"Pleural fluid produces stony dullness."},
 
-{question:"18. Which respiratory muscle is most important during inspiration?",options:["Intercostal muscles","Diaphragm","Abdominal muscles","Scalene muscles"],answer:1,explanation:"The diaphragm is the primary muscle responsible for inspiration."},
+{question:"18. Which respiratory muscle is most important during inspiration?",
+options:["Abdominal muscles","Diaphragm","Scalene muscles","Intercostal muscles"],
+answer:1,
+explanation:"The diaphragm is the primary muscle of inspiration."},
 
-{question:"19. Which occupational lung disease occurs in silica exposure?",options:["Asbestosis","Silicosis","Byssinosis","Bagassosis"],answer:1,explanation:"Silicosis occurs due to inhalation of crystalline silica particles."},
+{question:"19. Which occupational lung disease occurs in silica exposure?",
+options:["Asbestosis","Bagassosis","Silicosis","Byssinosis"],
+answer:2,
+explanation:"Silica dust causes silicosis."},
 
-{question:"20. Which disease shows non-caseating granulomas?",options:["Tuberculosis","Sarcoidosis","Histoplasmosis","Aspergillosis"],answer:1,explanation:"Sarcoidosis produces non-caseating granulomas."},
+{question:"20. Which disease shows non-caseating granulomas?",
+options:["Sarcoidosis","Tuberculosis","Aspergillosis","Histoplasmosis"],
+answer:0,
+explanation:"Sarcoidosis produces non-caseating granulomas."},
 
-{question:"21. Which complication may occur in severe pneumonia?",options:["Pleural effusion","Asthma","COPD","Pulmonary fibrosis"],answer:0,explanation:"Pleural effusion is a common complication of bacterial pneumonia."},
+{question:"21. Which complication may occur in severe pneumonia?",
+options:["Pleural effusion","Pulmonary fibrosis","COPD","Asthma"],
+answer:0,
+explanation:"Pleural effusion is a common complication."},
 
-{question:"22. Which respiratory disorder shows reduced FEV1/FVC ratio?",options:["Restrictive lung disease","Obstructive lung disease","Pleural disease","Pulmonary embolism"],answer:1,explanation:"Obstructive lung diseases such as COPD and asthma reduce the FEV1/FVC ratio."},
+{question:"22. Which respiratory disorder shows reduced FEV1/FVC ratio?",
+options:["Restrictive lung disease","Obstructive lung disease","Pulmonary embolism","Pleural disease"],
+answer:1,
+explanation:"Obstructive diseases reduce FEV1/FVC ratio."},
 
-{question:"23. Which lung cancer is commonly located centrally in bronchi?",options:["Adenocarcinoma","Squamous cell carcinoma","Large cell carcinoma","Carcinoid tumor"],answer:1,explanation:"Squamous cell carcinoma often arises centrally in the bronchi."},
+{question:"23. Which lung cancer is commonly located centrally in bronchi?",
+options:["Adenocarcinoma","Squamous cell carcinoma","Carcinoid tumor","Large cell carcinoma"],
+answer:1,
+explanation:"Squamous carcinoma often arises centrally."},
 
-{question:"24. Which sign indicates severe asthma exacerbation?",options:["Wheezing","Silent chest","Crackles","Pleural rub"],answer:1,explanation:"Silent chest indicates severe airway obstruction and minimal airflow."},
+{question:"24. Which sign indicates severe asthma exacerbation?",
+options:["Silent chest","Crackles","Pleural rub","Wheezing"],
+answer:0,
+explanation:"Silent chest indicates severe airway obstruction."},
 
-{question:"25. Which organism is most commonly responsible for lung abscess?",options:["Anaerobic bacteria","Mycoplasma pneumoniae","Chlamydia pneumoniae","Legionella"],answer:0,explanation:"Anaerobic bacteria from aspiration commonly cause lung abscess."},
+{question:"25. Which organism is most commonly responsible for lung abscess?",
+options:["Chlamydia pneumoniae","Mycoplasma pneumoniae","Anaerobic bacteria","Legionella"],
+answer:2,
+explanation:"Anaerobic bacteria from aspiration commonly cause lung abscess."},
 
-{question:"26. Which imaging sign suggests pulmonary edema?",options:["Kerley B lines","Honeycombing","Cavitation","Pleural plaques"],answer:0,explanation:"Kerley B lines indicate interstitial pulmonary edema."},
+{question:"26. Which imaging sign suggests pulmonary edema?",
+options:["Pleural plaques","Kerley B lines","Honeycombing","Cavitation"],
+answer:1,
+explanation:"Kerley B lines indicate interstitial pulmonary edema."},
 
-{question:"27. Which respiratory condition leads to barrel-shaped chest?",options:["Asthma","COPD","Pneumonia","Tuberculosis"],answer:1,explanation:"Hyperinflation in COPD produces barrel-shaped chest."},
+{question:"27. Which respiratory condition leads to barrel-shaped chest?",
+options:["Tuberculosis","Asthma","Pneumonia","COPD"],
+answer:3,
+explanation:"Hyperinflation in COPD produces barrel-shaped chest."},
 
-{question:"28. Which condition causes sudden chest pain and dyspnea in young tall individuals?",options:["Asthma","Primary spontaneous pneumothorax","Pulmonary fibrosis","Bronchitis"],answer:1,explanation:"Primary spontaneous pneumothorax commonly occurs in tall thin young males."},
+{question:"28. Which condition causes sudden chest pain and dyspnea in young tall individuals?",
+options:["Primary spontaneous pneumothorax","Asthma","Bronchitis","Pulmonary fibrosis"],
+answer:0,
+explanation:"Primary spontaneous pneumothorax commonly occurs in tall thin young males."},
 
-{question:"29. Which investigation is best to confirm bronchiectasis?",options:["Chest X-ray","High-resolution CT scan","Spirometry","Bronchoscopy"],answer:1,explanation:"HRCT scan is the gold standard for diagnosing bronchiectasis."},
+{question:"29. Which investigation is best to confirm bronchiectasis?",
+options:["Spirometry","Bronchoscopy","High-resolution CT scan","Chest X-ray"],
+answer:2,
+explanation:"HRCT scan is the gold standard for diagnosing bronchiectasis."},
 
-{question:"30. Which lung structure produces surfactant?",options:["Type I pneumocytes","Type II pneumocytes","Macrophages","Ciliated cells"],answer:1,explanation:"Type II pneumocytes produce pulmonary surfactant that reduces alveolar surface tension."}
+{question:"30. Which lung structure produces surfactant?",
+options:["Macrophages","Type II pneumocytes","Ciliated cells","Type I pneumocytes"],
+answer:1,
+explanation:"Type II pneumocytes produce pulmonary surfactant that reduces alveolar surface tension."}
 
 ]
 
