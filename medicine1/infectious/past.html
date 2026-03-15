@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 100:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Infectious – Past Paper MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{
+question: "1. The causative organism of tuberculosis is:",
+options: ["Streptococcus pneumoniae","Mycoplasma pneumoniae","Mycobacterium tuberculosis","Haemophilus influenzae"],
+answer: 2,
+explanation: "Tuberculosis is caused by Mycobacterium tuberculosis, an acid-fast bacillus."
+},
+
+{
+question: "2. BCG vaccination primarily protects against:",
+options: ["Severe childhood tuberculosis","Typhoid fever","Diphtheria","Cholera"],
+answer: 0,
+explanation: "BCG protects mainly against severe TB such as TB meningitis and miliary TB."
+},
+
+{
+question: "3. The stain used to identify Mycobacterium tuberculosis is:",
+options: ["Gram stain","Albert stain","India ink stain","Ziehl-Neelsen stain"],
+answer: 3,
+explanation: "Ziehl-Neelsen stain identifies acid-fast bacilli like Mycobacterium tuberculosis."
+},
+
+{
+question: "4. Mantoux test is used to detect:",
+options: ["Antibodies against TB","Cell mediated immunity to TB","Active TB bacteria","Bacterial toxins"],
+answer: 1,
+explanation: "Mantoux test measures delayed hypersensitivity reaction to tuberculin antigen."
+},
+
+{
+question: "5. The vector responsible for malaria transmission is:",
+options: ["Culex mosquito","Aedes mosquito","Anopheles mosquito","Sandfly"],
+answer: 2,
+explanation: "Female Anopheles mosquito transmits malaria parasites."
+},
+
+{
+question: "6. The infective stage of malaria for humans is:",
+options: ["Sporozoite","Merozoite","Trophozoite","Schizont"],
+answer: 0,
+explanation: "Sporozoites enter the bloodstream during mosquito bite."
+},
+
+{
+question: "7. The most dangerous malaria parasite is:",
+options: ["Plasmodium vivax","Plasmodium malariae","Plasmodium ovale","Plasmodium falciparum"],
+answer: 3,
+explanation: "Plasmodium falciparum causes cerebral malaria and severe complications."
+},
+
+{
+question: "8. The classical malaria fever sequence is:",
+options: ["Hot → Cold → Sweating","Cold → Hot → Sweating","Sweating → Cold → Hot","Hot → Sweating → Cold"],
+answer: 1,
+explanation: "Malaria fever typically progresses through cold stage, hot stage, and sweating stage."
+},
+
+{
+question: "9. Typhoid fever is caused by:",
+options: ["Salmonella typhi","Vibrio cholerae","Shigella dysenteriae","E. coli"],
+answer: 0,
+explanation: "Salmonella typhi causes typhoid fever."
+},
+
+{
+question: "10. The diagnostic screening test for typhoid is:",
+options: ["Mantoux test","Paul Bunnell test","Widal test","Weil Felix test"],
+answer: 2,
+explanation: "Widal test detects antibodies against Salmonella antigens."
+},
+
+{
+question: "11. The organism responsible for cholera is:",
+options: ["Salmonella typhi","Vibrio cholerae","Shigella dysenteriae","Campylobacter jejuni"],
+answer: 1,
+explanation: "Vibrio cholerae produces enterotoxin causing severe diarrhea."
+},
+
+{
+question: "12. Characteristic stool in cholera is:",
+options: ["Bloody stool","Black stool","Green stool","Rice water stool"],
+answer: 3,
+explanation: "Cholera produces profuse watery 'rice-water' stools."
+},
+
+{
+question: "13. Amoebic dysentery is caused by:",
+options: ["Entamoeba histolytica","Giardia lamblia","Balantidium coli","Trichomonas vaginalis"],
+answer: 0,
+explanation: "Entamoeba histolytica invades intestinal mucosa causing dysentery."
+},
+
+{
+question: "14. Amoebic liver abscess contains:",
+options: ["Yellow pus","Green pus","Anchovy sauce pus","Clear fluid"],
+answer: 2,
+explanation: "Amoebic liver abscess contains characteristic brown 'anchovy sauce' pus."
+},
+
+{
+question: "15. Kala-azar is caused by:",
+options: ["Trypanosoma gambiense","Leishmania donovani","Plasmodium falciparum","Toxoplasma gondii"],
+answer: 1,
+explanation: "Visceral leishmaniasis (kala-azar) is caused by Leishmania donovani."
+},
+
+{
+question: "16. The vector for kala-azar is:",
+options: ["Mosquito","Tick","Housefly","Sandfly"],
+answer: 3,
+explanation: "Kala-azar is transmitted by sandflies."
+},
+
+{
+question: "17. Dengue fever is transmitted by:",
+options: ["Anopheles mosquito","Culex mosquito","Aedes mosquito","Sandfly"],
+answer: 2,
+explanation: "Aedes aegypti mosquito transmits dengue virus."
+},
+
+{
+question: "18. A typical laboratory finding in dengue fever is:",
+options: ["Thrombocytopenia","Polycythemia","Leukocytosis","Hyperglycemia"],
+answer: 0,
+explanation: "Dengue commonly presents with thrombocytopenia."
+},
+
+{
+question: "19. Leptospirosis is caused by:",
+options: ["Borrelia burgdorferi","Leptospira interrogans","Treponema pallidum","Brucella melitensis"],
+answer: 1,
+explanation: "Leptospira interrogans is the causative organism."
+},
+
+{
+question: "20. Severe leptospirosis is called:",
+options: ["Bright disease","Addison disease","Hodgkin disease","Weil disease"],
+answer: 3,
+explanation: "Weil disease is severe leptospirosis with jaundice and renal failure."
+},
+
+{
+question: "21. Pertussis is caused by:",
+options: ["Corynebacterium diphtheriae","Staphylococcus aureus","Bordetella pertussis","Clostridium tetani"],
+answer: 2,
+explanation: "Bordetella pertussis causes whooping cough."
+},
+
+{
+question: "22. The classical symptom of pertussis is:",
+options: ["Whooping cough","Productive cough","Dry cough","Hemoptysis"],
+answer: 0,
+explanation: "Inspiratory 'whoop' occurs after coughing spasms."
+},
+
+{
+question: "23. Infectious mononucleosis is caused by:",
+options: ["Cytomegalovirus","Epstein-Barr virus","Adenovirus","Herpes simplex virus"],
+answer: 1,
+explanation: "Epstein-Barr virus infects B cells causing infectious mononucleosis."
+},
+
+{
+question: "24. The heterophile antibody test used in mononucleosis is:",
+options: ["Mantoux test","Widal test","VDRL test","Paul Bunnell test"],
+answer: 3,
+explanation: "Paul-Bunnell test detects heterophile antibodies in EBV infection."
+},
+
+{
+question: "25. The most common opportunistic infection in HIV is:",
+options: ["Malaria","Tuberculosis","Typhoid","Dengue"],
+answer: 1,
+explanation: "Tuberculosis is the most common opportunistic infection in HIV patients."
+},
+
+{
+question: "26. Which organism causes diphtheria?",
+options: ["Streptococcus pyogenes","Staphylococcus aureus","Clostridium diphtheriae","Corynebacterium diphtheriae"],
+answer: 3,
+explanation: "Diphtheria is caused by Corynebacterium diphtheriae which produces a potent exotoxin."
+},
+
+{
+question: "27. The pseudomembrane seen in diphtheria is mainly composed of:",
+options: ["Dead epithelial cells and bacteria","Fibrin, necrotic cells and bacteria","Platelets and RBCs","Pure bacterial colonies"],
+answer: 1,
+explanation: "The diphtheritic membrane contains fibrin, necrotic epithelial cells and bacteria."
+},
+
+{
+question: "28. Tetanus is caused by:",
+options: ["Clostridium tetani","Clostridium botulinum","Clostridium perfringens","Bacillus anthracis"],
+answer: 0,
+explanation: "Clostridium tetani produces tetanospasmin toxin causing muscle spasms."
+},
+
+{
+question: "29. The toxin responsible for tetanus symptoms is:",
+options: ["Endotoxin","Enterotoxin","Tetanospasmin","Hemolysin"],
+answer: 2,
+explanation: "Tetanospasmin blocks inhibitory neurotransmitters causing muscle rigidity."
+},
+
+{
+question: "30. The most characteristic feature of tetanus is:",
+options: ["Opisthotonus","Muscle weakness","Flaccid paralysis","Lockjaw (trismus)"],
+answer: 3,
+explanation: "Lockjaw due to masseter spasm is the earliest symptom of tetanus."
+},
+
+{
+question: "31. Botulism causes:",
+options: ["Spastic paralysis","Flaccid paralysis","Convulsions","Muscle hypertrophy"],
+answer: 1,
+explanation: "Botulinum toxin blocks acetylcholine release causing flaccid paralysis."
+},
+
+{
+question: "32. The organism causing botulism is:",
+options: ["Clostridium tetani","Bacillus cereus","Clostridium botulinum","Clostridium difficile"],
+answer: 2,
+explanation: "Botulism is caused by Clostridium botulinum toxin."
+},
+
+{
+question: "33. Gas gangrene is commonly caused by:",
+options: ["Clostridium perfringens","Clostridium tetani","Staphylococcus aureus","E. coli"],
+answer: 0,
+explanation: "Clostridium perfringens produces toxins causing tissue necrosis and gas formation."
+},
+
+{
+question: "34. The most serious complication of rabies infection is:",
+options: ["Encephalitis","Kidney failure","Myocarditis","Meningitis"],
+answer: 0,
+explanation: "Rabies virus causes fatal encephalitis."
+},
+
+{
+question: "35. Rabies virus is transmitted mainly through:",
+options: ["Contaminated food","Animal bite","Mosquito bite","Blood transfusion"],
+answer: 1,
+explanation: "Rabies spreads through saliva of infected animals via bites."
+},
+
+{
+question: "36. The Negri bodies seen in rabies are found in:",
+options: ["Kidney cells","Neurons","Liver cells","Muscle cells"],
+answer: 1,
+explanation: "Negri bodies are cytoplasmic inclusions in neurons."
+},
+
+{
+question: "37. Chickenpox is caused by:",
+options: ["Herpes simplex virus","Measles virus","Varicella zoster virus","Rubella virus"],
+answer: 2,
+explanation: "Varicella-zoster virus causes chickenpox."
+},
+
+{
+question: "38. The classical lesion of chickenpox is:",
+options: ["Macule","Papule","Vesicle","Pustule"],
+answer: 2,
+explanation: "Chickenpox lesions progress to vesicles described as 'dew drops on rose petals'."
+},
+
+{
+question: "39. Shingles is caused by reactivation of:",
+options: ["Herpes simplex virus","Varicella zoster virus","Epstein Barr virus","Cytomegalovirus"],
+answer: 1,
+explanation: "Herpes zoster occurs due to reactivation of varicella zoster virus."
+},
+
+{
+question: "40. The causative agent of measles is:",
+options: ["Adenovirus","Paramyxovirus","Orthomyxovirus","Flavivirus"],
+answer: 1,
+explanation: "Measles virus belongs to the Paramyxovirus family."
+},
+
+{
+question: "41. Koplik spots appear in:",
+options: ["Measles","Rubella","Mumps","Chickenpox"],
+answer: 0,
+explanation: "Koplik spots are pathognomonic for measles."
+},
+
+{
+question: "42. The most common complication of measles is:",
+options: ["Otitis media","Encephalitis","Pneumonia","Blindness"],
+answer: 2,
+explanation: "Pneumonia is the most common complication of measles."
+},
+
+{
+question: "43. Rubella infection during pregnancy may cause:",
+options: ["Congenital rubella syndrome","Congenital malaria","Congenital cholera","Congenital typhoid"],
+answer: 0,
+explanation: "Rubella infection causes congenital heart defects, cataracts, and deafness."
+},
+
+{
+question: "44. The most common feature of congenital rubella syndrome is:",
+options: ["Kidney failure","Sensorineural deafness","Severe anemia","Hypertension"],
+answer: 1,
+explanation: "Hearing loss is the most frequent abnormality."
+},
+
+{
+question: "45. The virus responsible for mumps belongs to:",
+options: ["Paramyxovirus","Retrovirus","Orthomyxovirus","Flavivirus"],
+answer: 0,
+explanation: "Mumps virus is a member of the Paramyxoviridae family."
+},
+
+{
+question: "46. The most common complication of mumps in adults is:",
+options: ["Orchitis","Nephritis","Hepatitis","Myocarditis"],
+answer: 0,
+explanation: "Orchitis is a common complication in post-pubertal males."
+},
+
+{
+question: "47. The organism responsible for plague is:",
+options: ["Yersinia pestis","Pasteurella multocida","Francisella tularensis","Brucella melitensis"],
+answer: 0,
+explanation: "Yersinia pestis causes plague."
+},
+
+{
+question: "48. The vector transmitting plague is:",
+options: ["Mosquito","Tick","Rat flea","Sandfly"],
+answer: 2,
+explanation: "Rat fleas transmit Yersinia pestis."
+},
+
+{
+question: "49. The characteristic lymph node swelling in plague is called:",
+options: ["Bubo","Granuloma","Abscess","Papule"],
+answer: 0,
+explanation: "Painful swollen lymph nodes (buboes) are characteristic."
+},
+
+{
+question: "50. Brucellosis is commonly transmitted through:",
+options: ["Contaminated milk","Mosquito bite","Airborne droplets","Blood transfusion"],
+answer: 0,
+explanation: "Brucella infection spreads through unpasteurized dairy products."
+},
+
+{
+question: "51. Which organism causes anthrax?",
+options: ["Clostridium tetani","Bacillus anthracis","Yersinia pestis","Brucella melitensis"],
+answer: 1,
+explanation: "Anthrax is caused by Bacillus anthracis, a gram-positive spore-forming bacillus."
+},
+
+{
+question: "52. The cutaneous form of anthrax produces:",
+options: ["Ulcer with pus","Red rash","Vesicular eruption","Black eschar"],
+answer: 3,
+explanation: "Cutaneous anthrax produces a painless ulcer with a characteristic black eschar."
+},
+
+{
+question: "53. Scrub typhus is caused by:",
+options: ["Rickettsia prowazekii","Coxiella burnetii","Orientia tsutsugamushi","Borrelia recurrentis"],
+answer: 2,
+explanation: "Scrub typhus is caused by Orientia tsutsugamushi."
+},
+
+{
+question: "54. The vector transmitting scrub typhus is:",
+options: ["Chigger mite","Tick","Mosquito","Flea"],
+answer: 0,
+explanation: "Scrub typhus is transmitted by larval mites (chiggers)."
+},
+
+{
+question: "55. The typical lesion seen in scrub typhus is:",
+options: ["Maculopapular rash","Eschar","Papule","Pustule"],
+answer: 1,
+explanation: "An eschar at the bite site is characteristic of scrub typhus."
+},
+
+{
+question: "56. Q fever is caused by:",
+options: ["Rickettsia rickettsii","Chlamydia psittaci","Brucella abortus","Coxiella burnetii"],
+answer: 3,
+explanation: "Q fever is caused by Coxiella burnetii."
+},
+
+{
+question: "57. The causative organism of syphilis is:",
+options: ["Treponema pallidum","Borrelia burgdorferi","Leptospira interrogans","Campylobacter jejuni"],
+answer: 0,
+explanation: "Syphilis is caused by Treponema pallidum."
+},
+
+{
+question: "58. The primary lesion of syphilis is:",
+options: ["Papule","Ulcer","Chancre","Vesicle"],
+answer: 2,
+explanation: "Primary syphilis presents with a painless chancre."
+},
+
+{
+question: "59. The screening test for syphilis is:",
+options: ["ELISA","VDRL","PCR","Gram stain"],
+answer: 1,
+explanation: "VDRL and RPR are commonly used screening tests."
+},
+
+{
+question: "60. The confirmatory test for syphilis is:",
+options: ["FTA-ABS test","Mantoux test","Widal test","Weil Felix test"],
+answer: 0,
+explanation: "Fluorescent treponemal antibody test confirms syphilis."
+},
+
+{
+question: "61. Lyme disease is caused by:",
+options: ["Treponema pallidum","Leptospira interrogans","Rickettsia rickettsii","Borrelia burgdorferi"],
+answer: 3,
+explanation: "Borrelia burgdorferi causes Lyme disease."
+},
+
+{
+question: "62. The vector for Lyme disease is:",
+options: ["Mosquito","Flea","Tick","Sandfly"],
+answer: 2,
+explanation: "Ixodes tick transmits Lyme disease."
+},
+
+{
+question: "63. The characteristic rash in Lyme disease is:",
+options: ["Maculopapular rash","Erythema migrans","Vesicular rash","Petechial rash"],
+answer: 1,
+explanation: "Erythema migrans is the typical expanding rash."
+},
+
+{
+question: "64. The causative organism of gonorrhea is:",
+options: ["Neisseria gonorrhoeae","Neisseria meningitidis","Chlamydia trachomatis","Treponema pallidum"],
+answer: 0,
+explanation: "Neisseria gonorrhoeae causes gonorrhea."
+},
+
+{
+question: "65. The typical morphology of Neisseria gonorrhoeae is:",
+options: ["Gram positive cocci","Gram positive bacilli","Gram negative rods","Gram negative diplococci"],
+answer: 3,
+explanation: "Gonococcus is a gram-negative diplococcus."
+},
+
+{
+question: "66. The organism causing trachoma is:",
+options: ["Chlamydia pneumoniae","Chlamydia psittaci","Chlamydia trachomatis","Mycoplasma pneumoniae"],
+answer: 2,
+explanation: "Chlamydia trachomatis causes trachoma."
+},
+
+{
+question: "67. The most common cause of bacterial meningitis in adults is:",
+options: ["Streptococcus pneumoniae","Neisseria gonorrhoeae","E. coli","Listeria monocytogenes"],
+answer: 0,
+explanation: "Streptococcus pneumoniae is the leading cause in adults."
+},
+
+{
+question: "68. Meningococcal meningitis is caused by:",
+options: ["Staphylococcus aureus","Neisseria meningitidis","Haemophilus influenzae","Streptococcus pyogenes"],
+answer: 1,
+explanation: "Neisseria meningitidis causes meningococcal meningitis."
+},
+
+{
+question: "69. The rash seen in meningococcal infection is:",
+options: ["Macular rash","Vesicular rash","Papular rash","Petechial rash"],
+answer: 3,
+explanation: "Petechial rash is typical in meningococcemia."
+},
+
+{
+question: "70. Haemophilus influenzae mainly causes:",
+options: ["Meningitis in children","Tuberculosis","Typhoid","Malaria"],
+answer: 0,
+explanation: "H. influenzae type b historically caused pediatric meningitis."
+},
+
+{
+question: "71. The most common cause of community acquired pneumonia is:",
+options: ["Streptococcus pneumoniae","Klebsiella pneumoniae","Mycoplasma pneumoniae","Legionella pneumophila"],
+answer: 0,
+explanation: "Pneumococcus is the leading cause."
+},
+
+{
+question: "72. Legionnaires disease is caused by:",
+options: ["Mycoplasma pneumoniae","Chlamydia pneumoniae","Klebsiella pneumoniae","Legionella pneumophila"],
+answer: 3,
+explanation: "Legionella pneumophila causes Legionnaires disease."
+},
+
+{
+question: "73. Atypical pneumonia is commonly caused by:",
+options: ["Streptococcus pneumoniae","Mycoplasma pneumoniae","Staphylococcus aureus","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Mycoplasma pneumoniae causes atypical pneumonia."
+},
+
+{
+question: "74. The cold agglutinin test is associated with:",
+options: ["Legionella infection","Influenza infection","Mycoplasma pneumoniae","Tuberculosis"],
+answer: 2,
+explanation: "Cold agglutinins may be present in Mycoplasma infection."
+},
+
+{
+question: "75. The most common fungal infection in AIDS is:",
+options: ["Histoplasmosis","Aspergillosis","Candidiasis","Cryptococcosis"],
+answer: 2,
+explanation: "Oral and esophageal candidiasis are common opportunistic infections."
+},
+
+{
+question: "76. Cryptococcal meningitis is most commonly caused by:",
+options: ["Candida albicans","Aspergillus fumigatus","Cryptococcus neoformans","Histoplasma capsulatum"],
+answer: 2,
+explanation: "Cryptococcus neoformans commonly causes meningitis in immunocompromised patients, especially AIDS."
+},
+
+{
+question: "77. Histoplasmosis is caused by:",
+options: ["Histoplasma capsulatum","Blastomyces dermatitidis","Candida albicans","Aspergillus fumigatus"],
+answer: 0,
+explanation: "Histoplasma capsulatum is a dimorphic fungus found in soil contaminated with bird droppings."
+},
+
+{
+question: "78. Aspergillosis is caused by:",
+options: ["Candida albicans","Histoplasma capsulatum","Cryptococcus neoformans","Aspergillus fumigatus"],
+answer: 3,
+explanation: "Aspergillus fumigatus causes invasive aspergillosis especially in immunocompromised patients."
+},
+
+{
+question: "79. Oral thrush is commonly caused by:",
+options: ["Aspergillus","Candida albicans","Histoplasma","Cryptococcus"],
+answer: 1,
+explanation: "Candida albicans causes oral thrush and other mucocutaneous infections."
+},
+
+{
+question: "80. Dermatophyte infections are commonly known as:",
+options: ["Candidiasis","Mycosis fungoides","Ringworm","Blastomycosis"],
+answer: 2,
+explanation: "Dermatophyte infections of skin are commonly called ringworm (tinea infections)."
+},
+
+{
+question: "81. The organism responsible for scabies is:",
+options: ["Sarcoptes scabiei","Demodex folliculorum","Pediculus humanus","Ixodes tick"],
+answer: 0,
+explanation: "Scabies is caused by Sarcoptes scabiei mite."
+},
+
+{
+question: "82. The vector responsible for filariasis is:",
+options: ["Sandfly","Tick","Flea","Mosquito"],
+answer: 3,
+explanation: "Mosquitoes transmit filarial parasites such as Wuchereria bancrofti."
+},
+
+{
+question: "83. Elephantiasis occurs due to infection with:",
+options: ["Onchocerca volvulus","Wuchereria bancrofti","Loa loa","Dracunculus medinensis"],
+answer: 1,
+explanation: "Lymphatic filariasis caused by Wuchereria bancrofti leads to elephantiasis."
+},
+
+{
+question: "84. River blindness is caused by:",
+options: ["Loa loa","Dracunculus medinensis","Onchocerca volvulus","Trichinella spiralis"],
+answer: 2,
+explanation: "Onchocerca volvulus causes river blindness."
+},
+
+{
+question: "85. The causative organism of toxoplasmosis is:",
+options: ["Toxoplasma gondii","Leishmania donovani","Trypanosoma cruzi","Plasmodium falciparum"],
+answer: 0,
+explanation: "Toxoplasma gondii causes toxoplasmosis."
+},
+
+{
+question: "86. Congenital toxoplasmosis can lead to:",
+options: ["Renal failure","Pneumonia","Hepatitis","Hydrocephalus"],
+answer: 3,
+explanation: "Congenital toxoplasmosis causes hydrocephalus, chorioretinitis and intracranial calcifications."
+},
+
+{
+question: "87. The organism causing hydatid disease is:",
+options: ["Taenia saginata","Echinococcus granulosus","Taenia solium","Hymenolepis nana"],
+answer: 1,
+explanation: "Hydatid cyst disease is caused by Echinococcus granulosus."
+},
+
+{
+question: "88. Humans acquire hydatid disease from:",
+options: ["Cats","Dogs","Cattle","Mosquitoes"],
+answer: 1,
+explanation: "Dogs are the definitive host of Echinococcus granulosus."
+},
+
+{
+question: "89. The pork tapeworm is:",
+options: ["Taenia solium","Taenia saginata","Diphyllobothrium latum","Echinococcus granulosus"],
+answer: 0,
+explanation: "Taenia solium is the pork tapeworm."
+},
+
+{
+question: "90. Neurocysticercosis is caused by:",
+options: ["Taenia saginata","Hymenolepis nana","Diphyllobothrium latum","Taenia solium"],
+answer: 3,
+explanation: "Larval stage of Taenia solium causes neurocysticercosis."
+},
+
+{
+question: "91. The beef tapeworm is:",
+options: ["Taenia solium","Taenia saginata","Echinococcus granulosus","Hymenolepis nana"],
+answer: 1,
+explanation: "Taenia saginata is the beef tapeworm."
+},
+
+{
+question: "92. Ascariasis is caused by:",
+options: ["Ancylostoma duodenale","Enterobius vermicularis","Ascaris lumbricoides","Trichuris trichiura"],
+answer: 2,
+explanation: "Ascaris lumbricoides is a large intestinal roundworm."
+},
+
+{
+question: "93. The organism causing hookworm infection is:",
+options: ["Ancylostoma duodenale","Ascaris lumbricoides","Enterobius vermicularis","Trichuris trichiura"],
+answer: 0,
+explanation: "Hookworm infection is commonly caused by Ancylostoma duodenale."
+},
+
+{
+question: "94. Pinworm infection is caused by:",
+options: ["Ascaris lumbricoides","Ancylostoma duodenale","Trichuris trichiura","Enterobius vermicularis"],
+answer: 3,
+explanation: "Enterobius vermicularis causes pinworm infection."
+},
+
+{
+question: "95. The most common symptom of pinworm infection is:",
+options: ["Abdominal pain","Perianal itching","Fever","Diarrhea"],
+answer: 1,
+explanation: "Perianal itching especially at night is characteristic."
+},
+
+{
+question: "96. Whipworm infection is caused by:",
+options: ["Enterobius vermicularis","Ancylostoma duodenale","Trichuris trichiura","Ascaris lumbricoides"],
+answer: 2,
+explanation: "Trichuris trichiura causes whipworm infection."
+},
+
+{
+question: "97. The parasite causing dracunculiasis is:",
+options: ["Dracunculus medinensis","Wuchereria bancrofti","Loa loa","Onchocerca volvulus"],
+answer: 0,
+explanation: "Dracunculus medinensis is the Guinea worm."
+},
+
+{
+question: "98. The intermediate host of Dracunculus medinensis is:",
+options: ["Mosquito","Tick","Sandfly","Cyclops"],
+answer: 3,
+explanation: "Cyclops (water flea) acts as the intermediate host."
+},
+
+{
+question: "99. Strongyloidiasis is caused by:",
+options: ["Ancylostoma duodenale","Strongyloides stercoralis","Ascaris lumbricoides","Enterobius vermicularis"],
+answer: 1,
+explanation: "Strongyloides stercoralis causes strongyloidiasis."
+},
+
+{
+question: "100. The drug of choice for most intestinal helminth infections is:",
+options: ["Metronidazole","Albendazole","Penicillin","Rifampicin"],
+answer: 1,
+explanation: "Albendazole is widely used for treatment of many helminth infections."
+}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 6000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Infectious – Top 50 Final-1 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{
+question: "1. The most common cause of bacterial pneumonia worldwide is:",
+options: ["Mycoplasma pneumoniae","Klebsiella pneumoniae","Streptococcus pneumoniae","Legionella pneumophila"],
+answer: 2,
+explanation: "Streptococcus pneumoniae is the most common cause of community-acquired pneumonia."
+},
+
+{
+question: "2. Tuberculosis primarily spreads through:",
+options: ["Airborne droplets","Contaminated water","Mosquito bite","Food poisoning"],
+answer: 0,
+explanation: "TB spreads through airborne droplet nuclei from infected individuals."
+},
+
+{
+question: "3. The most dangerous complication of falciparum malaria is:",
+options: ["Severe anemia","Renal stones","Diarrhea","Cerebral malaria"],
+answer: 3,
+explanation: "Plasmodium falciparum can cause cerebral malaria leading to coma."
+},
+
+{
+question: "4. The diagnostic test commonly used for latent TB infection is:",
+options: ["Widal test","Mantoux test","VDRL","Paul Bunnell test"],
+answer: 1,
+explanation: "Mantoux test detects delayed hypersensitivity to tuberculin."
+},
+
+{
+question: "5. Dengue virus belongs to which family?",
+options: ["Paramyxoviridae","Retroviridae","Flaviviridae","Orthomyxoviridae"],
+answer: 2,
+explanation: "Dengue virus belongs to the Flavivirus genus of Flaviviridae family."
+},
+
+{
+question: "6. The drug of choice for amoebiasis is:",
+options: ["Metronidazole","Rifampicin","Penicillin","Albendazole"],
+answer: 0,
+explanation: "Metronidazole is highly effective against Entamoeba histolytica."
+},
+
+{
+question: "7. The vector of Japanese encephalitis is:",
+options: ["Aedes mosquito","Culex mosquito","Anopheles mosquito","Sandfly"],
+answer: 1,
+explanation: "Japanese encephalitis virus is transmitted by Culex mosquitoes."
+},
+
+{
+question: "8. The classical sign of tetanus is:",
+options: ["Flaccid paralysis","Severe diarrhea","High fever","Lockjaw"],
+answer: 3,
+explanation: "Trismus (lockjaw) occurs due to tetanospasmin toxin."
+},
+
+{
+question: "9. The organism causing cholera is:",
+options: ["Vibrio cholerae","Shigella dysenteriae","Salmonella typhi","E. coli"],
+answer: 0,
+explanation: "Vibrio cholerae produces enterotoxin causing profuse watery diarrhea."
+},
+
+{
+question: "10. Rose spots are typically seen in:",
+options: ["Malaria","Dengue","Typhoid fever","Influenza"],
+answer: 2,
+explanation: "Rose spots are faint pink macules on abdomen in typhoid fever."
+},
+
+{
+question: "11. Pertussis is caused by:",
+options: ["Mycoplasma pneumoniae","Bordetella pertussis","Streptococcus pneumoniae","Haemophilus influenzae"],
+answer: 1,
+explanation: "Bordetella pertussis causes whooping cough."
+},
+
+{
+question: "12. The most severe complication of measles is:",
+options: ["Otitis media","Diarrhea","Arthritis","Encephalitis"],
+answer: 3,
+explanation: "Measles encephalitis can be fatal."
+},
+
+{
+question: "13. Infectious mononucleosis is caused by:",
+options: ["Epstein Barr virus","Cytomegalovirus","Herpes simplex virus","Adenovirus"],
+answer: 0,
+explanation: "EBV infects B lymphocytes causing mononucleosis."
+},
+
+{
+question: "14. The classical lesion in chickenpox is:",
+options: ["Macule","Papule","Vesicle","Nodule"],
+answer: 2,
+explanation: "Chickenpox lesions are described as 'dew drops on a rose petal'."
+},
+
+{
+question: "15. Rabies virus mainly affects:",
+options: ["Liver","Kidney","Skin","Central nervous system"],
+answer: 3,
+explanation: "Rabies virus causes fatal encephalitis."
+},
+
+{
+question: "16. The vector responsible for kala-azar transmission is:",
+options: ["Mosquito","Sandfly","Tick","Flea"],
+answer: 1,
+explanation: "Leishmania donovani is transmitted by sandflies."
+},
+
+{
+question: "17. HIV primarily infects:",
+options: ["CD4 T lymphocytes","B cells","Neutrophils","Macrophages"],
+answer: 0,
+explanation: "HIV targets CD4+ T cells leading to immunodeficiency."
+},
+
+{
+question: "18. The classical triad of congenital rubella includes:",
+options: ["Blindness anemia nephritis","Deafness cataract heart disease","Jaundice anemia splenomegaly","Renal failure hypertension diabetes"],
+answer: 1,
+explanation: "Congenital rubella causes deafness, cataracts and congenital heart disease."
+},
+
+{
+question: "19. Weil disease is severe form of:",
+options: ["Malaria","Leptospirosis","Typhoid","Cholera"],
+answer: 1,
+explanation: "Weil disease includes jaundice renal failure and hemorrhage."
+},
+
+{
+question: "20. Anchovy sauce pus is seen in:",
+options: ["Tubercular abscess","Bacterial abscess","Hydatid cyst","Amoebic liver abscess"],
+answer: 3,
+explanation: "Amoebic abscess contains brown anchovy sauce pus."
+},
+
+{
+question: "21. The most common opportunistic infection in AIDS patients is:",
+options: ["Malaria","Typhoid","Tuberculosis","Cholera"],
+answer: 2,
+explanation: "TB is the most frequent opportunistic infection in HIV."
+},
+
+{
+question: "22. The most common cause of atypical pneumonia is:",
+options: ["Mycoplasma pneumoniae","Streptococcus pneumoniae","Klebsiella pneumoniae","Legionella pneumophila"],
+answer: 0,
+explanation: "Mycoplasma pneumoniae causes walking pneumonia."
+},
+
+{
+question: "23. The characteristic rash of Lyme disease is:",
+options: ["Papular rash","Vesicular rash","Petechial rash","Erythema migrans"],
+answer: 3,
+explanation: "Lyme disease presents with expanding erythema migrans rash."
+},
+
+{
+question: "24. The vector transmitting Lyme disease is:",
+options: ["Mosquito","Tick","Flea","Sandfly"],
+answer: 1,
+explanation: "Ixodes tick transmits Borrelia burgdorferi."
+},
+
+{
+question: "25. The most common fungal infection in AIDS is:",
+options: ["Histoplasmosis","Aspergillosis","Candidiasis","Cryptococcosis"],
+answer: 2,
+explanation: "Oral and esophageal candidiasis are common in AIDS."
+},
+
+{
+question: "26. The causative organism of plague is:",
+options: ["Yersinia pestis","Francisella tularensis","Bacillus anthracis","Brucella melitensis"],
+answer: 0,
+explanation: "Plague is caused by Yersinia pestis and transmitted via rat fleas."
+},
+
+{
+question: "27. Koplik spots are characteristic of:",
+options: ["Rubella","Measles","Varicella","Scarlet fever"],
+answer: 1,
+explanation: "Koplik spots are bluish-white lesions on buccal mucosa seen in measles."
+},
+
+{
+question: "28. The most common cause of bacterial meningitis in adults is:",
+options: ["Neisseria meningitidis","Haemophilus influenzae","Streptococcus pneumoniae","Listeria monocytogenes"],
+answer: 2,
+explanation: "Streptococcus pneumoniae is the leading cause of bacterial meningitis in adults."
+},
+
+{
+question: "29. The vector transmitting dengue fever is:",
+options: ["Anopheles mosquito","Culex mosquito","Aedes aegypti","Sandfly"],
+answer: 2,
+explanation: "Dengue virus is transmitted by Aedes aegypti mosquito."
+},
+
+{
+question: "30. The most common cause of infective endocarditis in IV drug users is:",
+options: ["Staphylococcus aureus","Streptococcus viridans","Enterococcus faecalis","Pseudomonas aeruginosa"],
+answer: 0,
+explanation: "Staphylococcus aureus frequently causes right-sided endocarditis in IV drug users."
+},
+
+{
+question: "31. The confirmatory test for HIV infection is:",
+options: ["ELISA","Western blot","PCR","Rapid antibody test"],
+answer: 1,
+explanation: "Western blot has traditionally been used as confirmatory test for HIV."
+},
+
+{
+question: "32. The most common site of extrapulmonary tuberculosis is:",
+options: ["Kidney","Lymph nodes","Brain","Bone"],
+answer: 1,
+explanation: "Tuberculous lymphadenitis is the most common extrapulmonary TB manifestation."
+},
+
+{
+question: "33. The organism causing gas gangrene is:",
+options: ["Clostridium tetani","Clostridium perfringens","Clostridium difficile","Clostridium botulinum"],
+answer: 1,
+explanation: "Clostridium perfringens produces toxins causing gas gangrene."
+},
+
+{
+question: "34. The most common cause of viral hepatitis worldwide is:",
+options: ["Hepatitis B","Hepatitis A","Hepatitis C","Hepatitis E"],
+answer: 1,
+explanation: "Hepatitis A is the most common cause of acute viral hepatitis globally."
+},
+
+{
+question: "35. The vector responsible for chikungunya transmission is:",
+options: ["Culex mosquito","Sandfly","Aedes mosquito","Anopheles mosquito"],
+answer: 2,
+explanation: "Chikungunya virus is transmitted by Aedes aegypti mosquito."
+},
+
+{
+question: "36. The toxin responsible for diphtheria complications is:",
+options: ["Neurotoxin","Enterotoxin","Exotoxin","Endotoxin"],
+answer: 2,
+explanation: "Corynebacterium diphtheriae produces a powerful exotoxin."
+},
+
+{
+question: "37. The most common cause of traveler’s diarrhea is:",
+options: ["Shigella","Salmonella","Enterotoxigenic E. coli","Campylobacter"],
+answer: 2,
+explanation: "ETEC is the most frequent cause of traveler’s diarrhea."
+},
+
+{
+question: "38. The most common complication of mumps in adults is:",
+options: ["Orchitis","Pancreatitis","Meningitis","Hepatitis"],
+answer: 0,
+explanation: "Mumps orchitis is a well-known complication in post-pubertal males."
+},
+
+{
+question: "39. The disease caused by Treponema pallidum is:",
+options: ["Gonorrhea","Syphilis","Chlamydia","Leptospirosis"],
+answer: 1,
+explanation: "Treponema pallidum is the causative agent of syphilis."
+},
+
+{
+question: "40. The causative organism of whooping cough is:",
+options: ["Bordetella pertussis","Haemophilus influenzae","Mycoplasma pneumoniae","Streptococcus pyogenes"],
+answer: 0,
+explanation: "Bordetella pertussis causes pertussis or whooping cough."
+},
+
+{
+question: "41. The classical triad of Weil disease includes:",
+options: ["Jaundice renal failure hemorrhage","Fever rash arthritis","Anemia splenomegaly jaundice","Headache vomiting coma"],
+answer: 0,
+explanation: "Weil disease is severe leptospirosis causing jaundice, renal failure and bleeding."
+},
+
+{
+question: "42. The most common cause of infective diarrhea in children worldwide is:",
+options: ["Rotavirus","Norovirus","Adenovirus","Astrovirus"],
+answer: 0,
+explanation: "Rotavirus is the most common cause of severe diarrhea in young children."
+},
+
+{
+question: "43. The causative agent of scrub typhus is:",
+options: ["Rickettsia prowazekii","Orientia tsutsugamushi","Coxiella burnetii","Borrelia recurrentis"],
+answer: 1,
+explanation: "Scrub typhus is caused by Orientia tsutsugamushi."
+},
+
+{
+question: "44. The diagnostic test for typhoid fever commonly used is:",
+options: ["Mantoux test","Widal test","VDRL","ELISA"],
+answer: 1,
+explanation: "Widal test detects antibodies against Salmonella typhi."
+},
+
+{
+question: "45. The organism causing bacillary dysentery is:",
+options: ["Salmonella typhi","Vibrio cholerae","Shigella dysenteriae","Entamoeba histolytica"],
+answer: 2,
+explanation: "Shigella dysenteriae causes bacillary dysentery."
+},
+
+{
+question: "46. The most common fungal infection in immunocompromised patients is:",
+options: ["Cryptococcus","Candida","Histoplasma","Blastomyces"],
+answer: 1,
+explanation: "Candida species are the most frequent fungal infections in immunocompromised patients."
+},
+
+{
+question: "47. The main reservoir of rabies virus is:",
+options: ["Dogs","Cats","Rodents","Bats"],
+answer: 0,
+explanation: "Dogs are the most common reservoir and source of rabies transmission globally."
+},
+
+{
+question: "48. The disease caused by Clostridium botulinum is:",
+options: ["Tetanus","Botulism","Gas gangrene","Pseudomembranous colitis"],
+answer: 1,
+explanation: "Botulinum toxin causes descending flaccid paralysis."
+},
+
+{
+question: "49. The vector transmitting malaria is:",
+options: ["Culex mosquito","Aedes mosquito","Anopheles mosquito","Sandfly"],
+answer: 2,
+explanation: "Female Anopheles mosquito transmits Plasmodium parasites."
+},
+
+{
+question: "50. The most common cause of hospital-acquired pneumonia is:",
+options: ["Staphylococcus aureus","Pseudomonas aeruginosa","Klebsiella pneumoniae","Streptococcus pneumoniae"],
+answer: 1,
+explanation: "Pseudomonas aeruginosa is a common cause of nosocomial pneumonia."
+}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

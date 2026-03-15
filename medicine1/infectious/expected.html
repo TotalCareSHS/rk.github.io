@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Infectious – Expected MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{
+question: "1. The causative virus of chickenpox is:",
+options: ["Varicella-zoster virus", "Herpes simplex virus", "Epstein-Barr virus", "Cytomegalovirus"],
+answer: 0,
+explanation: "Chickenpox is caused by Varicella-zoster virus (VZV), a herpesvirus."
+},
+
+{
+question: "2. Koplik spots are characteristic of:",
+options: ["Rubella", "Measles", "Chickenpox", "Mumps"],
+answer: 1,
+explanation: "Koplik spots on buccal mucosa are pathognomonic for measles."
+},
+
+{
+question: "3. The most common complication of mumps in adults is:",
+options: ["Orchitis", "Myocarditis", "Hepatitis", "Encephalitis"],
+answer: 0,
+explanation: "Orchitis is a common complication of mumps in post-pubertal males."
+},
+
+{
+question: "4. The virus responsible for German measles is:",
+options: ["Paramyxovirus", "Rubella virus", "Orthomyxovirus", "Flavivirus"],
+answer: 1,
+explanation: "Rubella is caused by Rubella virus from the Togaviridae family."
+},
+
+{
+question: "5. Avian influenza is primarily caused by which subtype?",
+options: ["H1N1", "H5N1", "H3N2", "H2N2"],
+answer: 1,
+explanation: "Highly pathogenic avian influenza is mainly associated with H5N1."
+},
+
+{
+question: "6. The vector responsible for transmission of dengue fever is:",
+options: ["Anopheles mosquito", "Aedes aegypti", "Culex mosquito", "Sandfly"],
+answer: 1,
+explanation: "Dengue virus is transmitted by Aedes aegypti mosquito."
+},
+
+{
+question: "7. The most severe form of malaria is caused by:",
+options: ["Plasmodium vivax", "Plasmodium falciparum", "Plasmodium malariae", "Plasmodium ovale"],
+answer: 1,
+explanation: "Plasmodium falciparum causes cerebral malaria and severe disease."
+},
+
+{
+question: "8. The drug of choice for uncomplicated falciparum malaria is:",
+options: ["Artemisinin combination therapy", "Chloroquine", "Primaquine", "Quinine"],
+answer: 0,
+explanation: "ACT is recommended treatment for uncomplicated falciparum malaria."
+},
+
+{
+question: "9. Rose spots are seen in:",
+options: ["Dengue", "Typhoid fever", "Malaria", "Leptospirosis"],
+answer: 1,
+explanation: "Rose spots on abdomen are a classic feature of typhoid fever."
+},
+
+{
+question: "10. The causative organism of typhoid fever is:",
+options: ["Salmonella typhi", "Shigella dysenteriae", "E. coli", "Vibrio cholerae"],
+answer: 0,
+explanation: "Typhoid fever is caused by Salmonella typhi."
+},
+
+{
+question: "11. Kala-azar is caused by:",
+options: ["Leishmania donovani", "Trypanosoma cruzi", "Entamoeba histolytica", "Giardia lamblia"],
+answer: 0,
+explanation: "Kala-azar (visceral leishmaniasis) is caused by Leishmania donovani."
+},
+
+{
+question: "12. The vector of kala-azar is:",
+options: ["Tsetse fly", "Sandfly", "Mosquito", "Housefly"],
+answer: 1,
+explanation: "Leishmaniasis is transmitted by female sandfly."
+},
+
+{
+question: "13. The most common cause of infective mononucleosis is:",
+options: ["Cytomegalovirus", "Epstein-Barr virus", "Adenovirus", "Herpes simplex virus"],
+answer: 1,
+explanation: "EBV infects B lymphocytes and causes infectious mononucleosis."
+},
+
+{
+question: "14. Paul–Bunnell test is used to diagnose:",
+options: ["Dengue", "Infectious mononucleosis", "Typhoid", "Malaria"],
+answer: 1,
+explanation: "Paul-Bunnell heterophile antibody test detects EBV infection."
+},
+
+{
+question: "15. The most common opportunistic infection in HIV patients is:",
+options: ["Tuberculosis", "Malaria", "Typhoid", "Dengue"],
+answer: 0,
+explanation: "Tuberculosis is the most common opportunistic infection in HIV."
+},
+
+{
+question: "16. AIDS is diagnosed when CD4 count falls below:",
+options: ["500 cells/mm³", "350 cells/mm³", "200 cells/mm³", "100 cells/mm³"],
+answer: 2,
+explanation: "A CD4 count below 200 cells/mm³ defines AIDS."
+},
+
+{
+question: "17. Septic shock is characterized by:",
+options: ["Persistent hypotension despite fluids", "High blood sugar", "Bradycardia", "Hypothermia only"],
+answer: 0,
+explanation: "Septic shock includes hypotension not responding to fluid resuscitation."
+},
+
+{
+question: "18. The causative organism of leptospirosis is:",
+options: ["Leptospira interrogans", "Borrelia burgdorferi", "Treponema pallidum", "Brucella melitensis"],
+answer: 0,
+explanation: "Leptospirosis is caused by the spirochete Leptospira interrogans."
+},
+
+{
+question: "19. Weil's disease refers to severe:",
+options: ["Malaria", "Leptospirosis", "Typhoid", "Dengue"],
+answer: 1,
+explanation: "Severe leptospirosis with jaundice and renal failure is called Weil's disease."
+},
+
+{
+question: "20. The causative organism of amoebiasis is:",
+options: ["Giardia lamblia", "Entamoeba histolytica", "Trichomonas vaginalis", "Balantidium coli"],
+answer: 1,
+explanation: "Entamoeba histolytica causes amoebic dysentery."
+},
+
+{
+question: "21. The drug of choice for amoebiasis is:",
+options: ["Metronidazole", "Albendazole", "Chloroquine", "Ivermectin"],
+answer: 0,
+explanation: "Metronidazole is the first-line drug for amoebiasis."
+},
+
+{
+question: "22. The causative organism of diphtheria is:",
+options: ["Corynebacterium diphtheriae", "Clostridium tetani", "Bordetella pertussis", "Streptococcus pyogenes"],
+answer: 0,
+explanation: "Diphtheria is caused by Corynebacterium diphtheriae."
+},
+
+{
+question: "23. The pseudomembrane in diphtheria forms in the:",
+options: ["Pharynx", "Liver", "Lung", "Intestine"],
+answer: 0,
+explanation: "Grayish pseudomembrane forms in throat/pharynx."
+},
+
+{
+question: "24. Whooping cough is caused by:",
+options: ["Bordetella pertussis", "Streptococcus pneumoniae", "Haemophilus influenzae", "Mycoplasma pneumoniae"],
+answer: 0,
+explanation: "Pertussis is caused by Bordetella pertussis."
+},
+
+{
+question: "25. The characteristic cough in pertussis is called:",
+options: ["Barking cough", "Whooping cough", "Dry cough", "Productive cough"],
+answer: 1,
+explanation: "Inspiratory 'whoop' after cough is characteristic."
+},
+
+{
+question: "26. The vector of chikungunya virus is:",
+options: ["Aedes mosquito", "Anopheles mosquito", "Sandfly", "Tsetse fly"],
+answer: 0,
+explanation: "Chikungunya virus spreads through Aedes mosquito."
+},
+
+{
+question: "27. Severe joint pain is characteristic of:",
+options: ["Dengue", "Chikungunya", "Malaria", "Typhoid"],
+answer: 1,
+explanation: "Chikungunya causes severe arthralgia."
+},
+
+{
+question: "28. Pyrexia of unknown origin (PUO) is defined as fever lasting more than:",
+options: ["1 week", "2 weeks", "3 weeks", "5 days"],
+answer: 2,
+explanation: "PUO is fever >3 weeks without diagnosis."
+},
+
+{
+question: "29. The most common cause of PUO in developing countries is:",
+options: ["Tuberculosis", "Malaria", "Typhoid", "HIV"],
+answer: 0,
+explanation: "Tuberculosis is a major cause of PUO."
+},
+
+{
+question: "30. The Widal test is used for diagnosis of:",
+options: ["Malaria", "Typhoid fever", "Dengue", "Leptospirosis"],
+answer: 1,
+explanation: "Widal test detects antibodies against Salmonella typhi antigens."
+}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

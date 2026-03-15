@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 100:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Infectious – Revision 100 MCQs</h2>
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{
+question: "1. The most common cause of community-acquired pneumonia worldwide is:",
+options: ["Mycoplasma pneumoniae","Streptococcus pneumoniae","Klebsiella pneumoniae","Legionella pneumophila"],
+answer: 1,
+explanation: "Streptococcus pneumoniae remains the most common cause of community-acquired pneumonia."
+},
+
+{
+question: "2. Which virus is responsible for subacute sclerosing panencephalitis?",
+options: ["Rubella virus","JC virus","Varicella zoster virus","Measles virus"],
+answer: 3,
+explanation: "SSPE is a late complication of persistent measles virus infection."
+},
+
+{
+question: "3. The gold standard test for diagnosing malaria is:",
+options: ["Peripheral blood smear microscopy","Rapid antigen test","Serology","PCR"],
+answer: 0,
+explanation: "Microscopic examination of thick and thin blood smear remains the gold standard."
+},
+
+{
+question: "4. 'Rice water stools' are characteristic of infection by:",
+options: ["Shigella dysenteriae","Salmonella typhi","Vibrio cholerae","Campylobacter jejuni"],
+answer: 2,
+explanation: "Vibrio cholerae causes profuse watery diarrhea described as rice-water stool."
+},
+
+{
+question: "5. The most common cause of bacterial meningitis in adults is:",
+options: ["Neisseria meningitidis","Streptococcus pneumoniae","Listeria monocytogenes","Haemophilus influenzae"],
+answer: 1,
+explanation: "Pneumococcus is the most frequent cause of meningitis in adults."
+},
+
+{
+question: "6. Which organism causes pseudomembranous colitis after antibiotic therapy?",
+options: ["Salmonella typhi","Shigella dysenteriae","Escherichia coli","Clostridioides difficile"],
+answer: 3,
+explanation: "Clostridioides difficile produces toxins leading to pseudomembranous colitis."
+},
+
+{
+question: "7. The vector responsible for transmission of malaria is:",
+options: ["Female Anopheles mosquito","Aedes mosquito","Culex mosquito","Sandfly"],
+answer: 0,
+explanation: "Plasmodium parasites are transmitted by female Anopheles mosquitoes."
+},
+
+{
+question: "8. The classical 'bull's eye rash' is seen in:",
+options: ["Leptospirosis","Typhoid fever","Lyme disease","Malaria"],
+answer: 2,
+explanation: "Erythema migrans is the classic rash of Lyme disease."
+},
+
+{
+question: "9. The causative organism of gas gangrene is:",
+options: ["Clostridium tetani","Clostridium difficile","Bacillus anthracis","Clostridium perfringens"],
+answer: 3,
+explanation: "Clostridium perfringens produces alpha toxin causing gas gangrene."
+},
+
+{
+question: "10. Koplik spots are seen in:",
+options: ["Rubella","Measles","Chickenpox","Scarlet fever"],
+answer: 1,
+explanation: "Koplik spots are pathognomonic for measles infection."
+},
+
+{
+question: "11. The most common opportunistic CNS infection in AIDS is:",
+options: ["Cryptococcus neoformans","Cytomegalovirus","Toxoplasma gondii","JC virus"],
+answer: 2,
+explanation: "Toxoplasma gondii causes multiple ring-enhancing lesions in AIDS patients."
+},
+
+{
+question: "12. The causative organism of whooping cough is:",
+options: ["Bordetella pertussis","Streptococcus pneumoniae","Mycoplasma pneumoniae","Haemophilus influenzae"],
+answer: 0,
+explanation: "Pertussis is caused by Bordetella pertussis."
+},
+
+{
+question: "13. The classical 'anchovy sauce pus' is seen in:",
+options: ["Tubercular abscess","Hydatid cyst","Pyogenic abscess","Amoebic liver abscess"],
+answer: 3,
+explanation: "Amoebic liver abscess caused by Entamoeba histolytica produces anchovy sauce pus."
+},
+
+{
+question: "14. The most common cause of infective endocarditis in IV drug users is:",
+options: ["Streptococcus viridans","Staphylococcus aureus","Enterococcus faecalis","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Staphylococcus aureus commonly infects the tricuspid valve in IV drug users."
+},
+
+{
+question: "15. The vector transmitting dengue fever is:",
+options: ["Aedes aegypti mosquito","Anopheles mosquito","Culex mosquito","Sandfly"],
+answer: 0,
+explanation: "Dengue virus is transmitted by Aedes aegypti mosquito."
+},
+
+{
+question: "16. The most common fungal infection in AIDS patients is:",
+options: ["Histoplasmosis","Aspergillosis","Candidiasis","Blastomycosis"],
+answer: 2,
+explanation: "Oral and esophageal candidiasis are very common in AIDS."
+},
+
+{
+question: "17. Which organism causes diphtheria?",
+options: ["Streptococcus pyogenes","Clostridium tetani","Staphylococcus aureus","Corynebacterium diphtheriae"],
+answer: 3,
+explanation: "Corynebacterium diphtheriae produces exotoxin causing diphtheria."
+},
+
+{
+question: "18. The most common cause of traveler’s diarrhea is:",
+options: ["Shigella dysenteriae","Enterotoxigenic E. coli","Salmonella typhi","Campylobacter jejuni"],
+answer: 1,
+explanation: "ETEC is the leading cause of traveler’s diarrhea."
+},
+
+{
+question: "19. The disease caused by Treponema pallidum is:",
+options: ["Gonorrhea","Chlamydia","Syphilis","Leptospirosis"],
+answer: 2,
+explanation: "Treponema pallidum is the causative organism of syphilis."
+},
+
+{
+question: "20. The most common cause of acute viral hepatitis worldwide is:",
+options: ["Hepatitis A virus","Hepatitis B virus","Hepatitis C virus","Hepatitis D virus"],
+answer: 0,
+explanation: "Hepatitis A is the most common cause of acute viral hepatitis."
+},
+
+{
+question: "21. The vector transmitting plague is:",
+options: ["Tick","Mosquito","Sandfly","Rat flea"],
+answer: 3,
+explanation: "Yersinia pestis is transmitted by rat fleas."
+},
+
+{
+question: "22. Which organism causes bacillary dysentery?",
+options: ["Salmonella","Shigella","Vibrio cholerae","Entamoeba histolytica"],
+answer: 1,
+explanation: "Shigella dysenteriae causes bacillary dysentery."
+},
+
+{
+question: "23. The diagnostic stain used for Mycobacterium tuberculosis is:",
+options: ["Ziehl-Neelsen stain","Gram stain","Giemsa stain","India ink stain"],
+answer: 0,
+explanation: "Acid-fast bacilli are detected using Ziehl-Neelsen stain."
+},
+
+{
+question: "24. The organism responsible for Lyme disease is:",
+options: ["Treponema pallidum","Leptospira interrogans","Borrelia burgdorferi","Rickettsia rickettsii"],
+answer: 2,
+explanation: "Lyme disease is caused by Borrelia burgdorferi."
+},
+
+{
+question: "25. The most common cause of atypical pneumonia is:",
+options: ["Streptococcus pneumoniae","Legionella pneumophila","Mycoplasma pneumoniae","Klebsiella pneumoniae"],
+answer: 2,
+explanation: "Mycoplasma pneumoniae commonly causes atypical pneumonia."
+},
+
+{
+question: "26. The most common cause of infective diarrhea producing severe dehydration in epidemics is:",
+options: ["Salmonella typhi","Shigella dysenteriae","Vibrio cholerae","Campylobacter jejuni"],
+answer: 2,
+explanation: "Vibrio cholerae causes massive watery diarrhea leading to rapid dehydration."
+},
+
+{
+question: "27. The most common opportunistic infection in AIDS worldwide is:",
+options: ["Tuberculosis","Cryptococcosis","Toxoplasmosis","Histoplasmosis"],
+answer: 0,
+explanation: "Tuberculosis is the most common opportunistic infection in HIV patients globally."
+},
+
+{
+question: "28. The virus responsible for infectious mononucleosis is:",
+options: ["Cytomegalovirus","Adenovirus","Herpes simplex virus","Epstein-Barr virus"],
+answer: 3,
+explanation: "Epstein-Barr virus infects B cells causing infectious mononucleosis."
+},
+
+{
+question: "29. The most common bacterial cause of urinary tract infection is:",
+options: ["Klebsiella pneumoniae","Escherichia coli","Proteus mirabilis","Enterococcus faecalis"],
+answer: 1,
+explanation: "E. coli accounts for the majority of community-acquired UTIs."
+},
+
+{
+question: "30. Which infection produces 'rose spots' on the abdomen?",
+options: ["Dengue fever","Malaria","Typhoid fever","Leptospirosis"],
+answer: 2,
+explanation: "Rose spots are a classic sign of typhoid fever."
+},
+
+{
+question: "31. The most common cause of viral myocarditis is:",
+options: ["Coxsackie B virus","Influenza virus","Adenovirus","EBV"],
+answer: 0,
+explanation: "Coxsackie B virus frequently causes viral myocarditis."
+},
+
+{
+question: "32. The organism responsible for Legionnaires' disease is:",
+options: ["Mycoplasma pneumoniae","Chlamydia pneumoniae","Streptococcus pneumoniae","Legionella pneumophila"],
+answer: 3,
+explanation: "Legionella pneumophila causes severe atypical pneumonia."
+},
+
+{
+question: "33. The most common cause of neonatal conjunctivitis is:",
+options: ["Chlamydia trachomatis","Neisseria gonorrhoeae","Staphylococcus aureus","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Chlamydia trachomatis is the most common cause of ophthalmia neonatorum."
+},
+
+{
+question: "34. The most common cause of brain abscess is:",
+options: ["Staphylococcus aureus","Mycobacterium tuberculosis","Streptococcus species","Toxoplasma gondii"],
+answer: 2,
+explanation: "Streptococci from ear/sinus infections frequently cause brain abscess."
+},
+
+{
+question: "35. Which virus causes congenital cataracts and PDA?",
+options: ["CMV","Varicella","Measles","Rubella"],
+answer: 3,
+explanation: "Congenital rubella syndrome includes cataracts, PDA, and deafness."
+},
+
+{
+question: "36. The vector responsible for kala-azar transmission is:",
+options: ["Sandfly","Tick","Mosquito","Flea"],
+answer: 0,
+explanation: "Leishmania donovani is transmitted by sandflies."
+},
+
+{
+question: "37. Which infection produces 'eschar' at the site of bite?",
+options: ["Malaria","Typhoid fever","Scrub typhus","Dengue"],
+answer: 2,
+explanation: "Scrub typhus caused by Orientia tsutsugamushi produces an eschar."
+},
+
+{
+question: "38. The most common cause of septic arthritis is:",
+options: ["Streptococcus pyogenes","Staphylococcus aureus","Neisseria gonorrhoeae","Mycobacterium tuberculosis"],
+answer: 1,
+explanation: "Staphylococcus aureus is the most common cause of septic arthritis."
+},
+
+{
+question: "39. The causative organism of plague is:",
+options: ["Francisella tularensis","Bacillus anthracis","Brucella melitensis","Yersinia pestis"],
+answer: 3,
+explanation: "Yersinia pestis causes bubonic and pneumonic plague."
+},
+
+{
+question: "40. The infection associated with 'bull neck appearance' is:",
+options: ["Diphtheria","Pertussis","Scarlet fever","Tetanus"],
+answer: 0,
+explanation: "Severe diphtheria causes neck swelling called bull neck."
+},
+
+{
+question: "41. Which organism causes chancroid?",
+options: ["Treponema pallidum","Haemophilus ducreyi","Chlamydia trachomatis","Neisseria gonorrhoeae"],
+answer: 1,
+explanation: "Haemophilus ducreyi produces painful genital ulcers."
+},
+
+{
+question: "42. The parasite causing African sleeping sickness is:",
+options: ["Leishmania donovani","Trypanosoma cruzi","Trypanosoma brucei","Plasmodium falciparum"],
+answer: 2,
+explanation: "Trypanosoma brucei causes African trypanosomiasis."
+},
+
+{
+question: "43. The organism responsible for Q fever is:",
+options: ["Rickettsia rickettsii","Chlamydia psittaci","Bartonella henselae","Coxiella burnetii"],
+answer: 3,
+explanation: "Q fever is caused by Coxiella burnetii."
+},
+
+{
+question: "44. The most common cause of cellulitis is:",
+options: ["Streptococcus pyogenes","Clostridium perfringens","Pseudomonas aeruginosa","E. coli"],
+answer: 0,
+explanation: "Group A streptococcus commonly causes cellulitis."
+},
+
+{
+question: "45. The most common cause of viral encephalitis worldwide is:",
+options: ["Rabies virus","Herpes simplex virus","Japanese encephalitis virus","West Nile virus"],
+answer: 1,
+explanation: "HSV-1 is the most common cause of sporadic viral encephalitis."
+},
+
+{
+question: "46. Which organism causes cat scratch disease?",
+options: ["Brucella","Francisella","Bartonella henselae","Pasteurella multocida"],
+answer: 2,
+explanation: "Bartonella henselae infection causes cat scratch disease."
+},
+
+{
+question: "47. The infection associated with 'Negri bodies' in neurons is:",
+options: ["Rabies","Japanese encephalitis","Polio","CMV"],
+answer: 0,
+explanation: "Negri bodies are intracytoplasmic inclusions seen in rabies."
+},
+
+{
+question: "48. The causative agent of tetanus is:",
+options: ["Clostridium tetani","Clostridium botulinum","Clostridium difficile","Clostridium perfringens"],
+answer: 0,
+explanation: "Clostridium tetani produces tetanospasmin causing tetanus."
+},
+
+{
+question: "49. The most common cause of hospital-acquired pneumonia is:",
+options: ["Pseudomonas aeruginosa","Staphylococcus aureus","Klebsiella pneumoniae","Acinetobacter"],
+answer: 1,
+explanation: "Staphylococcus aureus is a major cause of hospital-acquired pneumonia."
+},
+
+{
+question: "50. The parasite causing cysticercosis in humans is:",
+options: ["Taenia saginata","Taenia solium","Ascaris lumbricoides","Echinococcus granulosus"],
+answer: 1,
+explanation: "Taenia solium larvae cause cysticercosis."
+},
+
+{
+question: "51. The most common cause of secondary bacterial pneumonia following influenza is:",
+options: ["Streptococcus pneumoniae","Haemophilus influenzae","Klebsiella pneumoniae","Staphylococcus aureus"],
+answer: 3,
+explanation: "Post-influenza pneumonia is classically caused by Staphylococcus aureus."
+},
+
+{
+question: "52. The most common cause of infective endocarditis in patients with pre-existing valvular disease is:",
+options: ["Staphylococcus aureus","Streptococcus viridans","Enterococcus faecalis","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Streptococcus viridans commonly causes subacute infective endocarditis."
+},
+
+{
+question: "53. The causative organism of leptospirosis is:",
+options: ["Treponema pallidum","Borrelia burgdorferi","Leptospira interrogans","Rickettsia rickettsii"],
+answer: 2,
+explanation: "Leptospira interrogans is a spirochete causing Weil’s disease."
+},
+
+{
+question: "54. The virus responsible for rabies belongs to which family?",
+options: ["Rhabdoviridae","Flaviviridae","Paramyxoviridae","Picornaviridae"],
+answer: 0,
+explanation: "Rabies virus belongs to the Rhabdoviridae family."
+},
+
+{
+question: "55. The most common cause of hospital-acquired urinary tract infection is:",
+options: ["Enterococcus faecalis","Klebsiella pneumoniae","Proteus mirabilis","Escherichia coli"],
+answer: 3,
+explanation: "E. coli remains the leading cause of hospital UTIs."
+},
+
+{
+question: "56. The classical 'step-ladder fever' pattern is seen in:",
+options: ["Malaria","Typhoid fever","Dengue fever","Leptospirosis"],
+answer: 1,
+explanation: "Typhoid fever often shows gradually rising step-ladder fever."
+},
+
+{
+question: "57. The most common cause of chronic meningitis in developing countries is:",
+options: ["Cryptococcus neoformans","Neisseria meningitidis","Mycobacterium tuberculosis","Listeria monocytogenes"],
+answer: 2,
+explanation: "Tuberculous meningitis is the commonest chronic meningitis."
+},
+
+{
+question: "58. The vector transmitting Japanese encephalitis is:",
+options: ["Culex mosquito","Aedes mosquito","Anopheles mosquito","Sandfly"],
+answer: 0,
+explanation: "Japanese encephalitis virus is transmitted by Culex mosquitoes."
+},
+
+{
+question: "59. The organism responsible for melioidosis is:",
+options: ["Burkholderia mallei","Brucella melitensis","Pseudomonas aeruginosa","Burkholderia pseudomallei"],
+answer: 3,
+explanation: "Burkholderia pseudomallei causes melioidosis."
+},
+
+{
+question: "60. The most common cause of bacterial conjunctivitis is:",
+options: ["Streptococcus pneumoniae","Staphylococcus aureus","Haemophilus influenzae","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Staphylococcus aureus commonly causes bacterial conjunctivitis."
+},
+
+{
+question: "61. The infection producing 'Hutchinson teeth' is:",
+options: ["Congenital syphilis","Congenital rubella","Congenital CMV","Congenital toxoplasmosis"],
+answer: 0,
+explanation: "Hutchinson teeth are characteristic of congenital syphilis."
+},
+
+{
+question: "62. The parasite responsible for visceral leishmaniasis is:",
+options: ["Leishmania tropica","Leishmania braziliensis","Leishmania donovani","Trypanosoma cruzi"],
+answer: 2,
+explanation: "Leishmania donovani causes kala-azar."
+},
+
+{
+question: "63. The most common cause of fungal meningitis in AIDS patients is:",
+options: ["Candida albicans","Aspergillus fumigatus","Histoplasma capsulatum","Cryptococcus neoformans"],
+answer: 3,
+explanation: "Cryptococcus neoformans causes meningitis in AIDS."
+},
+
+{
+question: "64. The most common cause of osteomyelitis in adults is:",
+options: ["Pseudomonas aeruginosa","Staphylococcus aureus","Mycobacterium tuberculosis","Salmonella"],
+answer: 1,
+explanation: "Staphylococcus aureus is the leading cause of osteomyelitis."
+},
+
+{
+question: "65. The virus causing chickenpox is:",
+options: ["Varicella zoster virus","Herpes simplex virus","Cytomegalovirus","Epstein Barr virus"],
+answer: 0,
+explanation: "Varicella zoster virus causes chickenpox and shingles."
+},
+
+{
+question: "66. The most common cause of liver abscess in tropical regions is:",
+options: ["Staphylococcus aureus","Klebsiella pneumoniae","Entamoeba histolytica","E. coli"],
+answer: 2,
+explanation: "Amoebic liver abscess due to Entamoeba histolytica is common in tropical regions."
+},
+
+{
+question: "67. Which organism causes anthrax?",
+options: ["Clostridium tetani","Listeria monocytogenes","Corynebacterium diphtheriae","Bacillus anthracis"],
+answer: 3,
+explanation: "Bacillus anthracis causes cutaneous and inhalational anthrax."
+},
+
+{
+question: "68. The most common cause of bacterial sinusitis is:",
+options: ["Staphylococcus aureus","Streptococcus pneumoniae","Pseudomonas aeruginosa","Klebsiella pneumoniae"],
+answer: 1,
+explanation: "Pneumococcus frequently causes acute sinusitis."
+},
+
+{
+question: "69. Which parasite causes 'river blindness'?",
+options: ["Onchocerca volvulus","Wuchereria bancrofti","Loa loa","Brugia malayi"],
+answer: 0,
+explanation: "Onchocerca volvulus causes onchocerciasis (river blindness)."
+},
+
+{
+question: "70. The organism responsible for brucellosis is:",
+options: ["Salmonella typhi","Yersinia pestis","Brucella melitensis","Francisella tularensis"],
+answer: 2,
+explanation: "Brucella melitensis causes brucellosis transmitted via unpasteurized milk."
+},
+
+{
+question: "71. The virus causing hemorrhagic fever with renal syndrome is:",
+options: ["Ebola virus","Marburg virus","Dengue virus","Hantavirus"],
+answer: 3,
+explanation: "Hantavirus infection causes hemorrhagic fever with renal syndrome."
+},
+
+{
+question: "72. The most common cause of impetigo is:",
+options: ["Corynebacterium diphtheriae","Staphylococcus aureus","Pseudomonas aeruginosa","E. coli"],
+answer: 1,
+explanation: "Staphylococcus aureus frequently causes impetigo."
+},
+
+{
+question: "73. The parasite causing hydatid cyst is:",
+options: ["Taenia saginata","Ascaris lumbricoides","Echinococcus granulosus","Strongyloides stercoralis"],
+answer: 2,
+explanation: "Echinococcus granulosus produces hydatid cysts in liver and lungs."
+},
+
+{
+question: "74. The most common cause of viral gastroenteritis in children is:",
+options: ["Rotavirus","Norovirus","Adenovirus","Astrovirus"],
+answer: 0,
+explanation: "Rotavirus is the leading cause of severe diarrhea in children."
+},
+
+{
+question: "75. The infection producing 'black eschar' skin lesions is:",
+options: ["Plague","Leptospirosis","Tularemia","Anthrax"],
+answer: 3,
+explanation: "Cutaneous anthrax forms a painless black eschar lesion."
+},
+
+{
+question: "76. The most common cause of acute bacterial diarrhea worldwide is:",
+options: ["Vibrio cholerae","Escherichia coli","Shigella dysenteriae","Campylobacter jejuni"],
+answer: 1,
+explanation: "Enterotoxigenic and enteropathogenic E. coli commonly cause acute infectious diarrhea."
+},
+
+{
+question: "77. Which organism causes Weil’s disease?",
+options: ["Treponema pallidum","Borrelia recurrentis","Rickettsia rickettsii","Leptospira interrogans"],
+answer: 3,
+explanation: "Severe leptospirosis with jaundice and renal failure is called Weil’s disease."
+},
+
+{
+question: "78. The most common cause of brain abscess following otitis media is:",
+options: ["Streptococcus species","Staphylococcus aureus","E. coli","Klebsiella pneumoniae"],
+answer: 0,
+explanation: "Streptococci are the most frequent organisms causing brain abscess."
+},
+
+{
+question: "79. The organism causing relapsing fever is:",
+options: ["Treponema pallidum","Leptospira interrogans","Borrelia recurrentis","Rickettsia prowazekii"],
+answer: 2,
+explanation: "Borrelia recurrentis causes louse-borne relapsing fever."
+},
+
+{
+question: "80. The most common cause of fungal pneumonia in immunocompromised patients is:",
+options: ["Cryptococcus neoformans","Aspergillus fumigatus","Candida albicans","Histoplasma capsulatum"],
+answer: 1,
+explanation: "Aspergillus is a major cause of invasive fungal pneumonia."
+},
+
+{
+question: "81. Which organism produces neurotoxin causing flaccid paralysis?",
+options: ["Clostridium tetani","Corynebacterium diphtheriae","Bacillus anthracis","Clostridium botulinum"],
+answer: 3,
+explanation: "Botulinum toxin blocks acetylcholine release causing flaccid paralysis."
+},
+
+{
+question: "82. The vector transmitting yellow fever is:",
+options: ["Aedes mosquito","Culex mosquito","Anopheles mosquito","Sandfly"],
+answer: 0,
+explanation: "Yellow fever virus is transmitted by Aedes aegypti."
+},
+
+{
+question: "83. The most common cause of chronic osteomyelitis is:",
+options: ["Mycobacterium tuberculosis","Salmonella","Staphylococcus aureus","Pseudomonas aeruginosa"],
+answer: 2,
+explanation: "Staphylococcus aureus is the most common cause of osteomyelitis."
+},
+
+{
+question: "84. The organism causing granuloma inguinale is:",
+options: ["Treponema pallidum","Klebsiella granulomatis","Chlamydia trachomatis","Haemophilus ducreyi"],
+answer: 1,
+explanation: "Granuloma inguinale is caused by Klebsiella granulomatis."
+},
+
+{
+question: "85. The virus causing hand-foot-mouth disease is:",
+options: ["Adenovirus","Influenza virus","Epstein Barr virus","Coxsackie virus"],
+answer: 3,
+explanation: "Coxsackie A virus commonly causes hand-foot-mouth disease."
+},
+
+{
+question: "86. The most common cause of acute viral hepatitis in children is:",
+options: ["Hepatitis A virus","Hepatitis B virus","Hepatitis C virus","Hepatitis D virus"],
+answer: 0,
+explanation: "Hepatitis A virus is the most common cause of acute hepatitis in children."
+},
+
+{
+question: "87. The infection associated with 'rice water stools' is:",
+options: ["Shigella dysenteriae","Salmonella typhi","Vibrio cholerae","E. coli"],
+answer: 2,
+explanation: "Vibrio cholerae infection produces profuse watery diarrhea."
+},
+
+{
+question: "88. The most common cause of neonatal sepsis is:",
+options: ["Listeria monocytogenes","Group B Streptococcus","E. coli","Klebsiella pneumoniae"],
+answer: 1,
+explanation: "Group B Streptococcus is a leading cause of neonatal sepsis."
+},
+
+{
+question: "89. Which organism causes tularemia?",
+options: ["Brucella melitensis","Yersinia pestis","Bacillus anthracis","Francisella tularensis"],
+answer: 3,
+explanation: "Francisella tularensis causes tularemia."
+},
+
+{
+question: "90. The virus causing shingles is:",
+options: ["Varicella zoster virus","Herpes simplex virus","Cytomegalovirus","Epstein Barr virus"],
+answer: 0,
+explanation: "Reactivation of varicella zoster virus causes herpes zoster."
+},
+
+{
+question: "91. Which parasite causes lymphatic filariasis?",
+options: ["Onchocerca volvulus","Wuchereria bancrofti","Leishmania donovani","Trypanosoma brucei"],
+answer: 1,
+explanation: "Wuchereria bancrofti causes lymphatic filariasis."
+},
+
+{
+question: "92. The most common cause of infective endocarditis overall is:",
+options: ["Streptococcus viridans","Staphylococcus aureus","Enterococcus faecalis","HACEK organisms"],
+answer: 1,
+explanation: "Staphylococcus aureus is now the leading cause of infective endocarditis."
+},
+
+{
+question: "93. Which organism causes psittacosis?",
+options: ["Legionella pneumophila","Mycoplasma pneumoniae","Chlamydia pneumoniae","Chlamydia psittaci"],
+answer: 3,
+explanation: "Chlamydia psittaci causes pneumonia from bird exposure."
+},
+
+{
+question: "94. The parasite responsible for malaria is:",
+options: ["Plasmodium species","Leishmania donovani","Trypanosoma cruzi","Toxoplasma gondii"],
+answer: 0,
+explanation: "Malaria is caused by Plasmodium parasites."
+},
+
+{
+question: "95. The infection producing Koplik spots is:",
+options: ["Rubella","Scarlet fever","Measles","Varicella"],
+answer: 2,
+explanation: "Koplik spots are pathognomonic for measles."
+},
+
+{
+question: "96. The most common cause of nosocomial bloodstream infection is:",
+options: ["Enterococcus faecalis","Staphylococcus epidermidis","E. coli","Pseudomonas aeruginosa"],
+answer: 1,
+explanation: "Coagulase-negative staphylococci commonly infect IV lines."
+},
+
+{
+question: "97. Which organism causes Q fever?",
+options: ["Brucella melitensis","Rickettsia rickettsii","Bartonella henselae","Coxiella burnetii"],
+answer: 3,
+explanation: "Coxiella burnetii causes Q fever."
+},
+
+{
+question: "98. The most common cause of viral encephalitis is:",
+options: ["Herpes simplex virus","Rabies virus","Japanese encephalitis virus","West Nile virus"],
+answer: 0,
+explanation: "HSV-1 is the most common cause of sporadic viral encephalitis."
+},
+
+{
+question: "99. The parasite responsible for toxoplasmosis is:",
+options: ["Plasmodium falciparum","Leishmania donovani","Toxoplasma gondii","Trypanosoma cruzi"],
+answer: 2,
+explanation: "Toxoplasma gondii causes CNS infection in AIDS patients."
+},
+
+{
+question: "100. The most common cause of hospital acquired pneumonia is:",
+options: ["Klebsiella pneumoniae","Staphylococcus aureus","Pseudomonas aeruginosa","Acinetobacter"],
+answer: 1,
+explanation: "Staphylococcus aureus frequently causes nosocomial pneumonia."
+}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 6000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
