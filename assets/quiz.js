@@ -1,5 +1,5 @@
 // -------------------------
-// Total Care MCQ Quiz Engine
+// Total Care MCQ Quiz Engine - Fully Randomized
 // -------------------------
 
 let index = 0;
@@ -11,7 +11,7 @@ let questions = [
   {
     question: "What is 2 + 2?",
     options: ["3", "4", "5", "6"],
-    answer: 1, // index of correct answer
+    answer: 1,
     explanation: "2 + 2 equals 4."
   },
   {
@@ -19,63 +19,71 @@ let questions = [
     options: ["Paris", "Berlin", "London", "Rome"],
     answer: 0,
     explanation: "Paris is the capital of France."
+  },
+  {
+    question: "Largest planet in our solar system?",
+    options: ["Earth", "Mars", "Jupiter", "Venus"],
+    answer: 2,
+    explanation: "Jupiter is the largest planet."
   }
   // Add more questions here
 ];
 
 // -------------------------
-// Shuffle questions function
-function shuffleQuestions() {
-  for (let i = questions.length - 1; i > 0; i--) {
+// Shuffle helper (Fisher-Yates)
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [questions[i], questions[j]] = [questions[j], questions[i]];
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 
-// Shuffle options function
-function shuffleOptions() {
+// Shuffle questions and options
+function initializeQuiz() {
+  // Shuffle questions
+  shuffleArray(questions);
+
+  // Shuffle options inside each question
   questions.forEach(q => {
     const correctText = q.options[q.answer];
-    for (let i = q.options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
-    }
+    shuffleArray(q.options);
     q.answer = q.options.indexOf(correctText);
   });
+
+  // Initialize user answers
+  userAnswers = new Array(questions.length).fill(null);
+
+  // Start at a random question
+  index = Math.floor(Math.random() * questions.length);
 }
 
 // Store user answers
-let userAnswers = new Array(questions.length).fill(null);
+let userAnswers = [];
 
 // -------------------------
 // Show current question
 function showQuestion() {
-  let q = questions[index];
-
+  const q = questions[index];
   document.getElementById("progress").innerHTML =
     "<b>Question " + (index + 1) + " / " + questions.length + "</b>";
 
   let html = "<div class='question'>" + q.question + "</div>";
-
   q.options.forEach((opt, i) => {
     html += "<div class='option' onclick='answer(" + i + ")'>" + opt + "</div>";
   });
-
   document.getElementById("quiz").innerHTML = html;
 
-  // Show previously selected answer if returning to this question
-  let savedAnswer = userAnswers[index];
+  // Show previously selected answer if returning
+  const savedAnswer = userAnswers[index];
   if (savedAnswer !== null) {
     const opts = document.querySelectorAll(".option");
     opts.forEach(o => (o.style.pointerEvents = "none"));
-
     if (savedAnswer === q.answer) {
       opts[savedAnswer].classList.add("correct");
     } else {
       opts[savedAnswer].classList.add("wrong");
       opts[q.answer].classList.add("correct");
     }
-
     document.getElementById("explanation").innerHTML =
       "<p>" + q.explanation + "</p>";
   } else {
@@ -84,11 +92,11 @@ function showQuestion() {
 }
 
 // -------------------------
-// Handle answer selection
+// Answer selection
 function answer(i) {
   if (userAnswers[index] !== null) return;
 
-  let q = questions[index];
+  const q = questions[index];
   userAnswers[index] = i;
 
   const opts = document.querySelectorAll(".option");
@@ -110,7 +118,7 @@ function answer(i) {
 }
 
 // -------------------------
-// Next question
+// Next / Previous / Finish
 function nextQuestion() {
   if (index < questions.length - 1) {
     index++;
@@ -121,7 +129,6 @@ function nextQuestion() {
   }
 }
 
-// Previous question
 function prevQuestion() {
   if (index > 0) {
     index--;
@@ -130,7 +137,6 @@ function prevQuestion() {
   }
 }
 
-// Finish quiz
 function finishQuiz() {
   document.getElementById("quiz").innerHTML = "";
   document.getElementById("progress").innerHTML = "";
@@ -145,6 +151,5 @@ function finishQuiz() {
 
 // -------------------------
 // Initialize quiz
-shuffleQuestions();  // Shuffle the order of questions
-shuffleOptions();    // Shuffle options within each question
-showQuestion();      // Show the first question
+initializeQuiz();
+showQuestion();
