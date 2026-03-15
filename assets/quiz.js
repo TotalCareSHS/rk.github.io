@@ -1,5 +1,5 @@
 // -------------------------
-// Total Care MCQ Quiz Engine - Fully Randomized
+// Total Care MCQ Quiz Engine - 4-option MCQs, fully shuffled
 // -------------------------
 
 let index = 0;
@@ -11,22 +11,33 @@ let questions = [
   {
     question: "What is 2 + 2?",
     options: ["3", "4", "5", "6"],
-    answer: 1,
+    answer: 1, // index of correct answer ("4")
     explanation: "2 + 2 equals 4."
   },
   {
     question: "Capital of France?",
     options: ["Paris", "Berlin", "London", "Rome"],
-    answer: 0,
+    answer: 0, // "Paris"
     explanation: "Paris is the capital of France."
   },
   {
     question: "Largest planet in our solar system?",
     options: ["Earth", "Mars", "Jupiter", "Venus"],
-    answer: 2,
+    answer: 2, // "Jupiter"
     explanation: "Jupiter is the largest planet."
+  },
+  {
+    question: "Which gas do plants absorb from the atmosphere?",
+    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+    answer: 1, // "Carbon Dioxide"
+    explanation: "Plants absorb carbon dioxide for photosynthesis."
+  },
+  {
+    question: "What is H2O commonly known as?",
+    options: ["Oxygen", "Water", "Hydrogen", "Salt"],
+    answer: 1, // "Water"
+    explanation: "H2O is the chemical formula for water."
   }
-  // Add more questions here
 ];
 
 // -------------------------
@@ -38,25 +49,22 @@ function shuffleArray(arr) {
   }
 }
 
-// Shuffle questions and options
+// -------------------------
+// Initialize quiz: shuffle questions and options
 function initializeQuiz() {
-  // Shuffle questions
-  shuffleArray(questions);
+  shuffleArray(questions); // Shuffle questions
 
-  // Shuffle options inside each question
   questions.forEach(q => {
-    const correctText = q.options[q.answer];
-    shuffleArray(q.options);
-    q.answer = q.options.indexOf(correctText);
+    const correctText = q.options[q.answer]; // Store correct answer text
+    shuffleArray(q.options);                 // Shuffle options
+    q.answer = q.options.indexOf(correctText); // Update index of correct answer
   });
 
-  // Initialize user answers
+  index = Math.floor(Math.random() * questions.length); // Start at random question
   userAnswers = new Array(questions.length).fill(null);
-
-  // Start at a random question
-  index = Math.floor(Math.random() * questions.length);
 }
 
+// -------------------------
 // Store user answers
 let userAnswers = [];
 
@@ -64,13 +72,16 @@ let userAnswers = [];
 // Show current question
 function showQuestion() {
   const q = questions[index];
+
   document.getElementById("progress").innerHTML =
     "<b>Question " + (index + 1) + " / " + questions.length + "</b>";
 
   let html = "<div class='question'>" + q.question + "</div>";
+
   q.options.forEach((opt, i) => {
     html += "<div class='option' onclick='answer(" + i + ")'>" + opt + "</div>";
   });
+
   document.getElementById("quiz").innerHTML = html;
 
   // Show previously selected answer if returning
@@ -78,12 +89,14 @@ function showQuestion() {
   if (savedAnswer !== null) {
     const opts = document.querySelectorAll(".option");
     opts.forEach(o => (o.style.pointerEvents = "none"));
+
     if (savedAnswer === q.answer) {
       opts[savedAnswer].classList.add("correct");
     } else {
       opts[savedAnswer].classList.add("wrong");
       opts[q.answer].classList.add("correct");
     }
+
     document.getElementById("explanation").innerHTML =
       "<p>" + q.explanation + "</p>";
   } else {
@@ -92,7 +105,7 @@ function showQuestion() {
 }
 
 // -------------------------
-// Answer selection
+// Handle answer selection
 function answer(i) {
   if (userAnswers[index] !== null) return;
 
@@ -118,7 +131,7 @@ function answer(i) {
 }
 
 // -------------------------
-// Next / Previous / Finish
+// Navigation: Next / Previous / Finish
 function nextQuestion() {
   if (index < questions.length - 1) {
     index++;
@@ -150,6 +163,6 @@ function finishQuiz() {
 }
 
 // -------------------------
-// Initialize quiz
+// Initialize the quiz on page load
 initializeQuiz();
 showQuestion();
