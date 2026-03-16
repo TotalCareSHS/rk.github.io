@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 1 – Respiratory System – Exam Killer Set-3 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{
+question: "1. The most common cause of community-acquired pneumonia worldwide is:",
+a: "Mycoplasma pneumoniae",
+b: "Streptococcus pneumoniae",
+c: "Klebsiella pneumoniae",
+d: "Staphylococcus aureus",
+correct: "b"
+},
+
+{
+question: "2. Clubbing is most commonly associated with:",
+a: "Chronic bronchitis",
+b: "Bronchial asthma",
+c: "Bronchiectasis",
+d: "Pulmonary embolism",
+correct: "c"
+},
+
+{
+question: "3. The most sensitive imaging for pulmonary embolism is:",
+a: "Chest X-ray",
+b: "CT pulmonary angiography",
+c: "Ventilation perfusion scan",
+d: "Ultrasound chest",
+correct: "b"
+},
+
+{
+question: "4. Barrel-shaped chest is classically seen in:",
+a: "Bronchial asthma",
+b: "Pleural effusion",
+c: "Pulmonary fibrosis",
+d: "Emphysema",
+correct: "d"
+},
+
+{
+question: "5. The most common site for aspiration pneumonia is:",
+a: "Right lower lobe",
+b: "Left upper lobe",
+c: "Right upper lobe",
+d: "Left lower lobe",
+correct: "a"
+},
+
+{
+question: "6. Which organism commonly causes pneumonia in alcoholics?",
+a: "Klebsiella pneumoniae",
+b: "Haemophilus influenzae",
+c: "Legionella pneumophila",
+d: "Mycoplasma pneumoniae",
+correct: "a"
+},
+
+{
+question: "7. Pink puffers are typically seen in:",
+a: "Chronic bronchitis",
+b: "Pulmonary embolism",
+c: "Emphysema",
+d: "Bronchiectasis",
+correct: "c"
+},
+
+{
+question: "8. Blue bloater phenotype is seen in:",
+a: "Pulmonary fibrosis",
+b: "Chronic bronchitis",
+c: "Emphysema",
+d: "Asthma",
+correct: "b"
+},
+
+{
+question: "9. The gold standard test for diagnosing bronchiectasis is:",
+a: "Chest X-ray",
+b: "Bronchoscopy",
+c: "High resolution CT",
+d: "Sputum culture",
+correct: "c"
+},
+
+{
+question: "10. The most common cause of hemoptysis in developing countries is:",
+a: "Pulmonary tuberculosis",
+b: "Bronchogenic carcinoma",
+c: "Pulmonary embolism",
+d: "Bronchial asthma",
+correct: "a"
+},
+
+{
+question: "11. Honeycomb lung on CT is characteristic of:",
+a: "Sarcoidosis",
+b: "Pulmonary fibrosis",
+c: "Bronchiectasis",
+d: "Tuberculosis",
+correct: "b"
+},
+
+{
+question: "12. The drug of choice in acute severe asthma is:",
+a: "Oral theophylline",
+b: "Inhaled salbutamol",
+c: "Inhaled ipratropium",
+d: "Oral montelukast",
+correct: "b"
+},
+
+{
+question: "13. Which lung cancer is most strongly associated with smoking?",
+a: "Adenocarcinoma",
+b: "Small cell carcinoma",
+c: "Carcinoid tumor",
+d: "Bronchial adenoma",
+correct: "b"
+},
+
+{
+question: "14. Pancoast tumor occurs at the:",
+a: "Lower lobe",
+b: "Bronchus intermedius",
+c: "Apex of lung",
+d: "Hilum",
+correct: "c"
+},
+
+{
+question: "15. SIADH is commonly associated with:",
+a: "Small cell lung carcinoma",
+b: "Adenocarcinoma lung",
+c: "Large cell carcinoma",
+d: "Squamous cell carcinoma",
+correct: "a"
+},
+
+{
+question: "16. The most common type of lung cancer in non-smokers is:",
+a: "Adenocarcinoma",
+b: "Squamous cell carcinoma",
+c: "Small cell carcinoma",
+d: "Large cell carcinoma",
+correct: "a"
+},
+
+{
+question: "17. Reed-Sternberg cells are seen in:",
+a: "Non-Hodgkin lymphoma",
+b: "Hodgkin lymphoma",
+c: "Multiple myeloma",
+d: "Sarcoidosis",
+correct: "b"
+},
+
+{
+question: "18. Eggshell calcification of lymph nodes is seen in:",
+a: "Tuberculosis",
+b: "Sarcoidosis",
+c: "Silicosis",
+d: "Asbestosis",
+correct: "c"
+},
+
+{
+question: "19. Pleural plaques are characteristic of:",
+a: "Silicosis",
+b: "Coal worker pneumoconiosis",
+c: "Asbestosis",
+d: "Berylliosis",
+correct: "c"
+},
+
+{
+question: "20. The most common cause of transudative pleural effusion is:",
+a: "Tuberculosis",
+b: "Congestive heart failure",
+c: "Malignancy",
+d: "Pneumonia",
+correct: "b"
+},
+
+{
+question: "21. Light’s criteria are used to differentiate:",
+a: "Asthma vs COPD",
+b: "Transudate vs exudate pleural effusion",
+c: "Pulmonary vs cardiac edema",
+d: "Acute vs chronic bronchitis",
+correct: "b"
+},
+
+{
+question: "22. Tension pneumothorax causes:",
+a: "Decreased intrathoracic pressure",
+b: "Mediastinal shift to opposite side",
+c: "Bilateral lung collapse",
+d: "Hyperinflation of both lungs",
+correct: "b"
+},
+
+{
+question: "23. Which condition shows reversible airway obstruction?",
+a: "Bronchial asthma",
+b: "Emphysema",
+c: "Chronic bronchitis",
+d: "Bronchiectasis",
+correct: "a"
+},
+
+{
+question: "24. The most common symptom of lung cancer is:",
+a: "Chest pain",
+b: "Hemoptysis",
+c: "Chronic cough",
+d: "Dyspnea",
+correct: "c"
+},
+
+{
+question: "25. ARDS is characterized by:",
+a: "Cardiogenic pulmonary edema",
+b: "Diffuse alveolar damage",
+c: "Bronchial obstruction",
+d: "Pleural inflammation",
+correct: "b"
+},
+
+{
+question: "26. Which lung cancer most commonly produces cavitary lesions?",
+a: "Adenocarcinoma",
+b: "Small cell carcinoma",
+c: "Squamous cell carcinoma",
+d: "Large cell carcinoma",
+correct: "c"
+},
+
+{
+question: "27. The earliest physiological abnormality in emphysema is:",
+a: "Increased residual volume",
+b: "Decreased FEV1/FVC ratio",
+c: "Reduced diffusing capacity (DLCO)",
+d: "Hypoxemia",
+correct: "c"
+},
+
+{
+question: "28. Kartagener syndrome includes all EXCEPT:",
+a: "Bronchiectasis",
+b: "Situs inversus",
+c: "Chronic sinusitis",
+d: "Pulmonary fibrosis",
+correct: "d"
+},
+
+{
+question: "29. The most sensitive test for detecting latent tuberculosis infection is:",
+a: "Chest X-ray",
+b: "Mantoux test",
+c: "Sputum smear",
+d: "Interferon gamma release assay",
+correct: "d"
+},
+
+{
+question: "30. Which condition shows decreased DLCO?",
+a: "Pulmonary fibrosis",
+b: "Bronchial asthma",
+c: "Chronic bronchitis",
+d: "Obesity hypoventilation syndrome",
+correct: "a"
+},
+
+{
+question: "31. Hamman’s crunch is associated with:",
+a: "Pulmonary embolism",
+b: "Mediastinal emphysema",
+c: "Bronchiectasis",
+d: "Pleural effusion",
+correct: "b"
+},
+
+{
+question: "32. Which interstitial lung disease shows non-caseating granulomas?",
+a: "Sarcoidosis",
+b: "Silicosis",
+c: "Asbestosis",
+d: "Hypersensitivity pneumonitis",
+correct: "a"
+},
+
+{
+question: "33. The most common cause of secondary spontaneous pneumothorax is:",
+a: "Bronchial asthma",
+b: "COPD",
+c: "Pulmonary fibrosis",
+d: "Tuberculosis",
+correct: "b"
+},
+
+{
+question: "34. Which antibody is commonly seen in Goodpasture syndrome?",
+a: "Anti-GBM antibody",
+b: "ANA",
+c: "Anti-dsDNA",
+d: "p-ANCA",
+correct: "a"
+},
+
+{
+question: "35. Which lung carcinoma is most commonly peripheral?",
+a: "Adenocarcinoma",
+b: "Squamous cell carcinoma",
+c: "Small cell carcinoma",
+d: "Large cell carcinoma",
+correct: "a"
+},
+
+{
+question: "36. Which condition is associated with markedly elevated ACE levels?",
+a: "Sarcoidosis",
+b: "Tuberculosis",
+c: "Asbestosis",
+d: "COPD",
+correct: "a"
+},
+
+{
+question: "37. Which is the most common cause of ARDS?",
+a: "Sepsis",
+b: "Aspiration",
+c: "Trauma",
+d: "Pancreatitis",
+correct: "a"
+},
+
+{
+question: "38. In obstructive lung disease spirometry shows:",
+a: "Reduced FEV1/FVC ratio",
+b: "Normal FEV1",
+c: "Reduced total lung capacity",
+d: "Normal residual volume",
+correct: "a"
+},
+
+{
+question: "39. Which pleural effusion typically shows high ADA levels?",
+a: "Tuberculous pleural effusion",
+b: "Malignant effusion",
+c: "Heart failure effusion",
+d: "Nephrotic syndrome effusion",
+correct: "a"
+},
+
+{
+question: "40. Which organism causes pneumonia with relative bradycardia?",
+a: "Streptococcus pneumoniae",
+b: "Legionella pneumophila",
+c: "Staphylococcus aureus",
+d: "Klebsiella pneumoniae",
+correct: "b"
+},
+
+{
+question: "41. Which finding is typical of hypersensitivity pneumonitis?",
+a: "Non-caseating granulomas",
+b: "Caseating granulomas",
+c: "Pleural plaques",
+d: "Cavitary lesions",
+correct: "a"
+},
+
+{
+question: "42. The most common cause of massive hemoptysis is:",
+a: "Bronchiectasis",
+b: "Pulmonary embolism",
+c: "Asthma",
+d: "Sarcoidosis",
+correct: "a"
+},
+
+{
+question: "43. Which drug is known to cause pulmonary fibrosis?",
+a: "Amiodarone",
+b: "Paracetamol",
+c: "Aspirin",
+d: "Metformin",
+correct: "a"
+},
+
+{
+question: "44. Which condition shows “tram-track” appearance on CT?",
+a: "Bronchiectasis",
+b: "Emphysema",
+c: "Pulmonary fibrosis",
+d: "Sarcoidosis",
+correct: "a"
+},
+
+{
+question: "45. Which carcinoma is most associated with hypercalcemia?",
+a: "Small cell carcinoma",
+b: "Adenocarcinoma",
+c: "Squamous cell carcinoma",
+d: "Large cell carcinoma",
+correct: "c"
+},
+
+{
+question: "46. Which condition causes restrictive lung disease?",
+a: "Pulmonary fibrosis",
+b: "Asthma",
+c: "Chronic bronchitis",
+d: "Bronchiectasis",
+correct: "a"
+},
+
+{
+question: "47. The Reid index is increased in:",
+a: "Chronic bronchitis",
+b: "Emphysema",
+c: "Asthma",
+d: "Bronchiectasis",
+correct: "a"
+},
+
+{
+question: "48. Which imaging sign suggests pulmonary embolism?",
+a: "Westermark sign",
+b: "Golden S sign",
+c: "Air bronchogram",
+d: "Silhouette sign",
+correct: "a"
+},
+
+{
+question: "49. Which lung cancer metastasizes earliest?",
+a: "Adenocarcinoma",
+b: "Small cell carcinoma",
+c: "Squamous cell carcinoma",
+d: "Large cell carcinoma",
+correct: "b"
+},
+
+{
+question: "50. Which condition is associated with bilateral hilar lymphadenopathy?",
+a: "Tuberculosis",
+b: "Sarcoidosis",
+c: "Lung abscess",
+d: "COPD",
+correct: "b"
+}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
