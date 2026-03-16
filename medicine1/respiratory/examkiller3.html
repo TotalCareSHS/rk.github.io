@@ -35,455 +35,255 @@ Wrong: <span id="wrong">0</span>
 
 const questions=[
 
-{
-question: "1. The most common cause of community-acquired pneumonia worldwide is:",
-a: "Mycoplasma pneumoniae",
-b: "Streptococcus pneumoniae",
-c: "Klebsiella pneumoniae",
-d: "Staphylococcus aureus",
-correct: "b"
-},
+{question:"1. The most common cause of community-acquired pneumonia worldwide is:",
+options:["Mycoplasma pneumoniae","Streptococcus pneumoniae","Klebsiella pneumoniae","Staphylococcus aureus"],
+answer:1,
+explanation:"Streptococcus pneumoniae is the most common cause of community-acquired pneumonia worldwide."},
 
-{
-question: "2. Clubbing is most commonly associated with:",
-a: "Chronic bronchitis",
-b: "Bronchial asthma",
-c: "Bronchiectasis",
-d: "Pulmonary embolism",
-correct: "c"
-},
+{question:"2. Clubbing is most commonly associated with:",
+options:["Chronic bronchitis","Bronchial asthma","Bronchiectasis","Pulmonary embolism"],
+answer:2,
+explanation:"Bronchiectasis is strongly associated with digital clubbing due to chronic suppurative lung disease."},
 
-{
-question: "3. The most sensitive imaging for pulmonary embolism is:",
-a: "Chest X-ray",
-b: "CT pulmonary angiography",
-c: "Ventilation perfusion scan",
-d: "Ultrasound chest",
-correct: "b"
-},
+{question:"3. The most sensitive imaging for pulmonary embolism is:",
+options:["Chest X-ray","CT pulmonary angiography","Ventilation perfusion scan","Ultrasound chest"],
+answer:1,
+explanation:"CT pulmonary angiography is the most sensitive and widely used diagnostic imaging for pulmonary embolism."},
 
-{
-question: "4. Barrel-shaped chest is classically seen in:",
-a: "Bronchial asthma",
-b: "Pleural effusion",
-c: "Pulmonary fibrosis",
-d: "Emphysema",
-correct: "d"
-},
+{question:"4. Barrel-shaped chest is classically seen in:",
+options:["Bronchial asthma","Pleural effusion","Pulmonary fibrosis","Emphysema"],
+answer:3,
+explanation:"Emphysema causes hyperinflation of lungs leading to a barrel-shaped chest."},
 
-{
-question: "5. The most common site for aspiration pneumonia is:",
-a: "Right lower lobe",
-b: "Left upper lobe",
-c: "Right upper lobe",
-d: "Left lower lobe",
-correct: "a"
-},
+{question:"5. The most common site for aspiration pneumonia is:",
+options:["Right lower lobe","Left upper lobe","Right upper lobe","Left lower lobe"],
+answer:0,
+explanation:"Aspiration pneumonia most commonly affects the right lower lobe because the right bronchus is more vertical."},
 
-{
-question: "6. Which organism commonly causes pneumonia in alcoholics?",
-a: "Klebsiella pneumoniae",
-b: "Haemophilus influenzae",
-c: "Legionella pneumophila",
-d: "Mycoplasma pneumoniae",
-correct: "a"
-},
+{question:"6. Which organism commonly causes pneumonia in alcoholics?",
+options:["Klebsiella pneumoniae","Haemophilus influenzae","Legionella pneumophila","Mycoplasma pneumoniae"],
+answer:0,
+explanation:"Klebsiella pneumoniae commonly causes severe pneumonia in alcoholics."},
 
-{
-question: "7. Pink puffers are typically seen in:",
-a: "Chronic bronchitis",
-b: "Pulmonary embolism",
-c: "Emphysema",
-d: "Bronchiectasis",
-correct: "c"
-},
+{question:"7. Pink puffers are typically seen in:",
+options:["Chronic bronchitis","Pulmonary embolism","Emphysema","Bronchiectasis"],
+answer:2,
+explanation:"Pink puffers describe patients with emphysema who maintain near-normal oxygenation by hyperventilation."},
 
-{
-question: "8. Blue bloater phenotype is seen in:",
-a: "Pulmonary fibrosis",
-b: "Chronic bronchitis",
-c: "Emphysema",
-d: "Asthma",
-correct: "b"
-},
+{question:"8. Blue bloater phenotype is seen in:",
+options:["Pulmonary fibrosis","Chronic bronchitis","Emphysema","Asthma"],
+answer:1,
+explanation:"Blue bloater refers to chronic bronchitis patients with hypoxia, cyanosis, and CO₂ retention."},
 
-{
-question: "9. The gold standard test for diagnosing bronchiectasis is:",
-a: "Chest X-ray",
-b: "Bronchoscopy",
-c: "High resolution CT",
-d: "Sputum culture",
-correct: "c"
-},
+{question:"9. The gold standard test for diagnosing bronchiectasis is:",
+options:["Chest X-ray","Bronchoscopy","High resolution CT","Sputum culture"],
+answer:2,
+explanation:"High-resolution CT scan is the gold standard for diagnosing bronchiectasis."},
 
-{
-question: "10. The most common cause of hemoptysis in developing countries is:",
-a: "Pulmonary tuberculosis",
-b: "Bronchogenic carcinoma",
-c: "Pulmonary embolism",
-d: "Bronchial asthma",
-correct: "a"
-},
+{question:"10. The most common cause of hemoptysis in developing countries is:",
+options:["Pulmonary tuberculosis","Bronchogenic carcinoma","Pulmonary embolism","Bronchial asthma"],
+answer:0,
+explanation:"Pulmonary tuberculosis remains the most common cause of hemoptysis in developing countries."},
 
-{
-question: "11. Honeycomb lung on CT is characteristic of:",
-a: "Sarcoidosis",
-b: "Pulmonary fibrosis",
-c: "Bronchiectasis",
-d: "Tuberculosis",
-correct: "b"
-},
+{question:"11. Honeycomb lung on CT is characteristic of:",
+options:["Sarcoidosis","Pulmonary fibrosis","Bronchiectasis","Tuberculosis"],
+answer:1,
+explanation:"Honeycombing on CT indicates advanced pulmonary fibrosis."},
 
-{
-question: "12. The drug of choice in acute severe asthma is:",
-a: "Oral theophylline",
-b: "Inhaled salbutamol",
-c: "Inhaled ipratropium",
-d: "Oral montelukast",
-correct: "b"
-},
+{question:"12. The drug of choice in acute severe asthma is:",
+options:["Oral theophylline","Inhaled salbutamol","Inhaled ipratropium","Oral montelukast"],
+answer:1,
+explanation:"Short-acting beta agonists like salbutamol are the first-line treatment in acute asthma attacks."},
 
-{
-question: "13. Which lung cancer is most strongly associated with smoking?",
-a: "Adenocarcinoma",
-b: "Small cell carcinoma",
-c: "Carcinoid tumor",
-d: "Bronchial adenoma",
-correct: "b"
-},
+{question:"13. Which lung cancer is most strongly associated with smoking?",
+options:["Adenocarcinoma","Small cell carcinoma","Carcinoid tumor","Bronchial adenoma"],
+answer:1,
+explanation:"Small cell carcinoma has the strongest association with cigarette smoking."},
 
-{
-question: "14. Pancoast tumor occurs at the:",
-a: "Lower lobe",
-b: "Bronchus intermedius",
-c: "Apex of lung",
-d: "Hilum",
-correct: "c"
-},
+{question:"14. Pancoast tumor occurs at the:",
+options:["Lower lobe","Bronchus intermedius","Apex of lung","Hilum"],
+answer:2,
+explanation:"Pancoast tumors arise at the apex of the lung and can cause Horner syndrome."},
 
-{
-question: "15. SIADH is commonly associated with:",
-a: "Small cell lung carcinoma",
-b: "Adenocarcinoma lung",
-c: "Large cell carcinoma",
-d: "Squamous cell carcinoma",
-correct: "a"
-},
+{question:"15. SIADH is commonly associated with:",
+options:["Small cell lung carcinoma","Adenocarcinoma lung","Large cell carcinoma","Squamous cell carcinoma"],
+answer:0,
+explanation:"Small cell lung carcinoma commonly causes SIADH due to ectopic ADH production."},
 
-{
-question: "16. The most common type of lung cancer in non-smokers is:",
-a: "Adenocarcinoma",
-b: "Squamous cell carcinoma",
-c: "Small cell carcinoma",
-d: "Large cell carcinoma",
-correct: "a"
-},
+{question:"16. The most common type of lung cancer in non-smokers is:",
+options:["Adenocarcinoma","Squamous cell carcinoma","Small cell carcinoma","Large cell carcinoma"],
+answer:0,
+explanation:"Adenocarcinoma is the most common lung cancer in non-smokers and women."},
 
-{
-question: "17. Reed-Sternberg cells are seen in:",
-a: "Non-Hodgkin lymphoma",
-b: "Hodgkin lymphoma",
-c: "Multiple myeloma",
-d: "Sarcoidosis",
-correct: "b"
-},
+{question:"17. Reed-Sternberg cells are seen in:",
+options:["Non-Hodgkin lymphoma","Hodgkin lymphoma","Multiple myeloma","Sarcoidosis"],
+answer:1,
+explanation:"Reed-Sternberg cells are the hallmark diagnostic cells of Hodgkin lymphoma."},
 
-{
-question: "18. Eggshell calcification of lymph nodes is seen in:",
-a: "Tuberculosis",
-b: "Sarcoidosis",
-c: "Silicosis",
-d: "Asbestosis",
-correct: "c"
-},
+{question:"18. Eggshell calcification of lymph nodes is seen in:",
+options:["Tuberculosis","Sarcoidosis","Silicosis","Asbestosis"],
+answer:2,
+explanation:"Silicosis classically shows eggshell calcification of hilar lymph nodes."},
 
-{
-question: "19. Pleural plaques are characteristic of:",
-a: "Silicosis",
-b: "Coal worker pneumoconiosis",
-c: "Asbestosis",
-d: "Berylliosis",
-correct: "c"
-},
+{question:"19. Pleural plaques are characteristic of:",
+options:["Silicosis","Coal worker pneumoconiosis","Asbestosis","Berylliosis"],
+answer:2,
+explanation:"Pleural plaques are a classic radiologic finding in asbestos exposure."},
 
-{
-question: "20. The most common cause of transudative pleural effusion is:",
-a: "Tuberculosis",
-b: "Congestive heart failure",
-c: "Malignancy",
-d: "Pneumonia",
-correct: "b"
-},
+{question:"20. The most common cause of transudative pleural effusion is:",
+options:["Tuberculosis","Congestive heart failure","Malignancy","Pneumonia"],
+answer:1,
+explanation:"Congestive heart failure is the most common cause of transudative pleural effusion."},
 
-{
-question: "21. Light’s criteria are used to differentiate:",
-a: "Asthma vs COPD",
-b: "Transudate vs exudate pleural effusion",
-c: "Pulmonary vs cardiac edema",
-d: "Acute vs chronic bronchitis",
-correct: "b"
-},
+{question:"21. Light’s criteria are used to differentiate:",
+options:["Asthma vs COPD","Transudate vs exudate pleural effusion","Pulmonary vs cardiac edema","Acute vs chronic bronchitis"],
+answer:1,
+explanation:"Light’s criteria differentiate exudative from transudative pleural effusion."},
 
-{
-question: "22. Tension pneumothorax causes:",
-a: "Decreased intrathoracic pressure",
-b: "Mediastinal shift to opposite side",
-c: "Bilateral lung collapse",
-d: "Hyperinflation of both lungs",
-correct: "b"
-},
+{question:"22. Tension pneumothorax causes:",
+options:["Decreased intrathoracic pressure","Mediastinal shift to opposite side","Bilateral lung collapse","Hyperinflation of both lungs"],
+answer:1,
+explanation:"Tension pneumothorax increases intrathoracic pressure causing mediastinal shift to the opposite side."},
 
-{
-question: "23. Which condition shows reversible airway obstruction?",
-a: "Bronchial asthma",
-b: "Emphysema",
-c: "Chronic bronchitis",
-d: "Bronchiectasis",
-correct: "a"
-},
+{question:"23. Which condition shows reversible airway obstruction?",
+options:["Bronchial asthma","Emphysema","Chronic bronchitis","Bronchiectasis"],
+answer:0,
+explanation:"Bronchial asthma is characterized by reversible airway obstruction."},
 
-{
-question: "24. The most common symptom of lung cancer is:",
-a: "Chest pain",
-b: "Hemoptysis",
-c: "Chronic cough",
-d: "Dyspnea",
-correct: "c"
-},
+{question:"24. The most common symptom of lung cancer is:",
+options:["Chest pain","Hemoptysis","Chronic cough","Dyspnea"],
+answer:2,
+explanation:"Chronic cough is the most common presenting symptom of lung cancer."},
 
-{
-question: "25. ARDS is characterized by:",
-a: "Cardiogenic pulmonary edema",
-b: "Diffuse alveolar damage",
-c: "Bronchial obstruction",
-d: "Pleural inflammation",
-correct: "b"
-},
+{question:"25. ARDS is characterized by:",
+options:["Cardiogenic pulmonary edema","Diffuse alveolar damage","Bronchial obstruction","Pleural inflammation"],
+answer:1,
+explanation:"Acute respiratory distress syndrome is characterized by diffuse alveolar damage leading to severe hypoxemia."},
 
-{
-question: "26. Which lung cancer most commonly produces cavitary lesions?",
-a: "Adenocarcinoma",
-b: "Small cell carcinoma",
-c: "Squamous cell carcinoma",
-d: "Large cell carcinoma",
-correct: "c"
-},
+{question:"26. Which lung cancer most commonly produces cavitary lesions?",
+options:["Adenocarcinoma","Small cell carcinoma","Squamous cell carcinoma","Large cell carcinoma"],
+answer:2,
+explanation:"Squamous cell carcinoma often undergoes central necrosis leading to cavitary lung lesions."},
 
-{
-question: "27. The earliest physiological abnormality in emphysema is:",
-a: "Increased residual volume",
-b: "Decreased FEV1/FVC ratio",
-c: "Reduced diffusing capacity (DLCO)",
-d: "Hypoxemia",
-correct: "c"
-},
+{question:"27. The earliest physiological abnormality in emphysema is:",
+options:["Increased residual volume","Decreased FEV1/FVC ratio","Reduced diffusing capacity (DLCO)","Hypoxemia"],
+answer:2,
+explanation:"Reduced DLCO occurs early in emphysema due to destruction of alveolar walls and capillary beds."},
 
-{
-question: "28. Kartagener syndrome includes all EXCEPT:",
-a: "Bronchiectasis",
-b: "Situs inversus",
-c: "Chronic sinusitis",
-d: "Pulmonary fibrosis",
-correct: "d"
-},
+{question:"28. Kartagener syndrome includes all EXCEPT:",
+options:["Bronchiectasis","Situs inversus","Chronic sinusitis","Pulmonary fibrosis"],
+answer:3,
+explanation:"Kartagener syndrome consists of bronchiectasis, sinusitis, and situs inversus due to ciliary dysfunction."},
 
-{
-question: "29. The most sensitive test for detecting latent tuberculosis infection is:",
-a: "Chest X-ray",
-b: "Mantoux test",
-c: "Sputum smear",
-d: "Interferon gamma release assay",
-correct: "d"
-},
+{question:"29. The most sensitive test for detecting latent tuberculosis infection is:",
+options:["Chest X-ray","Mantoux test","Sputum smear","Interferon gamma release assay"],
+answer:3,
+explanation:"Interferon gamma release assays (IGRA) are highly sensitive and specific for latent TB infection."},
 
-{
-question: "30. Which condition shows decreased DLCO?",
-a: "Pulmonary fibrosis",
-b: "Bronchial asthma",
-c: "Chronic bronchitis",
-d: "Obesity hypoventilation syndrome",
-correct: "a"
-},
+{question:"30. Which condition shows decreased DLCO?",
+options:["Pulmonary fibrosis","Bronchial asthma","Chronic bronchitis","Obesity hypoventilation syndrome"],
+answer:0,
+explanation:"Pulmonary fibrosis reduces gas exchange surface area leading to decreased DLCO."},
 
-{
-question: "31. Hamman’s crunch is associated with:",
-a: "Pulmonary embolism",
-b: "Mediastinal emphysema",
-c: "Bronchiectasis",
-d: "Pleural effusion",
-correct: "b"
-},
+{question:"31. Hamman’s crunch is associated with:",
+options:["Pulmonary embolism","Mediastinal emphysema","Bronchiectasis","Pleural effusion"],
+answer:1,
+explanation:"Hamman’s crunch is a crunching sound heard in pneumomediastinum due to mediastinal emphysema."},
 
-{
-question: "32. Which interstitial lung disease shows non-caseating granulomas?",
-a: "Sarcoidosis",
-b: "Silicosis",
-c: "Asbestosis",
-d: "Hypersensitivity pneumonitis",
-correct: "a"
-},
+{question:"32. Which interstitial lung disease shows non-caseating granulomas?",
+options:["Sarcoidosis","Silicosis","Asbestosis","Hypersensitivity pneumonitis"],
+answer:0,
+explanation:"Sarcoidosis is characterized by non-caseating granulomas in multiple organs including lungs."},
 
-{
-question: "33. The most common cause of secondary spontaneous pneumothorax is:",
-a: "Bronchial asthma",
-b: "COPD",
-c: "Pulmonary fibrosis",
-d: "Tuberculosis",
-correct: "b"
-},
+{question:"33. The most common cause of secondary spontaneous pneumothorax is:",
+options:["Bronchial asthma","COPD","Pulmonary fibrosis","Tuberculosis"],
+answer:1,
+explanation:"COPD, especially emphysema with ruptured bullae, is the most common cause."},
 
-{
-question: "34. Which antibody is commonly seen in Goodpasture syndrome?",
-a: "Anti-GBM antibody",
-b: "ANA",
-c: "Anti-dsDNA",
-d: "p-ANCA",
-correct: "a"
-},
+{question:"34. Which antibody is commonly seen in Goodpasture syndrome?",
+options:["Anti-GBM antibody","ANA","Anti-dsDNA","p-ANCA"],
+answer:0,
+explanation:"Goodpasture syndrome involves antibodies against the glomerular and alveolar basement membrane."},
 
-{
-question: "35. Which lung carcinoma is most commonly peripheral?",
-a: "Adenocarcinoma",
-b: "Squamous cell carcinoma",
-c: "Small cell carcinoma",
-d: "Large cell carcinoma",
-correct: "a"
-},
+{question:"35. Which lung carcinoma is most commonly peripheral?",
+options:["Adenocarcinoma","Squamous cell carcinoma","Small cell carcinoma","Large cell carcinoma"],
+answer:0,
+explanation:"Adenocarcinoma typically arises in peripheral lung tissue."},
 
-{
-question: "36. Which condition is associated with markedly elevated ACE levels?",
-a: "Sarcoidosis",
-b: "Tuberculosis",
-c: "Asbestosis",
-d: "COPD",
-correct: "a"
-},
+{question:"36. Which condition is associated with markedly elevated ACE levels?",
+options:["Sarcoidosis","Tuberculosis","Asbestosis","COPD"],
+answer:0,
+explanation:"Serum ACE levels are frequently elevated in sarcoidosis due to granuloma activity."},
 
-{
-question: "37. Which is the most common cause of ARDS?",
-a: "Sepsis",
-b: "Aspiration",
-c: "Trauma",
-d: "Pancreatitis",
-correct: "a"
-},
+{question:"37. The most common cause of ARDS is:",
+options:["Sepsis","Aspiration","Trauma","Pancreatitis"],
+answer:0,
+explanation:"Sepsis is the leading cause of ARDS due to widespread inflammatory response."},
 
-{
-question: "38. In obstructive lung disease spirometry shows:",
-a: "Reduced FEV1/FVC ratio",
-b: "Normal FEV1",
-c: "Reduced total lung capacity",
-d: "Normal residual volume",
-correct: "a"
-},
+{question:"38. In obstructive lung disease spirometry shows:",
+options:["Reduced FEV1/FVC ratio","Normal FEV1","Reduced total lung capacity","Normal residual volume"],
+answer:0,
+explanation:"Obstructive lung diseases reduce the FEV1/FVC ratio due to airflow limitation."},
 
-{
-question: "39. Which pleural effusion typically shows high ADA levels?",
-a: "Tuberculous pleural effusion",
-b: "Malignant effusion",
-c: "Heart failure effusion",
-d: "Nephrotic syndrome effusion",
-correct: "a"
-},
+{question:"39. Which pleural effusion typically shows high ADA levels?",
+options:["Tuberculous pleural effusion","Malignant effusion","Heart failure effusion","Nephrotic syndrome effusion"],
+answer:0,
+explanation:"Elevated ADA levels in pleural fluid strongly suggest tuberculous pleural effusion."},
 
-{
-question: "40. Which organism causes pneumonia with relative bradycardia?",
-a: "Streptococcus pneumoniae",
-b: "Legionella pneumophila",
-c: "Staphylococcus aureus",
-d: "Klebsiella pneumoniae",
-correct: "b"
-},
+{question:"40. Which organism causes pneumonia with relative bradycardia?",
+options:["Streptococcus pneumoniae","Legionella pneumophila","Staphylococcus aureus","Klebsiella pneumoniae"],
+answer:1,
+explanation:"Legionella pneumonia is classically associated with relative bradycardia (Faget sign)."},
 
-{
-question: "41. Which finding is typical of hypersensitivity pneumonitis?",
-a: "Non-caseating granulomas",
-b: "Caseating granulomas",
-c: "Pleural plaques",
-d: "Cavitary lesions",
-correct: "a"
-},
+{question:"41. Which finding is typical of hypersensitivity pneumonitis?",
+options:["Non-caseating granulomas","Caseating granulomas","Pleural plaques","Cavitary lesions"],
+answer:0,
+explanation:"Hypersensitivity pneumonitis causes small non-caseating granulomas and interstitial inflammation."},
 
-{
-question: "42. The most common cause of massive hemoptysis is:",
-a: "Bronchiectasis",
-b: "Pulmonary embolism",
-c: "Asthma",
-d: "Sarcoidosis",
-correct: "a"
-},
+{question:"42. The most common cause of massive hemoptysis is:",
+options:["Bronchiectasis","Pulmonary embolism","Asthma","Sarcoidosis"],
+answer:0,
+explanation:"Bronchiectasis is a major cause of massive hemoptysis due to dilated fragile bronchial vessels."},
 
-{
-question: "43. Which drug is known to cause pulmonary fibrosis?",
-a: "Amiodarone",
-b: "Paracetamol",
-c: "Aspirin",
-d: "Metformin",
-correct: "a"
-},
+{question:"43. Which drug is known to cause pulmonary fibrosis?",
+options:["Amiodarone","Paracetamol","Aspirin","Metformin"],
+answer:0,
+explanation:"Amiodarone can cause pulmonary toxicity leading to interstitial fibrosis."},
 
-{
-question: "44. Which condition shows “tram-track” appearance on CT?",
-a: "Bronchiectasis",
-b: "Emphysema",
-c: "Pulmonary fibrosis",
-d: "Sarcoidosis",
-correct: "a"
-},
+{question:"44. Which condition shows 'tram-track' appearance on CT?",
+options:["Bronchiectasis","Emphysema","Pulmonary fibrosis","Sarcoidosis"],
+answer:0,
+explanation:"Bronchiectasis produces tram-track lines on CT due to dilated thickened bronchi."},
 
-{
-question: "45. Which carcinoma is most associated with hypercalcemia?",
-a: "Small cell carcinoma",
-b: "Adenocarcinoma",
-c: "Squamous cell carcinoma",
-d: "Large cell carcinoma",
-correct: "c"
-},
+{question:"45. Which carcinoma is most associated with hypercalcemia?",
+options:["Small cell carcinoma","Adenocarcinoma","Squamous cell carcinoma","Large cell carcinoma"],
+answer:2,
+explanation:"Squamous cell carcinoma secretes PTH-related peptide causing hypercalcemia."},
 
-{
-question: "46. Which condition causes restrictive lung disease?",
-a: "Pulmonary fibrosis",
-b: "Asthma",
-c: "Chronic bronchitis",
-d: "Bronchiectasis",
-correct: "a"
-},
+{question:"46. Which condition causes restrictive lung disease?",
+options:["Pulmonary fibrosis","Asthma","Chronic bronchitis","Bronchiectasis"],
+answer:0,
+explanation:"Pulmonary fibrosis causes reduced lung compliance leading to restrictive lung disease."},
 
-{
-question: "47. The Reid index is increased in:",
-a: "Chronic bronchitis",
-b: "Emphysema",
-c: "Asthma",
-d: "Bronchiectasis",
-correct: "a"
-},
+{question:"47. The Reid index is increased in:",
+options:["Chronic bronchitis","Emphysema","Asthma","Bronchiectasis"],
+answer:0,
+explanation:"Chronic bronchitis causes enlargement of mucus glands increasing the Reid index."},
 
-{
-question: "48. Which imaging sign suggests pulmonary embolism?",
-a: "Westermark sign",
-b: "Golden S sign",
-c: "Air bronchogram",
-d: "Silhouette sign",
-correct: "a"
-},
+{question:"48. Which imaging sign suggests pulmonary embolism?",
+options:["Westermark sign","Golden S sign","Air bronchogram","Silhouette sign"],
+answer:0,
+explanation:"Westermark sign indicates focal oligemia distal to a pulmonary embolism."},
 
-{
-question: "49. Which lung cancer metastasizes earliest?",
-a: "Adenocarcinoma",
-b: "Small cell carcinoma",
-c: "Squamous cell carcinoma",
-d: "Large cell carcinoma",
-correct: "b"
-},
+{question:"49. Which lung cancer metastasizes earliest?",
+options:["Adenocarcinoma","Small cell carcinoma","Squamous cell carcinoma","Large cell carcinoma"],
+answer:1,
+explanation:"Small cell lung carcinoma is highly aggressive and metastasizes early."},
 
-{
-question: "50. Which condition is associated with bilateral hilar lymphadenopathy?",
-a: "Tuberculosis",
-b: "Sarcoidosis",
-c: "Lung abscess",
-d: "COPD",
-correct: "b"
-}
+{question:"50. Which condition is associated with bilateral hilar lymphadenopathy?",
+options:["Tuberculosis","Sarcoidosis","Lung abscess","COPD"],
+answer:1,
+explanation:"Sarcoidosis classically presents with bilateral hilar lymphadenopathy on chest imaging."}
 
 ]
 
