@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 2 – ENDOCRINOLOGY – Top 50 Final-1 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient with type 2 diabetes presents with recurrent genital infections. Which drug is the likely cause?",
+options:["Metformin","SGLT2 inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"SGLT2 inhibitors cause glucosuria, predisposing to genital infections."},
+
+{question:"2. A patient has high TSH, high T4, and no suppression on TRH test. Most likely diagnosis:",
+options:["Primary hypothyroidism","TSH-secreting pituitary adenoma","Subclinical hypothyroidism","Thyroid hormone resistance"],
+answer:3,
+explanation:"Thyroid hormone resistance can present with high TSH and high T4 without suppression."},
+
+{question:"3. Which hormone decreases serum calcium levels?",
+options:["Parathyroid hormone","Calcitonin","Vitamin D","Cortisol"],
+answer:1,
+explanation:"Calcitonin lowers serum calcium by inhibiting bone resorption."},
+
+{question:"4. A patient presents with episodic hypertension, headache, and sweating. Diagnosis:",
+options:["Hyperthyroidism","Pheochromocytoma","Cushing syndrome","Addison disease"],
+answer:1,
+explanation:"Classic triad of pheochromocytoma."},
+
+{question:"5. Which condition shows decreased ACTH and decreased cortisol?",
+options:["Primary adrenal insufficiency","Secondary adrenal insufficiency","Cushing syndrome","Ectopic ACTH syndrome"],
+answer:1,
+explanation:"Secondary adrenal insufficiency involves pituitary failure."},
+
+{question:"6. Which thyroid disorder is most commonly associated with autoimmune antibodies?",
+options:["Subacute thyroiditis","Hashimoto thyroiditis","Toxic adenoma","Thyroid carcinoma"],
+answer:1,
+explanation:"Hashimoto thyroiditis is autoimmune with anti-TPO antibodies."},
+
+{question:"7. Which electrolyte abnormality is typical in DKA?",
+options:["Hypokalemia","Hyperkalemia","Hypernatremia","Hypocalcemia"],
+answer:1,
+explanation:"Serum potassium may appear elevated despite total body depletion."},
+
+{question:"8. Which hormone increases basal metabolic rate?",
+options:["Insulin","Thyroxine","Calcitonin","Aldosterone"],
+answer:1,
+explanation:"Thyroid hormones increase metabolic rate."},
+
+{question:"9. Which condition presents with delayed relaxation of reflexes?",
+options:["Hyperthyroidism","Hypothyroidism","Cushing syndrome","Addison disease"],
+answer:1,
+explanation:"Hypothyroidism causes slow relaxation of deep tendon reflexes."},
+
+{question:"10. A patient with hypercalcemia and low urinary calcium likely has:",
+options:["Primary hyperparathyroidism","Malignancy","Familial hypocalciuric hypercalcemia","Vitamin D toxicity"],
+answer:2,
+explanation:"FHH presents with hypercalcemia and low urinary calcium."},
+
+{question:"11. Which drug is most associated with hypoglycemia?",
+options:["Metformin","Sulfonylureas","DPP-4 inhibitors","SGLT2 inhibitors"],
+answer:1,
+explanation:"Sulfonylureas stimulate insulin release causing hypoglycemia."},
+
+{question:"12. Which endocrine disorder causes central obesity and striae?",
+options:["Addison disease","Cushing syndrome","Hyperthyroidism","Hypoparathyroidism"],
+answer:1,
+explanation:"Cushing syndrome causes fat redistribution and skin changes."},
+
+{question:"13. Which hormone is deficient in central diabetes insipidus?",
+options:["ADH","ACTH","TSH","Prolactin"],
+answer:0,
+explanation:"Central DI is due to ADH deficiency."},
+
+{question:"14. Which test is best for initial screening of thyroid dysfunction?",
+options:["T3","T4","TSH","Thyroglobulin"],
+answer:2,
+explanation:"TSH is most sensitive screening test."},
+
+{question:"15. Which condition is associated with increased PTH and low calcium?",
+options:["Primary hyperparathyroidism","Secondary hyperparathyroidism","Hypercalcemia of malignancy","Vitamin D toxicity"],
+answer:1,
+explanation:"Secondary hyperparathyroidism occurs due to low calcium states."},
+
+{question:"16. Which hormone increases glucose production in fasting state?",
+options:["Insulin","Glucagon","GLP-1","Somatostatin"],
+answer:1,
+explanation:"Glucagon promotes gluconeogenesis and glycogenolysis."},
+
+{question:"17. Which thyroid cancer has best prognosis?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:0,
+explanation:"Papillary carcinoma has excellent prognosis."},
+
+{question:"18. Which condition shows hyponatremia with euvolemia?",
+options:["Addison disease","SIADH","Hyperaldosteronism","Cushing syndrome"],
+answer:1,
+explanation:"SIADH causes dilutional hyponatremia."},
+
+{question:"19. Which endocrine disorder causes muscle weakness due to hypokalemia?",
+options:["Addison disease","Hyperaldosteronism","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"Hypokalemia in hyperaldosteronism causes weakness."},
+
+{question:"20. Which condition shows elevated IGF-1 levels?",
+options:["Hypopituitarism","Acromegaly","Hypothyroidism","Addison disease"],
+answer:1,
+explanation:"IGF-1 is elevated in acromegaly."},
+
+{question:"21. Which condition is associated with increased ketone production?",
+options:["Hyperosmolar hyperglycemic state","Diabetic ketoacidosis","Hypoglycemia","Lactic acidosis"],
+answer:2,
+explanation:"DKA is characterized by increased ketone production."},
+
+{question:"22. Which thyroid condition shows low uptake on radioactive iodine scan?",
+options:["Graves disease","Toxic adenoma","Subacute thyroiditis","Thyroid carcinoma"],
+answer:3,
+explanation:"Subacute thyroiditis shows low uptake due to inflammation."},
+
+{question:"23. Which hormone is secreted by parafollicular cells?",
+options:["Calcitonin","Thyroxine","Parathyroid hormone","Cortisol"],
+answer:0,
+explanation:"C cells of thyroid secrete calcitonin."},
+
+{question:"24. A patient presents with hypotension, hyponatremia, and hyperkalemia. Diagnosis:",
+options:["Addison disease","Cushing syndrome","Hyperaldosteronism","SIADH"],
+answer:0,
+explanation:"Primary adrenal insufficiency causes these findings."},
+
+{question:"25. Which drug improves insulin sensitivity?",
+options:["Sulfonylureas","Metformin","Insulin","Meglitinides"],
+answer:1,
+explanation:"Metformin improves insulin sensitivity."},
+
+{question:"26. Which hormone stimulates growth via IGF-1?",
+options:["Prolactin","Growth hormone","TSH","ACTH"],
+answer:1,
+explanation:"GH acts through IGF-1."},
+
+{question:"27. Which endocrine tumor secretes catecholamines?",
+options:["Insulinoma","Pituitary adenoma","Pheochromocytoma","Thyroid adenoma"],
+answer:2,
+explanation:"Pheochromocytoma secretes catecholamines."},
+
+{question:"28. Which condition shows increased cortisol and ACTH?",
+options:["Adrenal adenoma","Cushing disease","Addison disease","Hypothyroidism"],
+answer:1,
+explanation:"Cushing disease increases ACTH and cortisol."},
+
+{question:"29. Which electrolyte abnormality occurs in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"Dilutional hyponatremia occurs."},
+
+{question:"30. Which condition causes polyuria with high serum glucose?",
+options:["Diabetes mellitus","Diabetes insipidus","SIADH","Addison disease"],
+answer:0,
+explanation:"Hyperglycemia leads to osmotic diuresis."},
+
+{question:"31. Which test confirms acromegaly?",
+options:["Random GH level","IGF-1 level","TSH level","ACTH level"],
+answer:1,
+explanation:"IGF-1 is best screening; suppression test confirms."},
+
+{question:"32. Which thyroid cancer produces calcitonin?",
+options:["Papillary carcinoma","Follicular carcinoma","Anaplastic carcinoma","Medullary carcinoma"],
+answer:3,
+explanation:"Medullary carcinoma produces calcitonin."},
+
+{question:"33. Which condition leads to hypocalcemia?",
+options:["Hyperparathyroidism","Hypoparathyroidism","Vitamin D toxicity","Malignancy"],
+answer:2,
+explanation:"Hypoparathyroidism leads to hypocalcemia."},
+
+{question:"34. Which hormone regulates water reabsorption in kidney?",
+options:["Aldosterone","ADH","Renin","Cortisol"],
+answer:1,
+explanation:"ADH regulates water reabsorption."},
+
+{question:"35. Which condition causes hyperpigmentation?",
+options:["Addison disease","Cushing syndrome","Hypothyroidism","Hyperparathyroidism"],
+answer:1,
+explanation:"Addison disease increases ACTH causing pigmentation."},
+
+{question:"36. Which hormone decreases blood glucose?",
+options:["Glucagon","Insulin","Cortisol","Epinephrine"],
+answer:1,
+explanation:"Insulin lowers blood glucose."},
+
+{question:"37. Which condition causes osteoporosis due to excess cortisol?",
+options:["Addison disease","Cushing syndrome","Hypothyroidism","SIADH"],
+answer:2,
+explanation:"Cushing syndrome causes bone loss."},
+
+{question:"38. Which electrolyte change is seen in hyperaldosteronism?",
+options:["Hyperkalemia","Hyponatremia","Hypokalemia","Hypercalcemia"],
+answer:0,
+explanation:"Potassium loss causes hypokalemia."},
+
+{question:"39. Which test is best initial for diabetes diagnosis?",
+options:["Random glucose","HbA1c & Fasting glucose","Fasting glucose","Urine glucose"],
+answer:1,
+explanation:"Fasting glucose or HbA1c used; fasting is common initial."},
+
+{question:"40. Which hormone increases calcium reabsorption in kidney?",
+options:["Calcitonin","Vitamin D","PTH","Insulin"],
+answer:2,
+explanation:"PTH increases calcium reabsorption."},
+
+{question:"41. Which condition shows increased prolactin?",
+options:["Hypothyroidism","Hyperthyroidism","Cushing syndrome","Addison disease"],
+answer:0,
+explanation:"TRH stimulates prolactin in hypothyroidism."},
+
+{question:"42. Which gland secretes ACTH?",
+options:["Adrenal gland","Thyroid gland","Pituitary gland","Parathyroid gland"],
+answer:2,
+explanation:"Anterior pituitary secretes ACTH."},
+
+{question:"43. Which thyroid disorder causes heat intolerance?",
+options:["Hypothyroidism","Hyperthyroidism","Thyroiditis","Goiter"],
+answer:1,
+explanation:"Hyperthyroidism increases metabolism causing heat intolerance."},
+
+{question:"44. Which condition causes decreased cortisol?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","SIADH"],
+answer:1,
+explanation:"Addison disease reduces cortisol."},
+
+{question:"45. Which hormone increases sodium reabsorption?",
+options:["Aldosterone","Insulin","Glucagon","Calcitonin"],
+answer:0,
+explanation:"Aldosterone increases sodium reabsorption."},
+
+{question:"46. Which endocrine tumor causes hypoglycemia?",
+options:["Glucagonoma","Insulinoma","Somatostatinoma","VIPoma"],
+answer:1,
+explanation:"Insulinoma causes hypoglycemia."},
+
+{question:"47. Which condition shows increased TSH?",
+options:["Hyperthyroidism","Primary hypothyroidism","Secondary hypothyroidism","Thyroid carcinoma"],
+answer:1,
+explanation:"Primary hypothyroidism increases TSH."},
+
+{question:"48. Which hormone stimulates milk production?",
+options:["Oxytocin","Prolactin","Estrogen","Progesterone"],
+answer:1,
+explanation:"Prolactin stimulates milk production."},
+
+{question:"49. Which condition shows increased IGF-1?",
+options:["Hypopituitarism","Acromegaly","Hypothyroidism","Addison disease"],
+answer:1,
+explanation:"Acromegaly increases IGF-1."},
+
+{question:"50. Which condition causes metabolic alkalosis?",
+options:["Addison disease","DKA","Hyperaldosteronism","SIADH"],
+answer:3,
+explanation:"Hyperaldosteronism causes alkalosis due to H+ loss."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
