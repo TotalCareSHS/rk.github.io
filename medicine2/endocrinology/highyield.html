@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 2 – ENDOCRINOLOGY – High Yield MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient with long-standing diabetes presents with sudden painless loss of vision. Most likely cause:",
+options:["Vitreous hemorrhage","Retinal detachment","Optic neuritis","Macular degeneration"],
+answer:0,
+explanation:"Proliferative diabetic retinopathy can lead to vitreous hemorrhage causing sudden painless vision loss."},
+
+{question:"2. Which condition shows elevated TSH with elevated T4?",
+options:["Primary hypothyroidism","Secondary hypothyroidism","TSH-secreting pituitary adenoma","Subclinical hypothyroidism"],
+answer:2,
+explanation:"TSH-secreting adenoma causes high TSH despite high T4."},
+
+{question:"3. A patient presents with recurrent renal stones, bone pain, and abdominal discomfort. Likely diagnosis:",
+options:["Hypoparathyroidism","Hyperparathyroidism","Vitamin D deficiency","Hypothyroidism"],
+answer:1,
+explanation:"Classic 'stones, bones, groans' of hyperparathyroidism."},
+
+{question:"4. Which drug reduces cardiovascular mortality in diabetes?",
+options:["Sulfonylureas","Insulin","SGLT2 inhibitors","Alpha-glucosidase inhibitors"],
+answer:2,
+explanation:"SGLT2 inhibitors have proven cardiovascular benefit."},
+
+{question:"5. A patient with Addison disease is at risk of which emergency?",
+options:["Thyroid storm","Addisonian crisis","DKA","Myxedema coma"],
+answer:1,
+explanation:"Stress can precipitate adrenal crisis."},
+
+{question:"6. Which hormone is responsible for negative feedback on ACTH?",
+options:["Cortisol","Aldosterone","Adrenaline","Renin"],
+answer:0,
+explanation:"Cortisol inhibits ACTH via negative feedback."},
+
+{question:"7. A patient with hyperthyroidism develops atrial fibrillation. Best initial management:",
+options:["Radioiodine","Beta-blocker","Thyroidectomy","Antithyroid drugs"],
+answer:1,
+explanation:"Beta-blockers control adrenergic symptoms and arrhythmia."},
+
+{question:"8. Which condition shows decreased serum calcium and increased phosphate?",
+options:["Hyperparathyroidism","Hypoparathyroidism","Vitamin D toxicity","Malignancy"],
+answer:1,
+explanation:"Hypoparathyroidism causes hypocalcemia and hyperphosphatemia."},
+
+{question:"9. Which test confirms central diabetes insipidus?",
+options:["Water deprivation test","Serum sodium","Desmopressin response","Urine specific gravity"],
+answer:2,
+explanation:"Central DI responds to desmopressin with increased urine osmolality."},
+
+{question:"10. Which endocrine disorder causes truncal obesity with thin limbs?",
+options:["Hypothyroidism","Cushing syndrome","Addison disease","Hyperparathyroidism"],
+answer:1,
+explanation:"Cushing syndrome redistributes fat centrally."},
+
+{question:"11. A patient with diabetes has burning sensation in feet worse at night. Diagnosis:",
+options:["Peripheral neuropathy","Autonomic neuropathy","Radiculopathy","Myopathy"],
+answer:0,
+explanation:"Distal symmetric polyneuropathy is common in diabetes."},
+
+{question:"12. Which thyroid cancer is most aggressive?",
+options:["Papillary carcinoma","Follicular carcinoma","Anaplastic carcinoma","Medullary carcinoma"],
+answer:2,
+explanation:"Anaplastic carcinoma is highly aggressive with poor prognosis."},
+
+{question:"13. Which electrolyte abnormality is seen in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"SIADH causes dilutional hyponatremia."},
+
+{question:"14. Which hormone increases glucose production in liver?",
+options:["Insulin","Glucagon","GLP-1","Somatostatin"],
+answer:1,
+explanation:"Glucagon promotes gluconeogenesis and glycogenolysis."},
+
+{question:"15. A patient presents with episodic headache, sweating, and palpitations. Diagnosis:",
+options:["Cushing syndrome","Addison disease","Pheochromocytoma","Hyperthyroidism"],
+answer:2,
+explanation:"Classic triad of pheochromocytoma."},
+
+{question:"16. A patient with type 1 diabetes misses insulin and develops dehydration and confusion. Most likely lab finding:",
+options:["Low anion gap","High anion gap metabolic acidosis","Metabolic alkalosis","Respiratory acidosis"],
+answer:1,
+explanation:"DKA causes high anion gap metabolic acidosis due to ketone accumulation."},
+
+{question:"17. Which endocrine disorder is associated with increased skin pigmentation and hypotension?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","SIADH"],
+answer:1,
+explanation:"Addison disease leads to increased ACTH causing hyperpigmentation and hypotension."},
+
+{question:"18. A patient with hypercalcemia has suppressed PTH. Likely cause:",
+options:["Primary hyperparathyroidism","Vitamin D deficiency","Malignancy","Hypoparathyroidism"],
+answer:2,
+explanation:"Malignancy-related hypercalcemia suppresses PTH via PTHrP."},
+
+{question:"19. Which condition shows increased uptake on radioactive iodine scan?",
+options:["Subacute thyroiditis","Factitious thyrotoxicosis","Graves disease","Hashimoto thyroiditis"],
+answer:2,
+explanation:"Graves disease shows diffuse increased uptake."},
+
+{question:"20. Which hormone deficiency leads to diabetes insipidus?",
+options:["ADH","ACTH","TSH","Prolactin"],
+answer:0,
+explanation:"ADH deficiency leads to central diabetes insipidus."},
+
+{question:"21. A patient with resistant hypertension and hypokalemia should be evaluated for:",
+options:["Addison disease","Hyperaldosteronism","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"Primary hyperaldosteronism causes resistant hypertension with hypokalemia."},
+
+{question:"22. Which diabetes drug causes glucosuria as its mechanism?",
+options:["Metformin","SGLT2 inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"SGLT2 inhibitors block glucose reabsorption in kidneys."},
+
+{question:"23. Which thyroid condition presents with transient hyperthyroidism followed by hypothyroidism?",
+options:["Graves disease","Subacute thyroiditis","Toxic adenoma","Thyroid carcinoma"],
+answer:1,
+explanation:"Subacute thyroiditis shows biphasic pattern."},
+
+{question:"24. Which hormone primarily increases phosphate excretion?",
+options:["Vitamin D","Calcitonin","Parathyroid hormone","Insulin"],
+answer:2,
+explanation:"PTH promotes phosphate excretion in kidneys."},
+
+{question:"25. A patient with Cushing syndrome has which glucose abnormality?",
+options:["Hypoglycemia","Hyperglycemia","Normal glucose","Ketosis"],
+answer:1,
+explanation:"Cortisol increases gluconeogenesis leading to hyperglycemia."},
+
+{question:"26. Which test is most specific for insulinoma?",
+options:["Fasting insulin with hypoglycemia","HbA1c","Random glucose","Urine glucose"],
+answer:0,
+explanation:"Elevated insulin during hypoglycemia confirms insulinoma."},
+
+{question:"27. Which electrolyte abnormality is most common in adrenal insufficiency?",
+options:["Hypernatremia","Hypokalemia","Hyponatremia","Hypercalcemia"],
+answer:2,
+explanation:"Adrenal insufficiency commonly causes hyponatremia."},
+
+{question:"28. Which thyroid cancer is associated with amyloid deposition?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:2,
+explanation:"Medullary carcinoma shows amyloid from calcitonin."},
+
+{question:"29. A patient with acromegaly most likely has enlargement of:",
+options:["Small bones","Flat bones","Long bones epiphysis","Soft tissues and acral parts"],
+answer:3,
+explanation:"Acromegaly causes enlargement of hands, feet, and soft tissues."},
+
+{question:"30. Which condition is associated with decreased ADH action?",
+options:["SIADH","Central DI","Nephrogenic DI","Addison disease"],
+answer:2,
+explanation:"Nephrogenic DI is due to renal resistance to ADH."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

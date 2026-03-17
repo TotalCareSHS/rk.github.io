@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 2 – ENDOCRINOLOGY – Expected MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient with type 2 diabetes has persistent fasting hyperglycemia despite lifestyle changes. The most appropriate next step is:",
+options:["Start insulin immediately","Add metformin","Add sulfonylurea","Start GLP-1 agonist"],
+answer:1,
+explanation:"Metformin is the first-line pharmacological therapy for type 2 diabetes."},
+
+{question:"2. A patient presents with weight gain, cold intolerance, and bradycardia. Lab shows high TSH and low T4. Diagnosis:",
+options:["Secondary hypothyroidism","Subclinical hypothyroidism","Primary hypothyroidism","Hyperthyroidism"],
+answer:2,
+explanation:"Primary hypothyroidism shows elevated TSH and low T4."},
+
+{question:"3. Which hormone is primarily responsible for increasing serum calcium?",
+options:["Calcitonin","Parathyroid hormone","Insulin","Aldosterone"],
+answer:1,
+explanation:"PTH increases calcium by bone resorption and renal reabsorption."},
+
+{question:"4. A patient with Cushing syndrome has a pituitary adenoma. This condition is called:",
+options:["Addison disease","Cushing disease","Ectopic ACTH syndrome","Adrenal adenoma"],
+answer:1,
+explanation:"Cushing disease refers to pituitary ACTH-producing adenoma."},
+
+{question:"5. Which drug is preferred in managing diabetic ketoacidosis?",
+options:["Long-acting insulin","Regular insulin","Metformin","Sulfonylurea"],
+answer:1,
+explanation:"IV regular insulin is used in DKA."},
+
+{question:"6. A patient presents with polyuria and hypernatremia. Urine is dilute. Most likely diagnosis:",
+options:["SIADH","Central diabetes insipidus","Addison disease","Hyperaldosteronism"],
+answer:1,
+explanation:"Central DI causes inability to concentrate urine."},
+
+{question:"7. Which thyroid cancer is associated with psammoma bodies?",
+options:["Follicular carcinoma","Medullary carcinoma","Papillary carcinoma","Anaplastic carcinoma"],
+answer:2,
+explanation:"Papillary carcinoma shows psammoma bodies histologically."},
+
+{question:"8. A patient with hypercalcemia and kidney stones likely has:",
+options:["Hypoparathyroidism","Hyperparathyroidism","Vitamin D deficiency","SIADH"],
+answer:1,
+explanation:"Primary hyperparathyroidism causes stones, bones, groans."},
+
+{question:"9. Which hormone is decreased in Addison disease?",
+options:["ACTH","Cortisol","TSH","Prolactin"],
+answer:1,
+explanation:"Primary adrenal insufficiency causes low cortisol."},
+
+{question:"10. Which diabetes complication is most common?",
+options:["Nephropathy","Neuropathy","Retinopathy","Cardiomyopathy"],
+answer:1,
+explanation:"Neuropathy is the most common complication."},
+
+{question:"11. Which test is most sensitive for diagnosing early diabetic nephropathy?",
+options:["Serum creatinine","Microalbuminuria","Urine routine","Blood urea"],
+answer:1,
+explanation:"Microalbuminuria is the earliest marker."},
+
+{question:"12. Which hormone is responsible for milk ejection?",
+options:["Prolactin","Oxytocin","Estrogen","Progesterone"],
+answer:1,
+explanation:"Oxytocin causes milk ejection."},
+
+{question:"13. A patient has high cortisol and low ACTH. Diagnosis:",
+options:["Pituitary adenoma","Adrenal tumor","Ectopic ACTH","Addison disease"],
+answer:1,
+explanation:"Adrenal tumor produces cortisol suppressing ACTH."},
+
+{question:"14. Which electrolyte abnormality is seen in hyperaldosteronism?",
+options:["Hyperkalemia","Hypokalemia","Hyponatremia","Hypercalcemia"],
+answer:1,
+explanation:"Aldosterone causes potassium loss."},
+
+{question:"15. Which condition causes increased prolactin?",
+options:["Hypothyroidism","Hyperthyroidism","Cushing syndrome","Addison disease"],
+answer:0,
+explanation:"TRH stimulates prolactin secretion in hypothyroidism."},
+
+{question:"16. Which endocrine disorder presents with exophthalmos?",
+options:["Hypothyroidism","Graves disease","Thyroiditis","Hashimoto disease"],
+answer:1,
+explanation:"Graves disease causes exophthalmos."},
+
+{question:"17. Which investigation confirms pheochromocytoma?",
+options:["Serum calcium","Urinary metanephrines","TSH","ACTH"],
+answer:1,
+explanation:"Metanephrines are most sensitive."},
+
+{question:"18. A patient with DKA shows which acid-base disorder?",
+options:["Metabolic alkalosis","Respiratory acidosis","Metabolic acidosis","Respiratory alkalosis"],
+answer:2,
+explanation:"DKA causes metabolic acidosis."},
+
+{question:"19. Which hormone decreases serum phosphate?",
+options:["PTH","Vitamin D","Calcitonin","Insulin"],
+answer:0,
+explanation:"PTH decreases phosphate by renal excretion."},
+
+{question:"20. Which thyroid disorder presents with painful enlargement?",
+options:["Hashimoto thyroiditis","Subacute thyroiditis","Graves disease","Thyroid cancer"],
+answer:1,
+explanation:"Subacute thyroiditis is painful."},
+
+{question:"21. Which condition shows increased IGF-1?",
+options:["Gigantism","Acromegaly","Both","None"],
+answer:2,
+explanation:"Both conditions show increased IGF-1."},
+
+{question:"22. Which drug can cause hypoglycemia?",
+options:["Metformin","Sulfonylureas","SGLT2 inhibitors","DPP-4 inhibitors"],
+answer:1,
+explanation:"Sulfonylureas increase insulin secretion."},
+
+{question:"23. Which condition shows hyponatremia and hyperkalemia?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","SIADH"],
+answer:1,
+explanation:"Addison disease causes both."},
+
+{question:"24. Which hormone is elevated in stress?",
+options:["Insulin","Cortisol","Calcitonin","PTH"],
+answer:1,
+explanation:"Cortisol is the stress hormone."},
+
+{question:"25. Which condition causes decreased TSH and increased T4?",
+options:["Hypothyroidism","Hyperthyroidism","Subclinical hypothyroidism","Pituitary failure"],
+answer:1,
+explanation:"Hyperthyroidism suppresses TSH."},
+
+{question:"26. Which endocrine disorder causes hypertension with hypokalemia?",
+options:["Addison disease","Hyperaldosteronism","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"Hyperaldosteronism leads to sodium retention and potassium loss."},
+
+{question:"27. Which thyroid cancer spreads via blood?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:1,
+explanation:"Follicular carcinoma spreads hematogenously."},
+
+{question:"28. Which hormone opposes insulin?",
+options:["Growth hormone","Insulin","GLP-1","Adiponectin"],
+answer:0,
+explanation:"GH increases blood glucose."},
+
+{question:"29. Which test is best initial for thyroid dysfunction?",
+options:["T3","T4","TSH","Thyroglobulin"],
+answer:2,
+explanation:"TSH is best screening test."},
+
+{question:"30. Which condition shows hyperpigmentation?",
+options:["Cushing syndrome","Addison disease","Hypothyroidism","Hyperparathyroidism"],
+answer:1,
+explanation:"ACTH increase causes pigmentation."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

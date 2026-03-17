@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 100:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 2 – ENDOCRINOLOGY – Past Paper MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A 45-year-old obese man with central obesity, hypertension and purple striae is suspected of Cushing syndrome. The best initial screening test is:",
+options:["Serum ACTH level","Low-dose dexamethasone suppression test","High-dose dexamethasone suppression test","MRI pituitary"],
+answer:1,
+explanation:"Low-dose dexamethasone suppression test is the initial screening test for Cushing syndrome."},
+
+{question:"2. A patient with polyuria and polydipsia shows no response to desmopressin test. The most likely diagnosis is:",
+options:["Central diabetes insipidus","Nephrogenic diabetes insipidus","Psychogenic polydipsia","SIADH"],
+answer:1,
+explanation:"Nephrogenic DI does not respond to desmopressin due to renal resistance to ADH."},
+
+{question:"3. Which of the following is the most common cause of hyperthyroidism worldwide?",
+options:["Graves disease","Toxic multinodular goiter","Subacute thyroiditis","Iodine deficiency"],
+answer:0,
+explanation:"Graves disease is the most common cause of hyperthyroidism globally."},
+
+{question:"4. A patient presents with tetany and positive Chvostek sign. The most likely abnormality is:",
+options:["Hypercalcemia","Hypocalcemia","Hyperkalemia","Hyponatremia"],
+answer:1,
+explanation:"Hypocalcemia leads to neuromuscular excitability causing tetany and Chvostek sign."},
+
+{question:"5. Which drug is most commonly associated with lactic acidosis in diabetics?",
+options:["Metformin","Sulfonylureas","Insulin","DPP-4 inhibitors"],
+answer:0,
+explanation:"Metformin can cause lactic acidosis, especially in renal failure."},
+
+{question:"6. A diabetic patient presents with Kussmaul breathing. The underlying pathology is:",
+options:["Metabolic alkalosis","Respiratory acidosis","Metabolic acidosis","Respiratory alkalosis"],
+answer:2,
+explanation:"Kussmaul breathing is a compensatory mechanism for metabolic acidosis in DKA."},
+
+{question:"7. Which hormone is deficient in Sheehan syndrome?",
+options:["Growth hormone","Prolactin","ACTH","All anterior pituitary hormones"],
+answer:3,
+explanation:"Sheehan syndrome causes panhypopituitarism due to pituitary infarction."},
+
+{question:"8. A patient with hypercalcemia and low phosphate is most likely suffering from:",
+options:["Hypoparathyroidism","Hyperparathyroidism","Vitamin D deficiency","Renal failure"],
+answer:1,
+explanation:"Primary hyperparathyroidism causes hypercalcemia and hypophosphatemia."},
+
+{question:"9. Which of the following is the most sensitive test for acromegaly?",
+options:["Serum GH levels","IGF-1 levels","MRI pituitary","Oral glucose suppression test"],
+answer:1,
+explanation:"IGF-1 is the most sensitive screening test for acromegaly."},
+
+{question:"10. A patient with Addison disease typically shows:",
+options:["Hypernatremia","Hypokalemia","Hyperkalemia","Metabolic alkalosis"],
+answer:2,
+explanation:"Addison disease causes hyperkalemia due to aldosterone deficiency."},
+
+{question:"11. Which is the most common cause of hypothyroidism worldwide?",
+options:["Hashimoto thyroiditis","Iodine deficiency","Post-thyroidectomy","Drugs"],
+answer:1,
+explanation:"Iodine deficiency is the most common cause worldwide."},
+
+{question:"12. A patient develops hypocalcemia after thyroid surgery. The most likely cause is:",
+options:["Hypoparathyroidism","Vitamin D deficiency","Renal failure","Hyperthyroidism"],
+answer:0,
+explanation:"Accidental removal or damage to parathyroid glands causes hypocalcemia."},
+
+{question:"13. Which of the following is the first-line treatment in type 2 diabetes mellitus?",
+options:["Insulin","Metformin","Sulfonylureas","GLP-1 agonists"],
+answer:1,
+explanation:"Metformin is the first-line drug for type 2 diabetes."},
+
+{question:"14. Which thyroid cancer is most commonly associated with RET mutation?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:2,
+explanation:"Medullary thyroid carcinoma is associated with RET proto-oncogene mutation."},
+
+{question:"15. A patient presents with moon face, truncal obesity, and proximal muscle weakness. Which hormone is elevated?",
+options:["Cortisol","Aldosterone","Growth hormone","Thyroxine"],
+answer:0,
+explanation:"Cushing syndrome is due to excess cortisol."},
+
+{question:"16. Which condition causes hyperpigmentation due to increased ACTH?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","Hypoparathyroidism"],
+answer:1,
+explanation:"Addison disease causes increased ACTH leading to hyperpigmentation."},
+
+{question:"17. Which electrolyte abnormality is seen in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"SIADH causes dilutional hyponatremia."},
+
+{question:"18. A patient with type 1 diabetes develops abdominal pain and fruity breath. The diagnosis is:",
+options:["Hyperosmolar hyperglycemic state","Diabetic ketoacidosis","Lactic acidosis","Hypoglycemia"],
+answer:1,
+explanation:"Fruity breath and abdominal pain are classic for DKA."},
+
+{question:"19. Which of the following is most specific for Graves disease?",
+options:["Diffuse goiter","Exophthalmos","Weight loss","Tachycardia"],
+answer:1,
+explanation:"Exophthalmos is specific for Graves disease."},
+
+{question:"20. Which hormone is secreted by parafollicular C cells?",
+options:["Thyroxine","Triiodothyronine","Calcitonin","Parathyroid hormone"],
+answer:2,
+explanation:"Calcitonin is secreted by C cells of thyroid."},
+
+{question:"21. A patient with pheochromocytoma will have increased:",
+options:["Cortisol","Catecholamines","Aldosterone","Insulin"],
+answer:1,
+explanation:"Pheochromocytoma secretes excess catecholamines."},
+
+{question:"22. Which investigation is best to confirm primary hyperparathyroidism?",
+options:["Serum calcium","Serum phosphate","Serum PTH level","X-ray bone"],
+answer:2,
+explanation:"Elevated PTH confirms primary hyperparathyroidism."},
+
+{question:"23. Which drug is preferred in thyroid storm?",
+options:["Levothyroxine","Propranolol","Methimazole","Radioiodine"],
+answer:1,
+explanation:"Propranolol controls adrenergic symptoms and inhibits T4 to T3 conversion."},
+
+{question:"24. Which condition is associated with low TSH and low T4?",
+options:["Primary hypothyroidism","Secondary hypothyroidism","Subclinical hypothyroidism","Hyperthyroidism"],
+answer:1,
+explanation:"Secondary hypothyroidism occurs due to pituitary failure leading to low TSH and T4."},
+
+{question:"25. Which complication is most common in long-standing diabetes mellitus?",
+options:["Retinopathy","Neuropathy","Nephropathy","Coronary artery disease"],
+answer:1,
+explanation:"Diabetic neuropathy is the most common complication of long-standing diabetes."},
+
+{question:"26. A patient with hyperthyroidism develops agranulocytosis. Which drug is responsible?",
+options:["Propylthiouracil","Methimazole","Propranolol","Levothyroxine"],
+answer:1,
+explanation:"Methimazole is commonly associated with agranulocytosis."},
+
+{question:"27. Which condition shows high TSH and normal T4?",
+options:["Primary hypothyroidism","Subclinical hypothyroidism","Secondary hypothyroidism","Hyperthyroidism"],
+answer:1,
+explanation:"Subclinical hypothyroidism shows elevated TSH with normal T4."},
+
+{question:"28. A patient with hypercalcemia has low PTH. Most likely cause:",
+options:["Primary hyperparathyroidism","Malignancy","Vitamin D deficiency","Hypoparathyroidism"],
+answer:1,
+explanation:"Low PTH with hypercalcemia suggests malignancy (PTHrP mediated)."}, 
+
+{question:"29. Which is the most common pituitary tumor?",
+options:["Somatotroph adenoma","Corticotroph adenoma","Prolactinoma","Non-functioning adenoma"],
+answer:2,
+explanation:"Prolactinoma is the most common pituitary tumor."},
+
+{question:"30. Which feature is seen in hyperaldosteronism?",
+options:["Hyperkalemia","Hyponatremia","Metabolic alkalosis","Hypotension"],
+answer:2,
+explanation:"Hyperaldosteronism causes hypokalemia and metabolic alkalosis."},
+
+{question:"31. Which hormone increases insulin sensitivity?",
+options:["Growth hormone","Cortisol","Adiponectin","Glucagon"],
+answer:2,
+explanation:"Adiponectin improves insulin sensitivity."},
+
+{question:"32. Which test differentiates central vs nephrogenic DI?",
+options:["Water deprivation test","Serum sodium","Urine osmolality","Desmopressin test"],
+answer:3,
+explanation:"Desmopressin response distinguishes central from nephrogenic DI."},
+
+{question:"33. Which thyroid carcinoma spreads via lymphatics?",
+options:["Follicular carcinoma","Papillary carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:1,
+explanation:"Papillary carcinoma spreads via lymphatics."},
+
+{question:"34. Which electrolyte imbalance occurs in Addisonian crisis?",
+options:["Hypernatremia","Hypokalemia","Hyponatremia","Hypercalcemia"],
+answer:2,
+explanation:"Addisonian crisis causes hyponatremia and hyperkalemia."},
+
+{question:"35. Which drug causes weight gain in diabetes?",
+options:["Metformin","GLP-1 agonists","Sulfonylureas","SGLT2 inhibitors"],
+answer:2,
+explanation:"Sulfonylureas increase insulin and cause weight gain."},
+
+{question:"36. Which hormone is elevated in acromegaly?",
+options:["GH","IGF-1","TSH","ACTH"],
+answer:1,
+explanation:"IGF-1 is persistently elevated in acromegaly."},
+
+{question:"37. Which condition causes hypocalcemia with high PTH?",
+options:["Hypoparathyroidism","Vitamin D deficiency","Hyperparathyroidism","Malignancy"],
+answer:1,
+explanation:"Vitamin D deficiency leads to secondary hyperparathyroidism."},
+
+{question:"38. Which is most specific for diabetic nephropathy?",
+options:["Proteinuria","Microalbuminuria","Hematuria","Casts"],
+answer:1,
+explanation:"Microalbuminuria is the earliest and specific marker."},
+
+{question:"39. Which condition shows high cortisol with suppressed ACTH?",
+options:["Cushing disease","Adrenal tumor","Ectopic ACTH","Pituitary adenoma"],
+answer:1,
+explanation:"Adrenal tumor produces cortisol suppressing ACTH."},
+
+{question:"40. Which drug is used in DKA management?",
+options:["Regular insulin","Long-acting insulin","Metformin","Sulfonylurea"],
+answer:0,
+explanation:"Regular insulin IV is used in DKA."},
+
+{question:"41. Which condition causes hypercalcemia and bone resorption?",
+options:["Hypoparathyroidism","Hyperparathyroidism","Vitamin D deficiency","CKD"],
+answer:1,
+explanation:"PTH increases bone resorption causing hypercalcemia."},
+
+{question:"42. Which condition shows low cortisol and high ACTH?",
+options:["Secondary adrenal insufficiency","Addison disease","Cushing syndrome","Pheochromocytoma"],
+answer:1,
+explanation:"Primary adrenal failure leads to high ACTH."},
+
+{question:"43. Which thyroid test is best initial screening?",
+options:["T3","T4","TSH","Thyroglobulin"],
+answer:2,
+explanation:"TSH is the best initial screening test."},
+
+{question:"44. Which drug causes hypoglycemia most commonly?",
+options:["Metformin","Insulin","SGLT2 inhibitors","DPP-4 inhibitors"],
+answer:1,
+explanation:"Insulin therapy can cause hypoglycemia."},
+
+{question:"45. Which tumor produces catecholamines?",
+options:["Pituitary adenoma","Adrenal adenoma","Pheochromocytoma","Thyroid carcinoma"],
+answer:2,
+explanation:"Pheochromocytoma secretes catecholamines."},
+
+{question:"46. Which electrolyte abnormality occurs in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"SIADH causes dilutional hyponatremia."},
+
+{question:"47. Which test confirms acromegaly?",
+options:["GH level","IGF-1","Glucose suppression test","MRI"],
+answer:2,
+explanation:"Failure of GH suppression after glucose confirms acromegaly."},
+
+{question:"48. Which diabetes complication affects small vessels?",
+options:["Neuropathy","Retinopathy","Nephropathy","All of the above"],
+answer:3,
+explanation:"All are microvascular complications."},
+
+{question:"49. Which thyroid cancer has best prognosis?",
+options:["Papillary","Follicular","Medullary","Anaplastic"],
+answer:0,
+explanation:"Papillary carcinoma has best prognosis."},
+
+{question:"50. Which condition causes low calcium and high phosphate?",
+options:["Hyperparathyroidism","Hypoparathyroidism","Vitamin D excess","Malignancy"],
+answer:1,
+explanation:"Hypoparathyroidism causes hypocalcemia and hyperphosphatemia."},
+
+{question:"51. A patient with long-standing diabetes presents with orthostatic hypotension. The most likely cause is:",
+options:["Nephropathy","Retinopathy","Autonomic neuropathy","Macroangiopathy"],
+answer:2,
+explanation:"Autonomic neuropathy in diabetes leads to impaired vascular tone causing orthostatic hypotension."},
+
+{question:"52. Which condition is associated with increased alkaline phosphatase and hypercalcemia?",
+options:["Hypothyroidism","Hyperparathyroidism","Vitamin D deficiency","Hypoparathyroidism"],
+answer:1,
+explanation:"Hyperparathyroidism increases bone turnover causing elevated ALP and hypercalcemia."},
+
+{question:"53. A patient with hyperthyroidism develops fever, agitation, and tachycardia. Diagnosis:",
+options:["Thyroid storm","Hashimoto disease","Subacute thyroiditis","Myxedema coma"],
+answer:0,
+explanation:"Thyroid storm is a life-threatening exacerbation of hyperthyroidism."},
+
+{question:"54. Which hormone primarily increases renal calcium reabsorption?",
+options:["Calcitonin","Vitamin D","Parathyroid hormone","Aldosterone"],
+answer:2,
+explanation:"PTH increases calcium reabsorption in the kidneys."},
+
+{question:"55. Which drug reduces hepatic glucose production?",
+options:["Insulin","Sulfonylureas","Metformin","Thiazolidinediones"],
+answer:2,
+explanation:"Metformin decreases hepatic gluconeogenesis."},
+
+{question:"56. A patient has high cortisol not suppressed by high-dose dexamethasone. Cause:",
+options:["Pituitary adenoma","Adrenal adenoma","Ectopic ACTH","Exogenous steroids"],
+answer:2,
+explanation:"Ectopic ACTH production is not suppressed by high-dose dexamethasone."},
+
+{question:"57. Which condition causes increased TBG levels?",
+options:["Pregnancy","Malnutrition","Nephrotic syndrome","Liver failure"],
+answer:0,
+explanation:"Estrogen in pregnancy increases TBG levels."},
+
+{question:"58. A patient with DI has high serum sodium and low urine osmolality. Diagnosis:",
+options:["Central DI","SIADH","Psychogenic polydipsia","Adrenal insufficiency"],
+answer:0,
+explanation:"Central DI causes inability to concentrate urine leading to dilute urine."},
+
+{question:"59. Which diabetes drug works via incretin effect?",
+options:["Sulfonylureas","Insulin","DPP-4 inhibitors","Metformin"],
+answer:2,
+explanation:"DPP-4 inhibitors enhance incretin hormones increasing insulin secretion."},
+
+{question:"60. Which condition shows increased renin and aldosterone?",
+options:["Primary hyperaldosteronism","Cushing syndrome","Secondary hyperaldosteronism","Addison disease"],
+answer:2,
+explanation:"Secondary hyperaldosteronism increases both renin and aldosterone."},
+
+{question:"61. Which thyroid disorder shows painful gland?",
+options:["Hashimoto thyroiditis","Subacute thyroiditis","Thyroid carcinoma","Graves disease"],
+answer:1,
+explanation:"Subacute (de Quervain) thyroiditis presents with painful thyroid."},
+
+{question:"62. Which electrolyte abnormality occurs in DKA?",
+options:["Hypocalcemia","Hyperkalemia","Hypernatremia","Hypokalemia"],
+answer:1,
+explanation:"Serum potassium may appear elevated due to acidosis despite total body deficit."},
+
+{question:"63. Which hormone antagonizes insulin?",
+options:["GLP-1","Somatostatin","Growth hormone","Insulin-like growth factor"],
+answer:2,
+explanation:"Growth hormone increases blood glucose by opposing insulin."},
+
+{question:"64. Which investigation is best for diagnosing pheochromocytoma?",
+options:["TSH","Urinary metanephrines","Serum cortisol","Serum calcium"],
+answer:1,
+explanation:"Urinary metanephrines are highly sensitive for pheochromocytoma."},
+
+{question:"65. A patient with hypothyroidism shows which ECG finding?",
+options:["ST elevation","Peaked T waves","Low voltage complexes","Tachycardia"],
+answer:2,
+explanation:"Hypothyroidism commonly shows low voltage ECG complexes."},
+
+{question:"66. Which condition shows high calcium and low urinary calcium?",
+options:["Vitamin D toxicity","Familial hypocalciuric hypercalcemia","Primary hyperparathyroidism","Malignancy"],
+answer:1,
+explanation:"FHH presents with hypercalcemia and low urinary calcium excretion."},
+
+{question:"67. Which drug is contraindicated in pregnancy for hyperthyroidism?",
+options:["Methimazole","Propylthiouracil","Propranolol","Iodine"],
+answer:0,
+explanation:"Methimazole is teratogenic, especially in first trimester."},
+
+{question:"68. Which condition is associated with increased HbA1c?",
+options:["Chronic hyperglycemia","Acute blood loss","Hemolytic anemia","Iron deficiency"],
+answer:0,
+explanation:"HbA1c reflects long-term glucose levels."},
+
+{question:"69. Which hormone regulates circadian rhythm of cortisol?",
+options:["ACTH","Melatonin","TSH","CRH"],
+answer:0,
+explanation:"ACTH controls cortisol secretion in a circadian pattern."},
+
+{question:"70. Which endocrine disorder causes weight loss with increased appetite?",
+options:["Addison disease","Hyperthyroidism","Cushing syndrome","Hypothyroidism"],
+answer:1,
+explanation:"Hyperthyroidism increases metabolism causing weight loss despite appetite."},
+
+{question:"71. Which condition shows low sodium and high potassium?",
+options:["SIADH","Cushing syndrome","Addison disease","Hyperthyroidism"],
+answer:2,
+explanation:"Addison disease causes hyponatremia and hyperkalemia."},
+
+{question:"72. Which thyroid cancer spreads hematogenously?",
+options:["Papillary carcinoma","Medullary carcinoma","Anaplastic carcinoma","Follicular carcinoma"],
+answer:3,
+explanation:"Follicular carcinoma spreads via bloodstream."},
+
+{question:"73. Which drug causes hypoglycemia by increasing insulin release?",
+options:["Metformin","Sulfonylureas","SGLT2 inhibitors","GLP-1 agonists"],
+answer:1,
+explanation:"Sulfonylureas stimulate insulin secretion."},
+
+{question:"74. Which condition shows increased ADH secretion?",
+options:["Addison disease","Diabetes insipidus","SIADH","Cushing syndrome"],
+answer:2,
+explanation:"SIADH causes excessive ADH secretion."},
+
+{question:"75. Which endocrine disorder is associated with hyperpigmentation?",
+options:["Hypothyroidism","Hyperparathyroidism","Addison disease","Cushing syndrome"],
+answer:2,
+explanation:"Increased ACTH in Addison disease causes hyperpigmentation."},
+
+{question:"76. A patient with acromegaly fails to suppress GH after glucose load. What is the underlying mechanism?",
+options:["Decreased IGF-1 production","Autonomous GH secretion","Increased insulin sensitivity","Reduced pituitary size"],
+answer:1,
+explanation:"Acromegaly involves autonomous GH secretion which is not suppressed by glucose."},
+
+{question:"77. Which electrolyte abnormality is most characteristic of SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"SIADH leads to dilutional hyponatremia."},
+
+{question:"78. A patient with hypercalcemia has shortened QT interval. Cause:",
+options:["Hypoparathyroidism","Vitamin D deficiency","Hyperparathyroidism","Hypothyroidism"],
+answer:2,
+explanation:"Hypercalcemia shortens QT interval and is seen in hyperparathyroidism."},
+
+{question:"79. Which hormone directly stimulates aldosterone secretion?",
+options:["ACTH","Angiotensin II","TSH","ADH"],
+answer:1,
+explanation:"Angiotensin II is the main regulator of aldosterone secretion."},
+
+{question:"80. Which diabetes complication is reversible with tight glycemic control?",
+options:["Neuropathy","Retinopathy","Nephropathy","Autonomic dysfunction"],
+answer:0,
+explanation:"Early diabetic neuropathy may be reversible with good glycemic control."},
+
+{question:"81. Which thyroid condition presents with increased uptake on scan?",
+options:["Subacute thyroiditis","Graves disease","Thyroiditis","Factitious thyrotoxicosis"],
+answer:1,
+explanation:"Graves disease shows increased diffuse uptake on thyroid scan."},
+
+{question:"82. Which feature differentiates primary from secondary hypothyroidism?",
+options:["Low TSH","High TSH","Low T4","High T3"],
+answer:1,
+explanation:"Primary hypothyroidism has elevated TSH due to thyroid failure."},
+
+{question:"83. Which drug is used to treat hypercalcemia in malignancy?",
+options:["Calcitonin","Bisphosphonates","Vitamin D","Calcium supplements"],
+answer:1,
+explanation:"Bisphosphonates inhibit bone resorption and treat hypercalcemia."},
+
+{question:"84. Which condition shows high PTH with normal calcium?",
+options:["Primary hyperparathyroidism","Secondary hyperparathyroidism","Tertiary hyperparathyroidism","Hypoparathyroidism"],
+answer:1,
+explanation:"Secondary hyperparathyroidism shows elevated PTH with normal/low calcium."},
+
+{question:"85. A patient with Cushing syndrome has proximal muscle weakness due to:",
+options:["Protein catabolism","Fat deposition","Electrolyte imbalance","Glycogen storage"],
+answer:0,
+explanation:"Cortisol causes protein breakdown leading to muscle weakness."},
+
+{question:"86. Which hormone is elevated in stress response?",
+options:["Insulin","Cortisol","Thyroxine","Calcitonin"],
+answer:1,
+explanation:"Cortisol is the primary stress hormone."},
+
+{question:"87. Which investigation confirms insulinoma?",
+options:["Fasting insulin level","Random glucose","HbA1c","Urine ketones"],
+answer:0,
+explanation:"High insulin during hypoglycemia confirms insulinoma."},
+
+{question:"88. Which endocrine disorder causes resistant hypertension?",
+options:["Hypothyroidism","Hyperaldosteronism","Hypoparathyroidism","Addison disease"],
+answer:1,
+explanation:"Hyperaldosteronism leads to sodium retention and resistant hypertension."},
+
+{question:"89. Which thyroid hormone is most biologically active?",
+options:["T4","T3","Reverse T3","TSH"],
+answer:1,
+explanation:"T3 is the active form of thyroid hormone."},
+
+{question:"90. Which condition shows high ACTH and high cortisol?",
+options:["Adrenal tumor","Pituitary adenoma","Exogenous steroids","Adrenal insufficiency"],
+answer:1,
+explanation:"Pituitary adenoma (Cushing disease) increases ACTH and cortisol."},
+
+{question:"91. Which drug improves insulin sensitivity?",
+options:["Sulfonylureas","Metformin","Insulin","DPP-4 inhibitors"],
+answer:1,
+explanation:"Metformin improves insulin sensitivity and reduces glucose production."},
+
+{question:"92. Which endocrine disorder is associated with osteoporosis?",
+options:["Cushing syndrome","Addison disease","Hypothyroidism","SIADH"],
+answer:0,
+explanation:"Excess cortisol causes bone resorption leading to osteoporosis."},
+
+{question:"93. Which test is best to diagnose secondary adrenal insufficiency?",
+options:["ACTH stimulation test","Serum cortisol","MRI adrenal","Urinary cortisol"],
+answer:0,
+explanation:"ACTH stimulation test helps differentiate primary vs secondary causes."},
+
+{question:"94. Which hormone decreases blood glucose?",
+options:["Glucagon","Insulin","Cortisol","Growth hormone"],
+answer:1,
+explanation:"Insulin lowers blood glucose levels."},
+
+{question:"95. Which condition causes hyperkalemia?",
+options:["Cushing syndrome","Hyperaldosteronism","Addison disease","Hyperthyroidism"],
+answer:2,
+explanation:"Addison disease leads to aldosterone deficiency causing hyperkalemia."},
+
+{question:"96. Which thyroid cancer produces calcitonin?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:2,
+explanation:"Medullary carcinoma arises from C cells producing calcitonin."},
+
+{question:"97. Which condition shows increased urine output with low ADH?",
+options:["SIADH","Central diabetes insipidus","Hyperaldosteronism","Cushing syndrome"],
+answer:1,
+explanation:"Central DI is due to ADH deficiency causing polyuria."},
+
+{question:"98. Which endocrine disorder presents with hyperpigmentation and hypotension?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","Hypoparathyroidism"],
+answer:1,
+explanation:"Addison disease causes increased ACTH leading to pigmentation and hypotension."},
+
+{question:"99. Which electrolyte imbalance occurs in hyperaldosteronism?",
+options:["Hyperkalemia","Hypokalemia","Hyponatremia","Hypercalcemia"],
+answer:1,
+explanation:"Aldosterone causes potassium loss leading to hypokalemia."},
+
+{question:"100. Which endocrine tumor is associated with MEN-2 syndrome?",
+options:["Pituitary adenoma","Medullary thyroid carcinoma","Adrenal adenoma","Parathyroid hyperplasia"],
+answer:1,
+explanation:"MEN-2 is associated with medullary thyroid carcinoma."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 6000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
