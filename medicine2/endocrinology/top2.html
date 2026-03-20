@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 2 – ENDOCRINOLOGY – Top 50 Final-2 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient with long-standing type 2 diabetes develops proteinuria but normal serum creatinine. Most sensitive marker:",
+options:["Serum creatinine","24-hour protein","Microalbuminuria","Urine routine"],
+answer:2,
+explanation:"Microalbuminuria is the earliest marker of diabetic nephropathy."},
+
+{question:"2. Which condition is characterized by high calcium, low phosphate, and increased PTH?",
+options:["Vitamin D deficiency","Primary hyperparathyroidism","Hypoparathyroidism","Renal failure"],
+answer:1,
+explanation:"Primary hyperparathyroidism increases calcium and decreases phosphate."},
+
+{question:"3. A patient presents with heat intolerance, tremor, and weight loss. Which lab finding is expected?",
+options:["High TSH","Low T4","Low TSH","Normal T3"],
+answer:2,
+explanation:"Hyperthyroidism suppresses TSH."},
+
+{question:"4. Which hormone primarily acts via nuclear receptors?",
+options:["Insulin","Thyroid hormone","ADH","Glucagon"],
+answer:1,
+explanation:"Thyroid hormones act via nuclear receptors altering gene transcription."},
+
+{question:"5. A patient with adrenal insufficiency has which electrolyte abnormality?",
+options:["Hypernatremia","Hypokalemia","Hyponatremia","Hypercalcemia"],
+answer:2,
+explanation:"Hyponatremia is common in adrenal insufficiency."},
+
+{question:"6. Which drug can precipitate thyroid storm?",
+options:["Propranolol withdrawal","Radioiodine therapy","Iodinated contrast","Methimazole"],
+answer:2,
+explanation:"Iodine load can precipitate thyroid storm in susceptible individuals."},
+
+{question:"7. Which endocrine tumor is associated with MEN-1 syndrome?",
+options:["Medullary thyroid carcinoma","Parathyroid adenoma","Pheochromocytoma","Adrenal carcinoma"],
+answer:1,
+explanation:"MEN-1 involves parathyroid, pancreas, and pituitary tumors."},
+
+{question:"8. Which condition presents with increased ACTH but low cortisol?",
+options:["Primary adrenal insufficiency","Secondary adrenal insufficiency","Cushing disease","Adrenal adenoma"],
+answer:0,
+explanation:"Primary adrenal failure leads to high ACTH with low cortisol."},
+
+{question:"9. Which hormone increases renal potassium excretion?",
+options:["Insulin","Aldosterone","PTH","ADH"],
+answer:1,
+explanation:"Aldosterone promotes potassium excretion."},
+
+{question:"10. A patient with acromegaly most likely has which feature?",
+options:["Short stature","Prognathism","Decreased IGF-1","Hypoglycemia"],
+answer:1,
+explanation:"Acromegaly causes jaw enlargement and soft tissue growth."},
+
+{question:"11. Which test differentiates central from nephrogenic diabetes insipidus?",
+options:["Serum sodium","Water deprivation test","Desmopressin response","Urine osmolality"],
+answer:2,
+explanation:"Central DI responds to desmopressin; nephrogenic does not."},
+
+{question:"12. Which endocrine disorder is associated with hypercalcemia and bone resorption?",
+options:["Hypoparathyroidism","Hyperparathyroidism","SIADH","Hypothyroidism"],
+answer:1,
+explanation:"Excess PTH increases bone resorption."},
+
+{question:"13. Which hormone has a circadian rhythm peaking in early morning?",
+options:["Insulin","Cortisol","TSH","Prolactin"],
+answer:1,
+explanation:"Cortisol peaks in early morning."},
+
+{question:"14. Which diabetes drug decreases intestinal glucose absorption?",
+options:["Metformin","Alpha-glucosidase inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"Alpha-glucosidase inhibitors delay carbohydrate absorption."},
+
+{question:"15. A patient presents with episodic palpitations and hypertension. Which lab test is most appropriate?",
+options:["TSH","Serum cortisol","Urinary metanephrines","Serum calcium"],
+answer:2,
+explanation:"Metanephrines are best for diagnosing pheochromocytoma."},
+
+{question:"16. A patient with long-standing diabetes develops gastroparesis. The underlying cause is:",
+options:["Macroangiopathy","Autonomic neuropathy","Nephropathy","Retinopathy"],
+answer:1,
+explanation:"Autonomic neuropathy affects GI motility causing gastroparesis."},
+
+{question:"17. Which hormone increases bone resorption indirectly via osteoclast activation?",
+options:["Calcitonin","Parathyroid hormone","Vitamin D","Insulin"],
+answer:1,
+explanation:"PTH stimulates osteoblasts to activate osteoclasts indirectly."},
+
+{question:"18. A patient presents with low TSH and low T4. Most likely diagnosis:",
+options:["Primary hypothyroidism","Secondary hypothyroidism","Subclinical hypothyroidism","Hyperthyroidism"],
+answer:1,
+explanation:"Secondary hypothyroidism is due to pituitary failure."},
+
+{question:"19. Which endocrine disorder is associated with hypercalcemia and pancreatitis?",
+options:["Hypoparathyroidism","Hyperparathyroidism","SIADH","Addison disease"],
+answer:1,
+explanation:"Hyperparathyroidism can cause pancreatitis due to hypercalcemia."},
+
+{question:"20. Which drug class delays gastric emptying and promotes satiety?",
+options:["SGLT2 inhibitors","GLP-1 agonists","Sulfonylureas","Metformin"],
+answer:1,
+explanation:"GLP-1 agonists slow gastric emptying and increase satiety."},
+
+{question:"21. Which condition is characterized by increased cortisol with suppressed ACTH?",
+options:["Pituitary adenoma","Adrenal adenoma","Ectopic ACTH","Addison disease"],
+answer:1,
+explanation:"Adrenal tumors produce cortisol suppressing ACTH."},
+
+{question:"22. Which electrolyte abnormality is seen in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hypokalemia","Hypercalcemia"],
+answer:1,
+explanation:"SIADH leads to dilutional hyponatremia."},
+
+{question:"23. Which hormone stimulates lipolysis and increases blood glucose?",
+options:["Insulin","Growth hormone","Calcitonin","Aldosterone"],
+answer:1,
+explanation:"GH increases lipolysis and raises glucose levels."},
+
+{question:"24. Which test is most specific for diagnosing pheochromocytoma?",
+options:["Serum cortisol","Urinary metanephrines","Plasma glucose","TSH"],
+answer:1,
+explanation:"Urinary metanephrines are highly specific."},
+
+{question:"25. A patient with DKA has which potassium status?",
+options:["Low serum potassium","Normal potassium","High serum potassium","No change"],
+answer:2,
+explanation:"Serum potassium may be elevated despite total body depletion."},
+
+{question:"26. Which endocrine disorder causes increased bone density?",
+options:["Hyperparathyroidism","Hypoparathyroidism","Cushing syndrome","Hyperthyroidism"],
+answer:1,
+explanation:"Hypoparathyroidism reduces bone turnover increasing density."},
+
+{question:"27. Which thyroid cancer is associated with RET mutation?",
+options:["Papillary carcinoma","Medullary carcinoma","Follicular carcinoma","Anaplastic carcinoma"],
+answer:1,
+explanation:"RET mutation is seen in medullary carcinoma."},
+
+{question:"28. Which hormone primarily regulates circadian rhythm?",
+options:["Melatonin","Cortisol","TSH","Insulin"],
+answer:0,
+explanation:"Melatonin regulates circadian rhythm."},
+
+{question:"29. Which endocrine disorder presents with muscle weakness due to hyperkalemia?",
+options:["Hyperaldosteronism","Addison disease","Cushing syndrome","Hypothyroidism"],
+answer:1,
+explanation:"Addison disease causes hyperkalemia leading to weakness."},
+
+{question:"30. Which drug reduces intestinal glucose absorption?",
+options:["Metformin","Alpha-glucosidase inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"Alpha-glucosidase inhibitors delay carbohydrate absorption."},
+
+{question:"31. A patient with hypercalcemia has low PTH and high phosphate. Most likely cause:",
+options:["Primary hyperparathyroidism","Vitamin D intoxication","Malignancy","Hypoparathyroidism"],
+answer:1,
+explanation:"Vitamin D intoxication increases both calcium and phosphate with suppressed PTH."},
+
+{question:"32. A patient with resistant hypertension and low renin levels is suspected to have:",
+options:["Secondary hyperaldosteronism","Primary hyperaldosteronism","Addison disease","Cushing syndrome"],
+answer:1,
+explanation:"Primary hyperaldosteronism suppresses renin."},
+
+{question:"33. Which hormone deficiency leads to inability to concentrate urine despite normal kidneys?",
+options:["ADH","Aldosterone","Cortisol","Renin"],
+answer:0,
+explanation:"ADH deficiency causes central diabetes insipidus."},
+
+{question:"34. A patient with thyroid storm is best initially managed with:",
+options:["Radioiodine","Beta-blockers","Thyroidectomy","Levothyroxine"],
+answer:1,
+explanation:"Beta-blockers control adrenergic symptoms urgently."},
+
+{question:"35. Which endocrine disorder presents with hyperpigmentation and salt craving?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","Hypopituitarism"],
+answer:1,
+explanation:"Addison disease causes increased ACTH and salt craving."},
+
+{question:"36. Which test differentiates ectopic ACTH from pituitary ACTH production?",
+options:["Low-dose dexamethasone test","High-dose dexamethasone test","Serum cortisol","ACTH level"],
+answer:1,
+explanation:"High-dose dexamethasone suppresses pituitary but not ectopic ACTH."},
+
+{question:"37. Which condition shows increased urinary calcium excretion?",
+options:["Familial hypocalciuric hypercalcemia","Primary hyperparathyroidism","Hypoparathyroidism","Vitamin D deficiency"],
+answer:1,
+explanation:"Primary hyperparathyroidism increases urinary calcium."},
+
+{question:"38. A patient with hyperthyroidism develops muscle weakness. Mechanism:",
+options:["Hypokalemia due to aldosterone","Increased protein catabolism","Decreased ATP production","Increased calcium deposition"],
+answer:1,
+explanation:"Thyroid hormone increases protein breakdown causing weakness."},
+
+{question:"39. Which drug is most appropriate in a patient with type 2 diabetes and heart failure?",
+options:["Thiazolidinediones","SGLT2 inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"SGLT2 inhibitors improve heart failure outcomes."},
+
+{question:"40. Which endocrine disorder shows increased ACTH with normal cortisol rhythm loss?",
+options:["Cushing disease","Adrenal adenoma","Exogenous steroids","Hypothyroidism"],
+answer:0,
+explanation:"Cushing disease disrupts normal circadian rhythm."},
+
+{question:"41. Which electrolyte abnormality is most likely in secondary adrenal insufficiency?",
+options:["Hyperkalemia","Hyponatremia","Hypernatremia","Hypocalcemia"],
+answer:1,
+explanation:"Hyponatremia occurs due to cortisol deficiency; potassium usually normal."},
+
+{question:"42. Which thyroid condition shows high T3 but normal T4?",
+options:["Subclinical hypothyroidism","T3 toxicosis","Hashimoto thyroiditis","Myxedema coma"],
+answer:1,
+explanation:"T3 toxicosis shows isolated T3 elevation."},
+
+{question:"43. Which hormone is responsible for increasing renal phosphate excretion?",
+options:["Vitamin D","Parathyroid hormone","Calcitonin","Insulin"],
+answer:1,
+explanation:"PTH decreases phosphate reabsorption in kidney."},
+
+{question:"44. Which condition presents with episodic hypoglycemia relieved by eating?",
+options:["Glucagonoma","Insulinoma","Somatostatinoma","VIPoma"],
+answer:1,
+explanation:"Insulinoma causes fasting hypoglycemia relieved by food."},
+
+{question:"45. Which endocrine disorder is associated with increased bone turnover and fracture risk?",
+options:["Hypoparathyroidism","Hyperparathyroidism","SIADH","Addison disease"],
+answer:1,
+explanation:"Excess PTH increases bone resorption."},
+
+{question:"31. A patient with hypercalcemia has low PTH and high phosphate. Most likely cause:",
+options:["Primary hyperparathyroidism","Vitamin D intoxication","Malignancy","Hypoparathyroidism"],
+answer:1,
+explanation:"Vitamin D intoxication increases both calcium and phosphate with suppressed PTH."},
+
+{question:"32. A patient with resistant hypertension and low renin levels is suspected to have:",
+options:["Secondary hyperaldosteronism","Primary hyperaldosteronism","Addison disease","Cushing syndrome"],
+answer:1,
+explanation:"Primary hyperaldosteronism suppresses renin."},
+
+{question:"33. Which hormone deficiency leads to inability to concentrate urine despite normal kidneys?",
+options:["ADH","Aldosterone","Cortisol","Renin"],
+answer:0,
+explanation:"ADH deficiency causes central diabetes insipidus."},
+
+{question:"34. A patient with thyroid storm is best initially managed with:",
+options:["Radioiodine","Beta-blockers","Thyroidectomy","Levothyroxine"],
+answer:1,
+explanation:"Beta-blockers control adrenergic symptoms urgently."},
+
+{question:"35. Which endocrine disorder presents with hyperpigmentation and salt craving?",
+options:["Cushing syndrome","Addison disease","Hyperthyroidism","Hypopituitarism"],
+answer:1,
+explanation:"Addison disease causes increased ACTH and salt craving."},
+
+{question:"36. Which test differentiates ectopic ACTH from pituitary ACTH production?",
+options:["Low-dose dexamethasone test","High-dose dexamethasone test","Serum cortisol","ACTH level"],
+answer:1,
+explanation:"High-dose dexamethasone suppresses pituitary but not ectopic ACTH."},
+
+{question:"37. Which condition shows increased urinary calcium excretion?",
+options:["Familial hypocalciuric hypercalcemia","Primary hyperparathyroidism","Hypoparathyroidism","Vitamin D deficiency"],
+answer:1,
+explanation:"Primary hyperparathyroidism increases urinary calcium."},
+
+{question:"38. A patient with hyperthyroidism develops muscle weakness. Mechanism:",
+options:["Hypokalemia due to aldosterone","Increased protein catabolism","Decreased ATP production","Increased calcium deposition"],
+answer:1,
+explanation:"Thyroid hormone increases protein breakdown causing weakness."},
+
+{question:"39. Which drug is most appropriate in a patient with type 2 diabetes and heart failure?",
+options:["Thiazolidinediones","SGLT2 inhibitors","Sulfonylureas","Insulin"],
+answer:1,
+explanation:"SGLT2 inhibitors improve heart failure outcomes."},
+
+{question:"40. Which endocrine disorder shows increased ACTH with normal cortisol rhythm loss?",
+options:["Cushing disease","Adrenal adenoma","Exogenous steroids","Hypothyroidism"],
+answer:0,
+explanation:"Cushing disease disrupts normal circadian rhythm."},
+
+{question:"41. Which electrolyte abnormality is most likely in secondary adrenal insufficiency?",
+options:["Hyperkalemia","Hyponatremia","Hypernatremia","Hypocalcemia"],
+answer:1,
+explanation:"Hyponatremia occurs due to cortisol deficiency; potassium usually normal."},
+
+{question:"42. Which thyroid condition shows high T3 but normal T4?",
+options:["Subclinical hypothyroidism","T3 toxicosis","Hashimoto thyroiditis","Myxedema coma"],
+answer:1,
+explanation:"T3 toxicosis shows isolated T3 elevation."},
+
+{question:"43. Which hormone is responsible for increasing renal phosphate excretion?",
+options:["Vitamin D","Parathyroid hormone","Calcitonin","Insulin"],
+answer:1,
+explanation:"PTH decreases phosphate reabsorption in kidney."},
+
+{question:"44. Which condition presents with episodic hypoglycemia relieved by eating?",
+options:["Glucagonoma","Insulinoma","Somatostatinoma","VIPoma"],
+answer:1,
+explanation:"Insulinoma causes fasting hypoglycemia relieved by food."},
+
+{question:"45. Which endocrine disorder is associated with increased bone turnover and fracture risk?",
+options:["Hypoparathyroidism","Hyperparathyroidism","SIADH","Addison disease"],
+answer:1,
+explanation:"Excess PTH increases bone resorption."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
