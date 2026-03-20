@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 50:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+<h2>Medicine 2 – ENDOCRINOLOGY – Top 50 Final-3 MCQs</h2>
+
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. A patient with long-standing hyperthyroidism develops osteoporosis. Mechanism:",
+options:["Increased osteoblast activity","Increased bone resorption","Decreased calcium absorption","Reduced vitamin D activation"],
+answer:1,
+explanation:"Thyroid hormone increases bone turnover with net resorption."},
+
+{question:"2. A patient presents with hypoglycemia, low insulin, and low C-peptide. Likely cause:",
+options:["Insulinoma","Exogenous insulin use","Adrenal insufficiency","Factitious hypoglycemia"],
+answer:2,
+explanation:"Low insulin + low C-peptide suggests non-insulin mediated cause like adrenal insufficiency."},
+
+{question:"3. Which hormone is most responsible for nocturnal growth hormone secretion?",
+options:["Somatostatin","Ghrelin","GHRH","Dopamine"],
+answer:2,
+explanation:"GHRH stimulates GH release, especially during sleep."},
+
+{question:"4. A patient with hypercalcemia has elevated 1,25-(OH)2 vitamin D and low PTH. Diagnosis:",
+options:["Primary hyperparathyroidism","Sarcoidosis","Malignancy (PTHrP)","Vitamin D deficiency"],
+answer:1,
+explanation:"Granulomatous diseases increase vitamin D activation."},
+
+{question:"5. Which endocrine disorder is associated with delayed puberty and anosmia?",
+options:["Kallmann syndrome","Turner syndrome","Klinefelter syndrome","Hypothyroidism"],
+answer:0,
+explanation:"Kallmann syndrome causes GnRH deficiency with anosmia."},
+
+{question:"6. A patient with SIADH is treated rapidly with hypertonic saline. Most serious complication:",
+options:["Cerebral edema","Osmotic demyelination","Seizures","Hypokalemia"],
+answer:1,
+explanation:"Rapid correction causes central pontine myelinolysis."},
+
+{question:"7. Which hormone primarily regulates potassium balance?",
+options:["ADH","Aldosterone","Cortisol","Insulin"],
+answer:1,
+explanation:"Aldosterone controls potassium excretion."},
+
+{question:"8. A patient with Cushing syndrome shows low ACTH and high cortisol. Cause:",
+options:["Pituitary adenoma","Adrenal tumor","Ectopic ACTH","Exogenous steroids"],
+answer:1,
+explanation:"Adrenal tumors suppress ACTH."},
+
+{question:"9. Which thyroid condition shows high TSH receptor antibodies?",
+options:["Hashimoto thyroiditis","Graves disease","Subacute thyroiditis","Toxic adenoma"],
+answer:1,
+explanation:"Graves disease involves TSH receptor stimulating antibodies."},
+
+{question:"10. Which condition leads to increased insulin resistance?",
+options:["Addison disease","Acromegaly","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"GH excess causes insulin resistance."},
+
+{question:"11. A patient has hypernatremia with high urine osmolality. Likely diagnosis:",
+options:["Central DI","Nephrogenic DI","Dehydration","SIADH"],
+answer:2,
+explanation:"Dehydration causes concentrated urine with hypernatremia."},
+
+{question:"12. Which hormone increases renal calcium excretion?",
+options:["Parathyroid hormone","Calcitonin","Vitamin D","Aldosterone"],
+answer:1,
+explanation:"Calcitonin reduces calcium reabsorption."},
+
+{question:"13. A patient with episodic hypertension has elevated catecholamines but normal imaging. Next step:",
+options:["Repeat imaging","Genetic testing","Clonidine suppression test","Measure cortisol"],
+answer:2,
+explanation:"Clonidine suppression helps confirm pheochromocytoma."},
+
+{question:"14. Which endocrine disorder is associated with hypercalcemia and metabolic alkalosis?",
+options:["Addison disease","Hyperaldosteronism","Milk-alkali syndrome","SIADH"],
+answer:2,
+explanation:"Milk-alkali syndrome causes hypercalcemia + alkalosis."},
+
+{question:"15. Which hormone deficiency leads to decreased gluconeogenesis?",
+options:["Cortisol","Glucagon","Growth hormone","Thyroxine"],
+answer:0,
+explanation:"Cortisol is essential for gluconeogenesis."},
+
+{question:"16. A patient with hypercalcemia has high urinary calcium and elevated PTH. Most likely diagnosis:",
+options:["Familial hypocalciuric hypercalcemia","Primary hyperparathyroidism","Malignancy-related hypercalcemia","Vitamin D intoxication"],
+answer:1,
+explanation:"Primary hyperparathyroidism shows high PTH and increased urinary calcium."},
+
+{question:"17. Which condition shows increased cortisol with loss of suppression on low-dose dexamethasone but suppression on high-dose?",
+options:["Ectopic ACTH syndrome","Adrenal adenoma","Cushing disease","Exogenous steroid use"],
+answer:2,
+explanation:"Pituitary adenoma suppresses with high-dose dexamethasone."},
+
+{question:"18. A patient with diabetes presents with hyperglycemia, no ketones, and severe dehydration. Diagnosis:",
+options:["Diabetic ketoacidosis","Hyperosmolar hyperglycemic state","Lactic acidosis","Hypoglycemia"],
+answer:1,
+explanation:"HHS presents with severe hyperglycemia without ketosis."},
+
+{question:"19. Which hormone decreases insulin sensitivity the most?",
+options:["Growth hormone","Cortisol","Glucagon","Thyroxine"],
+answer:0,
+explanation:"GH causes marked insulin resistance."},
+
+{question:"20. A patient with low sodium, low cortisol, and high ACTH most likely has:",
+options:["Secondary adrenal insufficiency","Primary adrenal insufficiency","Cushing syndrome","SIADH"],
+answer:1,
+explanation:"Primary adrenal insufficiency shows high ACTH."},
+
+{question:"21. Which condition presents with low TSH, high T3, and normal T4?",
+options:["Graves disease","T3 toxicosis","Thyroiditis","Hypothyroidism"],
+answer:1,
+explanation:"T3 toxicosis shows isolated T3 elevation."},
+
+{question:"22. Which hormone is responsible for increasing free water reabsorption?",
+options:["Aldosterone","ADH","Renin","Cortisol"],
+answer:1,
+explanation:"ADH increases water reabsorption in collecting ducts."},
+
+{question:"23. A patient with episodic hypertension has elevated metanephrines but normal catecholamines. Interpretation:",
+options:["False positive","Pheochromocytoma","Adrenal insufficiency","Cushing syndrome"],
+answer:1,
+explanation:"Metanephrines are more sensitive markers."},
+
+{question:"24. Which endocrine disorder shows increased bone density?",
+options:["Hyperparathyroidism","Hypoparathyroidism","Hyperthyroidism","Cushing syndrome"],
+answer:1,
+explanation:"Reduced bone turnover increases density."},
+
+{question:"25. A patient with central obesity, hypertension, and hyperglycemia likely has:",
+options:["Addison disease","Cushing syndrome","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"Cushing syndrome causes metabolic syndrome features."},
+
+{question:"26. Which test is best to differentiate central vs nephrogenic DI?",
+options:["Serum osmolality","Water deprivation test","Desmopressin response","Urine sodium"],
+answer:2,
+explanation:"Central DI responds to desmopressin."},
+
+{question:"27. Which condition causes hyperkalemia with metabolic acidosis?",
+options:["Hyperaldosteronism","Addison disease","Cushing syndrome","SIADH"],
+answer:1,
+explanation:"Addison disease causes aldosterone deficiency."},
+
+{question:"28. Which thyroid cancer is most aggressive?",
+options:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],
+answer:3,
+explanation:"Anaplastic carcinoma is highly aggressive."},
+
+{question:"29. A patient with hypoglycemia has high insulin but low C-peptide. Diagnosis:",
+options:["Insulinoma","Exogenous insulin use","Factitious hypoglycemia","Glucagon deficiency"],
+answer:1,
+explanation:"Exogenous insulin suppresses C-peptide."},
+
+{question:"30. Which hormone increases hepatic gluconeogenesis the most?",
+options:["Insulin","Cortisol","GLP-1","Somatostatin"],
+answer:1,
+explanation:"Cortisol promotes gluconeogenesis."},
+
+{question:"31. A patient has hypercalcemia, low PTH, high 1,25-(OH)2D, and normal phosphate. Most likely diagnosis:",
+options:["Primary hyperparathyroidism","Malignancy (PTHrP)","Sarcoidosis","Vitamin D deficiency"],
+answer:2,
+explanation:"Granulomatous disease increases active vitamin D independent of PTH."},
+
+{question:"32. Which condition shows failure of cortisol suppression with both low- and high-dose dexamethasone?",
+options:["Cushing disease","Adrenal adenoma","Ectopic ACTH syndrome","Pseudo-Cushing state"],
+answer:2,
+explanation:"Ectopic ACTH is not suppressible."},
+
+{question:"33. A patient with hyponatremia has low serum osmolality but urine sodium >40 mmol/L. Diagnosis:",
+options:["Dehydration","SIADH","Addison disease","Nephrotic syndrome"],
+answer:1,
+explanation:"SIADH shows inappropriately high urine sodium."},
+
+{question:"34. Which hormone has the strongest effect on increasing basal metabolic rate?",
+options:["Insulin","Thyroxine","Cortisol","Growth hormone"],
+answer:1,
+explanation:"Thyroid hormone directly increases BMR."},
+
+{question:"35. A patient with hyperthyroidism develops atrial fibrillation. Underlying mechanism:",
+options:["Increased beta-adrenergic receptor sensitivity","Decreased cardiac output","Electrolyte imbalance","Increased vagal tone"],
+answer:0,
+explanation:"Thyroid hormones increase beta-receptor sensitivity."},
+
+{question:"36. Which condition presents with hypocalcemia, hyperphosphatemia, and low PTH?",
+options:["Vitamin D deficiency","Hypoparathyroidism","Chronic kidney disease","Hyperparathyroidism"],
+answer:1,
+explanation:"Low PTH leads to decreased calcium and increased phosphate."},
+
+{question:"37. A patient with high cortisol, low ACTH, and adrenal mass most likely has:",
+options:["Cushing disease","Adrenal adenoma","Ectopic ACTH","Hypopituitarism"],
+answer:1,
+explanation:"Adrenal source suppresses ACTH."},
+
+{question:"38. Which test is most appropriate to confirm insulinoma?",
+options:["HbA1c","Fasting insulin with hypoglycemia","Random glucose","Urine ketones"],
+answer:1,
+explanation:"Inappropriately high insulin during hypoglycemia confirms insulinoma."},
+
+{question:"39. A patient with acromegaly has failure of GH suppression after glucose load. Interpretation:",
+options:["Normal response","Acromegaly confirmed","GH deficiency","Pituitary failure"],
+answer:1,
+explanation:"GH should suppress; failure indicates acromegaly."},
+
+{question:"40. Which electrolyte abnormality is expected in SIADH?",
+options:["Hypernatremia","Hyponatremia","Hyperkalemia","Hypocalcemia"],
+answer:1,
+explanation:"Dilutional hyponatremia is hallmark."},
+
+{question:"41. Which endocrine disorder causes decreased bone mineral density due to cortisol excess?",
+options:["Addison disease","Cushing syndrome","Hypothyroidism","SIADH"],
+answer:1,
+explanation:"Cortisol excess leads to osteoporosis."},
+
+{question:"42. A patient presents with hyperglycemia, weight loss, and low insulin levels. Diagnosis:",
+options:["Type 1 diabetes mellitus","Type 2 diabetes mellitus","Insulinoma","Cushing syndrome"],
+answer:0,
+explanation:"Type 1 DM involves insulin deficiency."},
+
+{question:"43. Which hormone primarily stimulates hepatic glucose output during fasting?",
+options:["Insulin","Glucagon","Somatostatin","Calcitonin"],
+answer:1,
+explanation:"Glucagon promotes gluconeogenesis and glycogenolysis."},
+
+{question:"44. Which thyroid condition shows high TSH receptor antibodies with diffuse goiter?",
+options:["Hashimoto thyroiditis","Graves disease","Subacute thyroiditis","Toxic adenoma"],
+answer:1,
+explanation:"Graves disease is antibody-mediated hyperthyroidism."},
+
+{question:"45. A patient with adrenal insufficiency develops shock during stress. Cause:",
+options:["Excess catecholamines","Inadequate cortisol response","Hyperglycemia","Fluid overload"],
+answer:1,
+explanation:"Cortisol is required for stress response."},
+
+{question:"46. A patient presents with hypercalcemia, suppressed PTH, elevated ACE levels, and bilateral hilar lymphadenopathy. Most likely cause:",
+options:["Primary hyperparathyroidism","Sarcoidosis","Malignancy (PTHrP)","Vitamin D deficiency"],
+answer:1,
+explanation:"Sarcoidosis increases 1,25-(OH)2D via macrophages causing hypercalcemia."},
+
+{question:"47. A patient with suspected Cushing syndrome has high cortisol, high ACTH, and no suppression with high-dose dexamethasone. Diagnosis:",
+options:["Cushing disease","Adrenal adenoma","Ectopic ACTH syndrome","Exogenous steroid use"],
+answer:2,
+explanation:"Ectopic ACTH is not suppressed even with high-dose dexamethasone."},
+
+{question:"48. A patient with hyponatremia has low serum osmolality, high urine osmolality, and low uric acid. Most likely diagnosis:",
+options:["SIADH","Addison disease","Nephrotic syndrome","Diabetes insipidus"],
+answer:0,
+explanation:"SIADH causes euvolemic hyponatremia with low uric acid."},
+
+{question:"49. A patient presents with hypoglycemia. Labs show high insulin, high C-peptide, and negative sulfonylurea screen. Diagnosis:",
+options:["Exogenous insulin use","Insulinoma","Factitious hypoglycemia","Adrenal insufficiency"],
+answer:1,
+explanation:"Endogenous insulin production with high C-peptide indicates insulinoma."},
+
+{question:"50. A patient with hyperthyroidism has low uptake on scan and elevated ESR. Most likely diagnosis:",
+options:["Graves disease","Subacute thyroiditis","Toxic adenoma","TSH-secreting adenoma"],
+answer:1,
+explanation:"Subacute thyroiditis shows low uptake and inflammatory markers."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 3000
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
