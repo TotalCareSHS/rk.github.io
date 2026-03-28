@@ -121,7 +121,13 @@ function answer(i) {
   } else {
     opts[i].classList.add("wrong");
     opts[q.answer].classList.add("correct");
-    wrong++;
+    wrong++
+     // 🔥 ADD HERE
+  if(wrong >= 5){
+    alert("Patient died due to too many wrong decisions.")
+    finishQuiz()
+    return
+  }
   }
 
   document.getElementById("correct").innerText = correct;
