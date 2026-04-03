@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Respiratory – Expected MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Which immunoglobulin is primarily responsible for mucosal immunity?",
+options:["IgG","IgA","IgM","IgE"],
+answer:1,
+explanation:"IgA is the main immunoglobulin in mucosal secretions like saliva and breast milk."},
+
+{question:"2. Which cell is primarily responsible for antigen presentation to naive T cells?",
+options:["Macrophages","Dendritic cells","B lymphocytes","Neutrophils"],
+answer:1,
+explanation:"Dendritic cells are the most potent antigen-presenting cells for naive T cells."},
+
+{question:"3. A deficiency of C5–C9 complement components predisposes to infection with:",
+options:["Staphylococcus aureus","Neisseria species","Streptococcus pneumoniae","Haemophilus influenzae"],
+answer:1,
+explanation:"Terminal complement deficiency increases susceptibility to Neisseria infections."},
+
+{question:"4. Which hypersensitivity reaction is mediated by immune complexes?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Type III hypersensitivity involves immune complex deposition."},
+
+{question:"5. Which cytokine is most important for activation of macrophages?",
+options:["IL-4","IFN-gamma","IL-10","TNF-beta"],
+answer:1,
+explanation:"IFN-gamma activates macrophages and enhances microbicidal activity."},
+
+{question:"6. A patient with recurrent viral infections most likely has deficiency of:",
+options:["B cells","T cells","Neutrophils","Complement"],
+answer:1,
+explanation:"T cells are crucial for viral immunity."},
+
+{question:"7. Which immunoglobulin is produced first during primary immune response?",
+options:["IgG","IgA","IgM","IgE"],
+answer:2,
+explanation:"IgM is the first antibody produced in primary response."},
+
+{question:"8. Which major histocompatibility complex presents antigen to CD8+ T cells?",
+options:["MHC I","MHC II","MHC III","CD1"],
+answer:0,
+explanation:"MHC I presents endogenous antigens to CD8+ T cells."},
+
+{question:"9. Which hypersensitivity reaction is delayed and T-cell mediated?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Type IV is delayed hypersensitivity mediated by T cells."},
+
+{question:"10. Which cell type is most involved in allergic reactions?",
+options:["Neutrophils","Basophils","Eosinophils","Monocytes"],
+answer:2,
+explanation:"Eosinophils play a key role in allergic and parasitic responses."},
+
+{question:"11. A patient with selective IgA deficiency is at risk of:",
+options:["Autoimmune diseases","Parasitic infections","Fungal infections","Viral infections"],
+answer:0,
+explanation:"IgA deficiency is associated with autoimmune conditions."},
+
+{question:"12. Which complement pathway is activated by antigen-antibody complexes?",
+options:["Alternative pathway","Lectin pathway","Classical pathway","Intrinsic pathway"],
+answer:2,
+explanation:"Classical pathway is triggered by immune complexes."},
+
+{question:"13. Which interleukin promotes B-cell differentiation into plasma cells?",
+options:["IL-2","IL-4","IL-6","IL-1"],
+answer:2,
+explanation:"IL-6 promotes plasma cell differentiation."},
+
+{question:"14. Which immunodeficiency is characterized by absence of both B and T cells?",
+options:["DiGeorge syndrome","SCID","Wiskott-Aldrich syndrome","Selective IgA deficiency"],
+answer:1,
+explanation:"SCID leads to severe combined deficiency of B and T cells."},
+
+{question:"15. Which antibody crosses the placenta?",
+options:["IgM","IgA","IgG","IgE"],
+answer:2,
+explanation:"IgG is the only antibody that crosses the placenta."},
+
+{question:"16. A patient develops anaphylaxis after penicillin injection. Which immunoglobulin mediates this reaction?",
+options:["IgG","IgM","IgE","IgA"],
+answer:2,
+explanation:"Type I hypersensitivity reactions are mediated by IgE."},
+
+{question:"17. Which complement component is most important for opsonization?",
+options:["C1","C3b","C5","C9"],
+answer:1,
+explanation:"C3b is the key opsonin facilitating phagocytosis."},
+
+{question:"18. A child with recurrent catalase-positive infections likely has:",
+options:["SCID","Chronic granulomatous disease","DiGeorge syndrome","Wiskott-Aldrich syndrome"],
+answer:1,
+explanation:"CGD causes defective NADPH oxidase leading to catalase-positive infections."},
+
+{question:"19. Which cytokine is responsible for differentiation of Th1 cells?",
+options:["IL-4","IL-12","IL-5","IL-10"],
+answer:1,
+explanation:"IL-12 drives Th1 differentiation."},
+
+{question:"20. Which hypersensitivity reaction involves antibody-mediated cytotoxicity?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II involves antibodies against cell surface antigens."},
+
+{question:"21. A patient with DiGeorge syndrome primarily has deficiency of:",
+options:["B cells","T cells","Complement","Neutrophils"],
+answer:1,
+explanation:"Thymic aplasia leads to T-cell deficiency."},
+
+{question:"22. Which interleukin is responsible for eosinophil activation?",
+options:["IL-2","IL-5","IL-6","IL-8"],
+answer:1,
+explanation:"IL-5 activates eosinophils."},
+
+{question:"23. Which immunoglobulin is most effective at complement activation?",
+options:["IgA","IgE","IgM","IgD"],
+answer:2,
+explanation:"IgM is most efficient at activating complement."},
+
+{question:"24. A patient develops serum sickness. This is an example of:",
+options:["Type I hypersensitivity","Type II hypersensitivity","Type III hypersensitivity","Type IV hypersensitivity"],
+answer:2,
+explanation:"Serum sickness is immune complex mediated (Type III)."},
+
+
+{question:"25. Which cell type presents antigen via MHC II molecules?",
+options:["CD8+ T cells","B cells","Neutrophils","RBCs"],
+answer:1,
+explanation:"B cells are professional APCs presenting via MHC II."},
+
+{question:"26. A patient with HIV infection shows decreased which cell type first?",
+options:["CD8+ T cells","CD4+ T cells","B cells","NK cells"],
+answer:1,
+explanation:"HIV targets CD4+ T cells."},
+
+{question:"27. Which cytokine is responsible for fever production?",
+options:["IL-1","IL-4","IL-5","IL-13"],
+answer:0,
+explanation:"IL-1 acts as an endogenous pyrogen."},
+
+{question:"28. Which immunodeficiency is associated with thrombocytopenia and eczema?",
+options:["SCID","Wiskott-Aldrich syndrome","DiGeorge syndrome","CGD"],
+answer:1,
+explanation:"Wiskott-Aldrich presents with eczema, thrombocytopenia, immunodeficiency."},
+
+{question:"29. Which complement pathway is activated independently of antibodies?",
+options:["Classical","Alternative","Lectin","Intrinsic"],
+answer:1,
+explanation:"Alternative pathway does not require antibodies."},
+
+{question:"30. Which molecule is most important for T-cell receptor signaling?",
+options:["CD3","CD4","CD8","MHC II"],
+answer:0,
+explanation:"CD3 transduces signals from TCR."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

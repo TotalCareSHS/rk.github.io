@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 30:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Respiratory System – High Yield MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Which immunoglobulin is most abundant in extracellular fluid?",
+options:["IgM","IgA","IgG","IgE"],
+answer:2,
+explanation:"IgG is the most abundant immunoglobulin in serum and extracellular fluid."},
+
+{question:"2. Which CD marker is present on all T lymphocytes?",
+options:["CD19","CD3","CD20","CD21"],
+answer:1,
+explanation:"CD3 is a pan-T cell marker."},
+
+{question:"3. Which complement component acts as the main opsonin?",
+options:["C5","C3b","C1","C9"],
+answer:1,
+explanation:"C3b enhances phagocytosis via opsonization."},
+
+{question:"4. Tuberculin skin test is an example of:",
+options:["Type II","Type III","Type I","Type IV"],
+answer:3,
+explanation:"It is a delayed hypersensitivity reaction mediated by T cells."},
+
+{question:"5. Which cytokine induces class switching to IgE?",
+options:["IL-2","IL-4","IL-1","IL-6"],
+answer:1,
+explanation:"IL-4 drives IgE production."},
+
+{question:"6. Which immunodeficiency is due to thymic aplasia?",
+options:["SCID","DiGeorge syndrome","CGD","Hyper-IgM syndrome"],
+answer:1,
+explanation:"DiGeorge syndrome involves absent thymus → T-cell deficiency."},
+
+{question:"7. Which antibody is most efficient in complement activation?",
+options:["IgG","IgE","IgA","IgM"],
+answer:3,
+explanation:"IgM is the most effective at activating complement."},
+
+{question:"8. Which molecule presents antigen to CD8+ T cells?",
+options:["MHC II","MHC I","CD4","CD28"],
+answer:1,
+explanation:"MHC I presents endogenous antigens to CD8+ T cells."},
+
+{question:"9. Which cell is the primary antigen-presenting cell?",
+options:["Neutrophil","Dendritic cell","RBC","Platelet"],
+answer:1,
+explanation:"Dendritic cells are the most potent APCs."},
+
+{question:"10. Which immunoglobulin mediates allergic reactions?",
+options:["IgG","IgA","IgE","IgM"],
+answer:2,
+explanation:"IgE is responsible for type I hypersensitivity."},
+
+{question:"11. Which cytokine promotes T-cell proliferation?",
+options:["IL-2","IL-5","IL-10","IL-13"],
+answer:0,
+explanation:"IL-2 is crucial for T-cell growth."},
+
+{question:"12. Defect in NADPH oxidase is seen in:",
+options:["SCID","CGD","DiGeorge syndrome","Wiskott-Aldrich syndrome"],
+answer:1,
+explanation:"CGD leads to defective oxidative burst."},
+
+{question:"13. Which antibody is secreted as a dimer?",
+options:["IgG","IgM","IgA","IgD"],
+answer:2,
+explanation:"Secretory IgA exists as a dimer."},
+
+{question:"14. Which pathway is activated by mannose-binding lectin?",
+options:["Alternative","Lectin","Classical","Intrinsic"],
+answer:1,
+explanation:"Lectin pathway is triggered by mannose-binding lectin."},
+
+{question:"15. Which cell provides innate cytotoxicity without prior sensitization?",
+options:["B cells","NK cells","Macrophages","Plasma cells"],
+answer:1,
+explanation:"NK cells kill virus-infected cells without prior exposure."},
+
+{question:"16. Which immunoglobulin crosses the placenta?",
+options:["IgM","IgE","IgG","IgA"],
+answer:2,
+explanation:"IgG is the only antibody that crosses the placenta."},
+
+{question:"17. Which cell is primarily responsible for antibody production?",
+options:["T lymphocyte","Plasma cell","Macrophage","Neutrophil"],
+answer:1,
+explanation:"Plasma cells are differentiated B cells that produce antibodies."},
+
+{question:"18. Which complement pathway is antibody-independent?",
+options:["Classical","Lectin","Alternative","Intrinsic"],
+answer:2,
+explanation:"Alternative pathway is activated without antibodies."},
+
+{question:"19. Which hypersensitivity reaction involves immune complex deposition?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Type III involves antigen-antibody complexes depositing in tissues."},
+
+{question:"20. Which cytokine activates macrophages?",
+options:["IL-4","IFN-gamma","IL-10","IL-8"],
+answer:1,
+explanation:"IFN-gamma activates macrophages."},
+
+{question:"21. Which disease is associated with absence of B cells?",
+options:["Bruton agammaglobulinemia","SCID","DiGeorge syndrome","CGD"],
+answer:0,
+explanation:"Bruton disease leads to absence of mature B cells."},
+
+{question:"22. Which antibody is first produced in primary immune response?",
+options:["IgG","IgA","IgE","IgM"],
+answer:3,
+explanation:"IgM is the first antibody produced during primary response."},
+
+{question:"23. Which MHC molecule presents endogenous antigens?",
+options:["MHC II","MHC I","CD4","CD40"],
+answer:1,
+explanation:"MHC I presents intracellular antigens to CD8+ T cells."},
+
+{question:"24. Which cell releases histamine in allergic reactions?",
+options:["Neutrophil","Basophil","Macrophage","Dendritic cell"],
+answer:1,
+explanation:"Basophils (and mast cells) release histamine."},
+
+{question:"25. Which cytokine promotes neutrophil chemotaxis?",
+options:["IL-1","IL-8","IL-2","IL-6"],
+answer:1,
+explanation:"IL-8 is a strong neutrophil chemoattractant."},
+
+{question:"26. Which immunodeficiency presents with eczema, thrombocytopenia, and infections?",
+options:["SCID","Wiskott-Aldrich syndrome","CGD","DiGeorge syndrome"],
+answer:1,
+explanation:"Wiskott-Aldrich triad: eczema, thrombocytopenia, recurrent infections."},
+
+{question:"27. Which antibody is involved in mucosal immunity?",
+options:["IgG","IgM","IgA","IgD"],
+answer:2,
+explanation:"IgA is predominant in mucosal secretions."},
+
+{question:"28. Which complement component initiates classical pathway?",
+options:["C3","C5","C1","C9"],
+answer:2,
+explanation:"C1 binds to antigen-antibody complex to initiate pathway."},
+
+{question:"29. Which cell type is decreased in HIV infection?",
+options:["CD8+ T cells","CD4+ T cells","B cells","NK cells"],
+answer:1,
+explanation:"HIV targets CD4+ T helper cells."},
+
+{question:"30. Which hypersensitivity reaction is antibody-mediated cytotoxicity?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II involves antibody-mediated cell destruction."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 1800
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap

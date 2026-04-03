@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<h2>Medicine 1 – Respiratory System – Past Paper MCQs</h2>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="stats">
+Correct: <span id="correct">0</span> |
+Wrong: <span id="wrong">0</span>
+</div>
+
+<div id="timer">Time Left: 75:00</div>
+  
+<link rel="stylesheet" href="../../assets/style.css">
+
+</head>
+
+<body>
+
+<h2>Medicine 1 – Cardiovascular System – Past Paper MCQs</h2>
+
+<div id="progress"></div>
+<div id="quiz"></div>
+<div id="explanation"></div>
+
+<div class="navigation">
+<button onclick="prevQuestion()">Previous</button>
+<button onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="score"></div>
+  <div id="review"></div>
+
+<script>
+
+const questions=[
+
+{question:"1. Which immunoglobulin is the first to be produced in response to an antigen?",
+options:["IgA","IgG","IgM","IgE"],
+answer:2,
+explanation:"IgM is the first antibody produced in primary immune response."},
+
+{question:"2. Which cells are primarily infected by HIV?",
+options:["CD8+ T cells","CD4+ T cells","B lymphocytes","NK cells"],
+answer:1,
+explanation:"HIV targets CD4+ T helper cells."},
+
+{question:"3. Which hypersensitivity reaction is mediated by immune complexes?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Type III reactions involve deposition of antigen-antibody complexes."},
+
+{question:"4. Which immunoglobulin is most abundant in secretions?",
+options:["IgG","IgM","IgA","IgD"],
+answer:2,
+explanation:"IgA is the main antibody in mucosal secretions."},
+
+{question:"5. Which complement component is the main opsonin?",
+options:["C5","C1","C3b","C9"],
+answer:2,
+explanation:"C3b enhances phagocytosis by opsonization."},
+
+{question:"6. Which cell is the most potent antigen-presenting cell?",
+options:["Macrophage","B cell","Dendritic cell","Neutrophil"],
+answer:2,
+explanation:"Dendritic cells are the most effective APCs."},
+
+{question:"7. Which immunoglobulin crosses the placenta?",
+options:["IgM","IgA","IgG","IgE"],
+answer:2,
+explanation:"IgG provides passive immunity to fetus."},
+
+{question:"8. Which cytokine is responsible for T-cell proliferation?",
+options:["IL-1","IL-4","IL-2","IL-6"],
+answer:2,
+explanation:"IL-2 stimulates T-cell growth."},
+
+{question:"9. Which MHC class presents antigen to CD8+ T cells?",
+options:["MHC II","MHC I","CD4","CD40"],
+answer:1,
+explanation:"MHC I presents endogenous antigens to CD8+ T cells."},
+
+{question:"10. Which hypersensitivity reaction is delayed type?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Type IV is T-cell mediated delayed hypersensitivity."},
+
+{question:"11. Which antibody is most effective at complement activation?",
+options:["IgA","IgE","IgM","IgD"],
+answer:2,
+explanation:"IgM strongly activates complement."},
+
+{question:"12. Which disease is caused by NADPH oxidase deficiency?",
+options:["SCID","DiGeorge syndrome","CGD","Wiskott-Aldrich syndrome"],
+answer:2,
+explanation:"CGD involves defective oxidative burst in phagocytes."},
+
+{question:"13. Which pathway of complement is activated without antibodies?",
+options:["Classical","Lectin","Alternative","Intrinsic"],
+answer:2,
+explanation:"Alternative pathway is antibody-independent."},
+
+{question:"14. Which cell releases histamine during allergic reactions?",
+options:["Macrophage","Basophil","Neutrophil","Dendritic cell"],
+answer:1,
+explanation:"Basophils and mast cells release histamine."},
+
+{question:"15. Which immunoglobulin is involved in type I hypersensitivity?",
+options:["IgG","IgA","IgE","IgM"],
+answer:2,
+explanation:"IgE mediates allergic reactions."},
+
+{question:"16. Which cytokine activates macrophages?",
+options:["IL-10","IL-4","IFN-gamma","IL-8"],
+answer:2,
+explanation:"IFN-gamma activates macrophages."},
+
+{question:"17. Which condition shows thymic aplasia?",
+options:["SCID","DiGeorge syndrome","CGD","Hyper-IgM syndrome"],
+answer:1,
+explanation:"DiGeorge syndrome causes absence of thymus."},
+
+{question:"18. Which antibody exists as a pentamer?",
+options:["IgG","IgA","IgE","IgM"],
+answer:3,
+explanation:"IgM is pentameric."},
+
+{question:"19. Which complement component forms membrane attack complex?",
+options:["C3","C5b-9","C1","C4"],
+answer:1,
+explanation:"C5b-9 complex forms MAC."},
+
+{question:"20. Which hypersensitivity reaction is antibody-mediated cytotoxic?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II involves antibody-mediated cell destruction."},
+
+{question:"21. Which immunoglobulin is primarily involved in mucosal immunity?",
+options:["IgE","IgG","IgA","IgM"],
+answer:2,
+explanation:"IgA is the main antibody in mucosal secretions."},
+
+{question:"22. Which cell type is most important for innate antiviral defense?",
+options:["B lymphocytes","NK cells","Neutrophils","Plasma cells"],
+answer:1,
+explanation:"NK cells kill virus-infected cells without prior sensitization."},
+
+{question:"23. Which complement component is cleaved into C3a and C3b?",
+options:["C5","C3","C1","C4"],
+answer:1,
+explanation:"C3 is split into C3a and C3b during complement activation."},
+
+{question:"24. Which hypersensitivity reaction involves IgE?",
+options:["Type II","Type I","Type III","Type IV"],
+answer:1,
+explanation:"Type I hypersensitivity is IgE-mediated."},
+
+{question:"25. Which cytokine is anti-inflammatory?",
+options:["IL-1","IL-10","TNF-alpha","IL-6"],
+answer:1,
+explanation:"IL-10 suppresses inflammatory responses."},
+
+{question:"26. Which immunodeficiency presents with low IgA levels?",
+options:["Selective IgA deficiency","SCID","CGD","DiGeorge syndrome"],
+answer:0,
+explanation:"Selective IgA deficiency is the most common primary immunodeficiency."},
+
+{question:"27. Which antibody is most effective in neutralization of toxins?",
+options:["IgG","IgM","IgD","IgE"],
+answer:0,
+explanation:"IgG is highly effective in neutralizing toxins and viruses."},
+
+{question:"28. Which MHC molecule interacts with CD4+ T cells?",
+options:["MHC I","MHC II","CD8","CD3"],
+answer:1,
+explanation:"MHC II presents antigen to CD4+ T helper cells."},
+
+{question:"29. Which cell produces interferon-gamma?",
+options:["Th1 cells","Th2 cells","B cells","Neutrophils"],
+answer:0,
+explanation:"Th1 cells secrete IFN-gamma."},
+
+{question:"30. Which hypersensitivity reaction is seen in hemolytic anemia?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II involves antibody-mediated destruction of RBCs."},
+
+{question:"31. Which complement pathway is triggered by antigen-antibody complex?",
+options:["Alternative","Lectin","Classical","Intrinsic"],
+answer:2,
+explanation:"Classical pathway is activated by antigen-antibody complexes."},
+
+{question:"32. Which immunoglobulin has a J chain and is secreted as dimer?",
+options:["IgG","IgA","IgE","IgD"],
+answer:1,
+explanation:"IgA is secreted as a dimer with a J chain."},
+
+{question:"33. Which cytokine is responsible for fever?",
+options:["IL-2","IL-1","IL-4","IL-5"],
+answer:1,
+explanation:"IL-1 acts as an endogenous pyrogen."},
+
+{question:"34. Which condition is associated with defective T-cell development?",
+options:["CGD","DiGeorge syndrome","Wiskott-Aldrich syndrome","SCID"],
+answer:1,
+explanation:"DiGeorge syndrome leads to thymic aplasia."},
+
+{question:"35. Which antibody is mainly present in primary immune response?",
+options:["IgG","IgM","IgA","IgE"],
+answer:1,
+explanation:"IgM predominates in primary response."},
+
+{question:"36. Which cell is involved in phagocytosis and antigen presentation?",
+options:["RBC","Macrophage","Platelet","Basophil"],
+answer:1,
+explanation:"Macrophages phagocytose and present antigen."},
+
+{question:"37. Which complement component initiates the classical pathway?",
+options:["C1","C3","C5","C9"],
+answer:0,
+explanation:"C1 starts the classical pathway."},
+
+{question:"38. Which hypersensitivity reaction is T-cell mediated?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Type IV is mediated by T cells."},
+
+{question:"39. Which antibody is involved in allergic bronchial asthma?",
+options:["IgG","IgA","IgM","IgE"],
+answer:3,
+explanation:"IgE mediates allergic asthma."},
+
+{question:"40. Which cell presents antigen most efficiently to naïve T cells?",
+options:["Dendritic cell","Neutrophil","Eosinophil","RBC"],
+answer:0,
+explanation:"Dendritic cells are the most potent APCs."},
+
+{question:"41. Which immunoglobulin has the shortest half-life?",
+options:["IgG","IgA","IgM","IgE"],
+answer:3,
+explanation:"IgE has a very short half-life in serum."},
+
+{question:"42. Which complement fragment is an anaphylatoxin?",
+options:["C3a","C5b","C9","C2"],
+answer:0,
+explanation:"C3a (and C5a) act as anaphylatoxins."},
+
+{question:"43. Which cell is most important in helminth infection defense?",
+options:["Neutrophil","Eosinophil","Basophil","Macrophage"],
+answer:1,
+explanation:"Eosinophils play a major role in parasitic infections."},
+
+{question:"44. Which hypersensitivity reaction involves antibody against cell surface receptors?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II reactions involve antibodies targeting cell receptors."},
+
+{question:"45. Which cytokine promotes Th2 differentiation?",
+options:["IL-2","IL-12","IL-4","IFN-gamma"],
+answer:2,
+explanation:"IL-4 drives Th2 cell differentiation."},
+
+{question:"46. Which disease is associated with defective B-cell maturation?",
+options:["DiGeorge syndrome","Bruton agammaglobulinemia","CGD","SCID"],
+answer:1,
+explanation:"Bruton disease leads to absent mature B cells."},
+
+{question:"47. Which antibody is most effective in opsonization?",
+options:["IgA","IgG","IgE","IgD"],
+answer:1,
+explanation:"IgG enhances phagocytosis via opsonization."},
+
+{question:"48. Which MHC class is expressed on all nucleated cells?",
+options:["MHC II","MHC I","CD4","CD8"],
+answer:1,
+explanation:"MHC I is present on all nucleated cells."},
+
+{question:"49. Which cytokine is mainly produced by macrophages?",
+options:["IL-1","IL-2","IL-4","IL-5"],
+answer:0,
+explanation:"Macrophages secrete IL-1 as a pro-inflammatory cytokine."},
+
+{question:"50. Which hypersensitivity reaction occurs in serum sickness?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Serum sickness is a Type III reaction."},
+
+{question:"51. Which complement component is central to all pathways?",
+options:["C1","C2","C3","C5"],
+answer:2,
+explanation:"C3 is the central component of complement system."},
+
+{question:"52. Which immunoglobulin is found on B-cell surface as receptor?",
+options:["IgM","IgG","IgA","IgE"],
+answer:0,
+explanation:"IgM (and IgD) act as B-cell receptors."},
+
+{question:"53. Which cell is responsible for delayed hypersensitivity?",
+options:["B cells","T cells","NK cells","Neutrophils"],
+answer:1,
+explanation:"T cells mediate delayed hypersensitivity reactions."},
+
+{question:"54. Which cytokine suppresses immune response?",
+options:["IL-10","IL-2","IL-6","TNF-alpha"],
+answer:0,
+explanation:"IL-10 is anti-inflammatory and suppresses immunity."},
+
+{question:"55. Which immunodeficiency shows recurrent catalase-positive infections?",
+options:["SCID","CGD","DiGeorge syndrome","Wiskott-Aldrich syndrome"],
+answer:1,
+explanation:"CGD patients are susceptible to catalase-positive organisms."},
+
+{question:"56. Which antibody is least abundant in serum?",
+options:["IgG","IgM","IgD","IgA"],
+answer:2,
+explanation:"IgD is present in very low concentration."},
+
+{question:"57. Which complement fragment is chemotactic for neutrophils?",
+options:["C3b","C5a","C1","C9"],
+answer:1,
+explanation:"C5a is a strong chemoattractant."},
+
+{question:"58. Which hypersensitivity reaction is involved in contact dermatitis?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Contact dermatitis is Type IV delayed hypersensitivity."},
+
+{question:"59. Which cytokine promotes B-cell differentiation?",
+options:["IL-1","IL-6","IL-2","IL-8"],
+answer:1,
+explanation:"IL-6 promotes B-cell maturation."},
+
+{question:"60. Which cell type is increased in allergic conditions?",
+options:["Eosinophils","Neutrophils","RBCs","Platelets"],
+answer:0,
+explanation:"Eosinophils are elevated in allergic reactions."},
+
+{question:"61. Which immunoglobulin is most effective at neutralizing viruses?",
+options:["IgM","IgG","IgE","IgD"],
+answer:1,
+explanation:"IgG neutralizes toxins and viruses effectively."},
+
+{question:"62. Which complement component binds to antibody Fc region?",
+options:["C3","C1","C5","C9"],
+answer:1,
+explanation:"C1 binds to Fc portion of IgG or IgM."},
+
+{question:"63. Which cell type expresses CD8 receptor?",
+options:["Helper T cell","Cytotoxic T cell","B cell","Macrophage"],
+answer:1,
+explanation:"CD8 is present on cytotoxic T cells."},
+
+{question:"64. Which hypersensitivity mechanism involves IgG against basement membrane?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II hypersensitivity involves antibodies against fixed tissue antigens."},
+
+{question:"65. Which cytokine promotes differentiation of Th1 cells?",
+options:["IL-4","IL-12","IL-5","IL-10"],
+answer:1,
+explanation:"IL-12 promotes Th1 differentiation."},
+
+{question:"66. Which condition involves absence of both B and T cells?",
+options:["DiGeorge syndrome","SCID","CGD","Hyper-IgM syndrome"],
+answer:1,
+explanation:"SCID causes combined immunodeficiency."},
+
+{question:"67. Which antibody is best for complement fixation?",
+options:["IgA","IgM","IgE","IgD"],
+answer:1,
+explanation:"IgM strongly activates complement system."},
+
+{question:"68. Which MHC class interacts with CD8+ T cells?",
+options:["MHC II","MHC I","CD4","CD28"],
+answer:1,
+explanation:"MHC I presents antigen to CD8+ cells."},
+
+{question:"69. Which cytokine is involved in acute phase reaction?",
+options:["IL-6","IL-2","IL-4","IL-8"],
+answer:0,
+explanation:"IL-6 stimulates acute phase protein production."},
+
+{question:"70. Which hypersensitivity reaction is seen in Arthus reaction?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Arthus reaction is a Type III immune complex reaction."},
+
+{question:"71. Which complement component forms pore in cell membrane?",
+options:["C3","C5b-9","C1","C2"],
+answer:1,
+explanation:"C5b-9 complex forms membrane attack complex."},
+
+{question:"72. Which immunoglobulin is predominant in colostrum?",
+options:["IgG","IgA","IgM","IgE"],
+answer:1,
+explanation:"IgA is abundant in breast milk."},
+
+{question:"73. Which cell is responsible for graft rejection?",
+options:["B cells","Cytotoxic T cells","Neutrophils","Eosinophils"],
+answer:1,
+explanation:"CD8+ T cells mediate graft rejection."},
+
+{question:"74. Which cytokine is responsible for eosinophil activation?",
+options:["IL-2","IL-5","IL-1","IL-10"],
+answer:1,
+explanation:"IL-5 stimulates eosinophils."},
+
+{question:"75. Which immunodeficiency is characterized by defective class switching?",
+options:["SCID","Hyper-IgM syndrome","CGD","DiGeorge syndrome"],
+answer:1,
+explanation:"Hyper-IgM syndrome has defective switching from IgM."},
+
+{question:"76. Which antibody has highest avidity due to pentameric form?",
+options:["IgG","IgM","IgA","IgE"],
+answer:1,
+explanation:"IgM pentamer gives high avidity."},
+
+{question:"77. Which complement fragment enhances phagocytosis?",
+options:["C5a","C3b","C1","C9"],
+answer:1,
+explanation:"C3b acts as opsonin."},
+
+{question:"78. Which hypersensitivity is mediated by T cells only?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Type IV is purely T-cell mediated."},
+
+{question:"79. Which cytokine inhibits macrophage activation?",
+options:["IFN-gamma","IL-10","IL-2","TNF-alpha"],
+answer:1,
+explanation:"IL-10 suppresses macrophage activity."},
+
+{question:"80. Which cell is most important in antigen presentation to naïve T cells?",
+options:["Macrophage","Dendritic cell","Neutrophil","RBC"],
+answer:1,
+explanation:"Dendritic cells are most efficient APCs."},
+
+{question:"81. Which immunoglobulin is involved in B-cell receptor function?",
+options:["IgE","IgD","IgA","IgG"],
+answer:1,
+explanation:"IgD functions as a B-cell receptor along with IgM."},
+
+{question:"82. Which complement component is an anaphylatoxin?",
+options:["C3a","C5b","C1","C9"],
+answer:0,
+explanation:"C3a acts as an anaphylatoxin causing inflammation."},
+
+{question:"83. Which cell type is primarily responsible for killing tumor cells in innate immunity?",
+options:["NK cells","B cells","Neutrophils","Plasma cells"],
+answer:0,
+explanation:"NK cells destroy tumor and virus-infected cells."},
+
+{question:"84. Which hypersensitivity reaction involves IgG-mediated cytotoxicity?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:1,
+explanation:"Type II hypersensitivity involves IgG or IgM against cell surface antigens."},
+
+{question:"85. Which cytokine promotes B-cell proliferation?",
+options:["IL-2","IL-6","IL-4","TNF-alpha"],
+answer:2,
+explanation:"IL-4 promotes B-cell growth and differentiation."},
+
+{question:"86. Which immunodeficiency is associated with defective phagolysosome formation?",
+options:["SCID","Chediak-Higashi syndrome","DiGeorge syndrome","Hyper-IgM syndrome"],
+answer:1,
+explanation:"Chediak-Higashi involves defective lysosomal trafficking."},
+
+{question:"87. Which antibody is most effective in secondary immune response?",
+options:["IgM","IgG","IgE","IgD"],
+answer:1,
+explanation:"IgG predominates in secondary immune response."},
+
+{question:"88. Which MHC molecule presents exogenous antigens?",
+options:["MHC I","MHC II","CD8","CD28"],
+answer:1,
+explanation:"MHC II presents extracellular antigens to CD4+ cells."},
+
+{question:"89. Which cytokine causes neutrophil activation?",
+options:["IL-8","IL-2","IL-10","IL-4"],
+answer:0,
+explanation:"IL-8 is a strong neutrophil activator."},
+
+{question:"90. Which hypersensitivity is seen in tuberculin reaction?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:3,
+explanation:"Tuberculin test is delayed Type IV reaction."},
+
+{question:"91. Which complement component is cleaved into C5a and C5b?",
+options:["C3","C4","C5","C2"],
+answer:2,
+explanation:"C5 is split into C5a and C5b."},
+
+{question:"92. Which immunoglobulin is least abundant in plasma?",
+options:["IgG","IgA","IgM","IgE"],
+answer:3,
+explanation:"IgE has lowest serum concentration."},
+
+{question:"93. Which cell produces antibodies?",
+options:["Macrophage","Plasma cell","Neutrophil","Dendritic cell"],
+answer:1,
+explanation:"Plasma cells are antibody-producing cells."},
+
+{question:"94. Which cytokine is key for antiviral defense?",
+options:["IFN-alpha","IL-4","IL-5","IL-10"],
+answer:0,
+explanation:"Interferon-alpha has antiviral activity."},
+
+{question:"95. Which immunodeficiency shows albinism and recurrent infections?",
+options:["CGD","SCID","Chediak-Higashi syndrome","DiGeorge syndrome"],
+answer:2,
+explanation:"Chediak-Higashi presents with albinism and infections."},
+
+{question:"96. Which antibody is pentameric?",
+options:["IgG","IgA","IgM","IgE"],
+answer:2,
+explanation:"IgM is pentameric in structure."},
+
+{question:"97. Which complement fragment is chemotactic?",
+options:["C3b","C5a","C1","C9"],
+answer:1,
+explanation:"C5a attracts neutrophils."},
+
+{question:"98. Which hypersensitivity involves immune complex deposition?",
+options:["Type I","Type II","Type III","Type IV"],
+answer:2,
+explanation:"Type III involves immune complexes."},
+
+{question:"99. Which cytokine activates macrophages strongly?",
+options:["IL-2","IFN-gamma","IL-4","IL-6"],
+answer:1,
+explanation:"IFN-gamma activates macrophages."},
+
+{question:"100. Which cell is the most efficient antigen-presenting cell?",
+options:["Neutrophil","Dendritic cell","RBC","Platelet"],
+answer:1,
+explanation:"Dendritic cells are the most potent APCs."}
+
+]
+
+let index = 0
+let correct = 0
+let wrong = 0
+let userAnswers = new Array(questions.length).fill(null)
+
+let timeLeft = 4500
+let timerInterval
+
+function startTimer(){
+
+timerInterval = setInterval(function(){
+
+let minutes = Math.floor(timeLeft/60)
+let seconds = timeLeft%60
+
+if(seconds<10) seconds="0"+seconds
+
+document.getElementById("timer").innerHTML =
+"Time Left: "+minutes+":"+seconds
+
+timeLeft--
+
+if(timeLeft < 0){
+finishQuiz()
+}
+
+},1000)
+
+}
+
+function showQuestion(){
+
+let q = questions[index]
+
+document.getElementById("progress").innerHTML =
+"<b>Question "+(index+1)+" / "+questions.length+"</b>"
+
+let html = "<div class='question'>"+q.question+"</div>"
+
+q.options.forEach((opt,i)=>{
+
+html += "<div class='option' id='opt"+i+"' onclick='answer("+i+")'>"+opt+"</div>"
+
+})
+
+document.getElementById("quiz").innerHTML = html
+document.getElementById("explanation").innerHTML=""
+
+if(userAnswers[index]!==null){
+
+let chosen = userAnswers[index]
+let opts = document.querySelectorAll(".option")
+
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(chosen == q.answer){
+
+document.getElementById("opt"+chosen).classList.add("correct")
+
+}else{
+
+document.getElementById("opt"+chosen).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+
+}
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+}
+
+function answer(i){
+
+if(userAnswers[index]!==null) return
+
+let q = questions[index]
+userAnswers[index] = i
+
+let opts = document.querySelectorAll(".option")
+opts.forEach(o=>o.style.pointerEvents="none")
+
+if(i==q.answer){
+
+document.getElementById("opt"+i).classList.add("correct")
+correct++
+
+}else{
+
+document.getElementById("opt"+i).classList.add("wrong")
+document.getElementById("opt"+q.answer).classList.add("correct")
+wrong++
+
+}
+
+document.getElementById("correct").innerText = correct
+document.getElementById("wrong").innerText = wrong
+
+document.getElementById("explanation").innerHTML =
+"<p>"+q.explanation+"</p>"
+
+}
+
+function nextQuestion(){
+
+if(index < questions.length-1){
+
+index++
+showQuestion()
+
+}else{
+
+finishQuiz()
+
+}
+
+}
+
+function prevQuestion(){
+
+if(index>0){
+
+index--
+showQuestion()
+
+}
+
+}
+
+function finishQuiz(){
+
+clearInterval(timerInterval)
+
+document.getElementById("quiz").innerHTML=""
+
+document.getElementById("score").innerHTML =
+"<h2>Quiz Finished</h2>"+
+"<p><b>Correct:</b> "+correct+"</p>"+
+"<p><b>Wrong:</b> "+wrong+"</p>"+
+"<p><b>Total:</b> "+questions.length+"</p>"
+
+document.getElementById("review").innerHTML =
+"<button onclick='reviewWrong()'>Review Wrong Answers</button>"
+
+}
+
+function reviewWrong(){
+
+let html="<h3>Wrong Questions</h3>"
+
+questions.forEach((q,i)=>{
+
+if(userAnswers[i]!==null && userAnswers[i]!=q.answer){
+
+html+="<div style='margin-bottom:20px'>"
+html+="<b>"+q.question+"</b><br>"
+html+="Your Answer: "+q.options[userAnswers[i]]+"<br>"
+html+="Correct: "+q.options[q.answer]+"<br>"
+html+="<i>"+q.explanation+"</i>"
+html+="</div>"
+
+}
+
+})
+
+document.getElementById("review").innerHTML=html
+
+}
+
+startTimer()
+showQuestion()
+
+showQuestion()
+
+</script>
+
+</body>
+</html>
+TC MCQs Guided by Regnantia Kashyap
